@@ -13,10 +13,10 @@ private:
 	window *pWind;	//Pointer to the Graphics Window
 public:
 	Input(window *pW);		//Consturctor
-	void GetPointClicked(int &x, int &y) const;//Get coordinate where user clicks
-	string GetSrting(Output* pO) const ;	 //Returns a string entered by the user
+	void GetPointClicked(int &x, int &y) const; //Get coordinate where user clicks
+	string GetSrting(Output* pO) const ;	 // Returns a string entered by the user
 
-	ActionType GetUserAction() const; //Read the user click and map to an action
+	ActionType GetUserAction() const; // Read the user click and map to an action
 
 	~Input();
 };
