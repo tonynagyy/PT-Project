@@ -120,7 +120,7 @@ void Output::CreatePlayToolBar() const
 {
 	UI.InterfaceMode = MODE_PLAY;
 
-	string MenuItemImages2[DRAW_ITM_COUNT2];
+	string MenuItemImages2[PLAY_ITM_COUNT];
 
 	MenuItemImages2[ITM_DRAWMODE] = "images\\MenuItems\\Menu_drawmode.jpg";
 	MenuItemImages2[ITM_FIGURE_FILL_COLOR] = "images\\MenuItems\\Menu_figurefillcolor.jpg";
@@ -128,7 +128,7 @@ void Output::CreatePlayToolBar() const
 	MenuItemImages2[ITM_FIGURE_TYBE] = "images\\MenuItems\\Menu_figuretype.jpg";
 
 	//Draw menu item one image at a time
-	for (int i = 0; i < DRAW_ITM_COUNT2; i++)
+	for (int i = 0; i < PLAY_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages2[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 

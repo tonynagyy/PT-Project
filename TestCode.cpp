@@ -437,6 +437,7 @@ int main()
 
 		case TO_PLAY:
 				pOut->PrintMessage("Action: Switch to Play Mode, creating Design tool bar");
+
 				pOut->CreatePlayToolBar();
 				break;
 
