@@ -22,9 +22,9 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_LOAD,
 	ITM_UNDO,
 	ITM_REDO,
-	ITM_STARTREC,
-	ITM_STOPREC,
-	ITM_PLAYREC,
+	ITM_START_REC,
+	ITM_STOP_REC,
+	ITM_PLAY_REC,
 	ITM_SELECT,
 	ITM_MOVE,
 	ITM_CLEAR,
@@ -36,14 +36,16 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_SQUARE,
 	ITM_DRAWINGCLR,
 	ITM_FILLINGCLR,
-	ITM_DRAWMODE,
 	ITM_PLAYMODE,
-	ITM_FIGURETYPEANDFILLCOLOR,
-	ITM_FIGUREFILLCOLOR,
-	ITM_FIGURETYBE,
 	ITM_COLORS,
+	DRAW_ITM_COUNT1,
+	ITM_DRAWMODE = 0,
+	ITM_FIGURE_TYPE_AND_FILL_COLOR,
+	ITM_FIGURE_FILL_COLOR,
+	ITM_FIGURE_TYBE,
 	
-	DRAW_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
+	
+	DRAW_ITM_COUNT2		//no. of menu items ==> This should be the last line in this enum
 	
 };
 

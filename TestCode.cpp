@@ -333,19 +333,98 @@ int main()
 
 		switch (ActType)
 		{
+		case SAVE:
+			pOut->PrintMessage("Action: a click on save button , Click anywhere");
+			break;
+
+		case LOAD:
+			pOut->PrintMessage("Action: a click on load button , Click anywhere");
+			break;
+
+		case UNDO:
+			pOut->PrintMessage("Action: a click on undo button , Click anywhere");
+			break;
+
+		case REDO:
+			pOut->PrintMessage("Action: a click on redo button , Click anywhere");
+			break;
+
+		case START_REC:
+			pOut->PrintMessage("Action: Start recording , Click anywhere");
+			break;
+
+		case STOP_REC:
+			pOut->PrintMessage("Action: Stop recording , Click anywhere");
+			break;
+
+		case PLAY_REC:
+			pOut->PrintMessage("Action: Playing recording , Click anywhere");
+			break;
+
+		case SELECT:
+			pOut->PrintMessage("Action: a click on select button , Click anywhere");
+			break;
+
+		case MOVE:
+			pOut->PrintMessage("Action: a click on move button , Click anywhere");
+			break;
+
+		case CLEAR:
+			pOut->PrintMessage("Action: a click on clear button , Click anywhere");
+			break;
+
+		case DEL:
+			pOut->PrintMessage("Action: a click on delete button , Click anywhere");
+			break;
+
 		case DRAW_RECT:
-				pOut->PrintMessage("Action: Draw a Rectangle , Click anywhere");
-				break;
-
+			pOut->PrintMessage("Action: Draw a Rectangle , Click anywhere");
+			break;
 		
+		case DRAW_CIRC:
+			pOut->PrintMessage("Action: Draw a Circle , Click anywhere");
+			break;
 
-		case STATUS:
-				pOut->PrintMessage("Action: a click on the Status Bar, Click anywhere");
-				break;
+		case DRAW_HEX:
+			pOut->PrintMessage("Action: Draw a Hexagon , Click anywhere");
+			break;
+
+		case DRAW_TRI:
+			pOut->PrintMessage("Action: Draw a Triangle , Click anywhere");
+			break;
  
+		case DRAW_SQ:
+			pOut->PrintMessage("Action: Draw a Sqaure , Click anywhere");
+			break;
+
 		case DRAWING_AREA:
 				pOut->PrintMessage("Action: a click on the Drawing Area, Click anywhere");
 				break;
+
+		case HIGH_FRAME:
+			pOut->PrintMessage("Action: Highlighted the frame , Click anywhere");
+			break;
+
+		case FILL:
+			pOut->PrintMessage("Action: Filling the figure , Click anywhere");
+			break;
+
+		case COLOURS:
+			pOut->PrintMessage("Action: Select a colour , Click anywhere");
+			break;
+
+		case F1:
+			pOut->PrintMessage("Action: A7A , Click anywhere");
+			break;
+
+		case F2:
+			pOut->PrintMessage("Action: Double A7A , Click anywhere");
+			break;
+
+		case F3:
+			pOut->PrintMessage("Action: Triple A7A , Click anywhere");
+			break;
+
 
 		case EMPTY:
 				pOut->PrintMessage("Action: a click on empty area in the Design Tool Bar, Click anywhere");
@@ -360,6 +439,10 @@ int main()
 				pOut->PrintMessage("Action: Switch to Play Mode, creating Design tool bar");
 				pOut->CreatePlayToolBar();
 				break;
+
+		case STATUS:
+			pOut->PrintMessage("Action: a click on the Status Bar, Click anywhere");
+			break;
 
 
 		///TODO: Add more cases for the other action types

@@ -51,14 +51,30 @@ ActionType Input::GetUserAction() const
 
 			switch (ClickedItemOrder)
 			{
+			case ITM_EXIT : return EXIT;
+			case ITM_SAVE : return SAVE;
+			case ITM_LOAD : return LOAD;
+			case ITM_UNDO : return UNDO;
+			case ITM_REDO : return REDO;
+			case ITM_START_REC : return START_REC;
+			case ITM_STOP_REC : return STOP_REC;
+			case ITM_PLAY_REC : return PLAY_REC;
+			case ITM_SELECT : return SELECT;
+			case ITM_MOVE : return MOVE;
+			case ITM_CLEAR : return CLEAR;
+			case ITM_DELETE : return DEL;
 			case ITM_RECT : return DRAW_RECT ;
-			//case ITM_SQUARE : return DRAW_SQUARE ;
-			//case ITM_TRIANGLE : return DRAW_TRIANGLE ;
-			//case ITM_HEXAGON : return DRAW_HEXAGON ;
-			//case ITM_CIRCLE : return DRAW_CIRCLE ;
-			case ITM_EXIT: return EXIT;	
+			case ITM_CIRCLE: return DRAW_CIRC;
+			case ITM_HEXAGON : return DRAW_HEX;
+			case ITM_TRIANGLE : return DRAW_TRI;
+			case ITM_SQUARE : return DRAW_SQ ;
+			case ITM_DRAWINGCLR : return HIGH_FRAME;
+			case ITM_FILLINGCLR : return FILL;
+			case ITM_PLAYMODE : return TO_PLAY;
+			case ITM_COLORS : return COLOURS;
 			
-			default: return EMPTY;	//A click on empty place in desgin toolbar
+			
+			default : return EMPTY;	//A click on empty place in desgin toolbar
 			}
 		}
 
@@ -69,16 +85,39 @@ ActionType Input::GetUserAction() const
 		}
 		
 		//[3] User clicks on the status bar
-		return STATUS;
+		//if (y >= UI.height - UI.StatusBarHeight && y < UI.height)
+			//return STATUS;
 	}
 	else	//GUI is in PLAY mode
 	{
 		///TODO:
 		//perform checks similar to Draw mode checks above
 		//and return the correspoding action
-		return TO_PLAY;	//just for now. This should be updated
-	}	
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
 
+			switch (ClickedItemOrder)
+			{
+			case ITM_DRAWMODE : return TO_DRAW;
+			case ITM_FIGURE_TYPE_AND_FILL_COLOR: return F1;
+			case ITM_FIGURE_FILL_COLOR: return F2;
+			case ITM_FIGURE_TYBE: return F3;
+
+			default: return EMPTY;
+			}
+		}
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return PLAYING_AREA;
+		}
+		
+		//return TO_PLAY;	//just for now. This should be updated
+	}
+
+	// check if it is on status bar or not (whatever the mode)
+	if (y >= UI.height - UI.StatusBarHeight && y < UI.height)
+		return STATUS;
 }
 /////////////////////////////////
 	
