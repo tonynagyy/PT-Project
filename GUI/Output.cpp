@@ -13,7 +13,7 @@ Output::Output()
 	
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 80;
+	UI.MenuItemWidth = 49;
 	
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
@@ -80,7 +80,29 @@ void Output::CreateDrawToolBar() const
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
 	MenuItemImages[ITM_RECT] = "images\\MenuItems\\Menu_Rect.jpg";
-	
+	MenuItemImages[ITM_CLEAR] = "images\\MenuItems\\Menu_clear.jpg";
+	MenuItemImages[ITM_CIRCLE] = "images\\MenuItems\\Menu_Circ.jpg";
+	MenuItemImages[ITM_DELETE] = "images\\MenuItems\\Menu_delete.jpg";
+	MenuItemImages[ITM_DRAWINGCLR] = "images\\MenuItems\\Menu_drawingclr.jpg";
+	MenuItemImages[ITM_FILLINGCLR] = "images\\MenuItems\\Menu_fillingclr.jpg";
+	MenuItemImages[ITM_HEXAGON] = "images\\MenuItems\\Menu_Hexagon.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_load.jpg";
+	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\Menu_move.jpg";
+	MenuItemImages[ITM_PLAYREC] = "images\\MenuItems\\Menu_playrec.jpg";
+	MenuItemImages[ITM_COLORS] = "images\\MenuItems\\Menu_colors.jpg";
+	MenuItemImages[ITM_REDO] = "images\\MenuItems\\Menu_redo.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_save.jpg";
+	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\Menu_select.jpg";
+	MenuItemImages[ITM_SQUARE] = "images\\MenuItems\\Menu_square.jpg";
+	MenuItemImages[ITM_STARTREC] = "images\\MenuItems\\Menu_startrec.jpg";
+	MenuItemImages[ITM_STOPREC] = "images\\MenuItems\\Menu_stoprec.jpg";
+	MenuItemImages[ITM_TRIANGLE] = "images\\MenuItems\\Menu_Triangle.jpg";
+	MenuItemImages[ITM_UNDO] = "images\\MenuItems\\Menu_undo.jpg";
+	MenuItemImages[ITM_FIGUREFILLCOLOR] = "images\\MenuItems\\Menu_figurefillcolor.jpg";
+	MenuItemImages[ITM_FIGURETYPEANDFILLCOLOR] = "images\\MenuItems\\Menu_figuretybeandfillcolor.jpg";
+	MenuItemImages[ITM_FIGURETYBE] = "images\\MenuItems\\Menu_figuretype.jpg";
+	MenuItemImages[ITM_DRAWMODE] = "images\\MenuItems\\Menu_drawmode.jpg";
+	MenuItemImages[ITM_PLAYMODE] = "images\\MenuItems\\Menu_playmode.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
 
