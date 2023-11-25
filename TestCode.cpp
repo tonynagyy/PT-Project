@@ -461,6 +461,9 @@ int main()
 		case GET_YELLOW:
 			pOut->PrintMessage("Action: a click on yellow Colour Icon, Click anywhere");
 			break;
+		case PLAYING_AREA:
+			pOut->PrintMessage("Action: a click on the Playing Area, Click anywhere");
+			break;
 		case GET_EXIT_PLAY:
 			break;
 		case EXIT:
