@@ -17,11 +17,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 {
 	//Note: Items are **(ordered)** here as they appear in menu
 	//If you want to change the menu items order, change the order here
-    ITM_EXIT,//Exit item
-	ITM_SAVE,
-	ITM_LOAD,
-	ITM_UNDO,
-	ITM_REDO,
+	ITM_PLAYMODE,
 	ITM_START_REC,
 	ITM_STOP_REC,
 	ITM_PLAY_REC,
@@ -29,33 +25,42 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_MOVE,
 	ITM_CLEAR,
 	ITM_DELETE,
-	ITM_RECT, 
+	ITM_RECT,
 	ITM_CIRCLE,
 	ITM_HEXAGON,
 	ITM_TRIANGLE,
 	ITM_SQUARE,
+	ITM_UNDO,
+	ITM_REDO,
+	ITM_SAVE,
+	ITM_LOAD,
+	ITM_EXIT,//Exit item
 	ITM_DRAWINGCLR,
 	ITM_FILLINGCLR,
-	ITM_PLAYMODE,
-	ITM_COLORS,
+	REDD,
+	GREENN,
+	BLUEE,
+	YELLOWW,
+	BLACKK,
+	ORANGEE,
 	DRAW_ITM_COUNT1,
-		//no. of menu items ==> This should be the last line in this enum
-	
+	//no. of menu items ==> This should be the last line in this enum
+
 };
 
 enum PlayMenuItem //The items of the Play menu (you should add more items)
 {
 	//Note: Items are **(ordered)** here as they appear in menu
 	//If you want to change the menu items order, change the order here
-	
+
 	//TODO: Add more items names here
 	ITM_DRAWMODE = 0,
 	ITM_FIGURE_TYPE_AND_FILL_COLOR,
 	ITM_FIGURE_FILL_COLOR,
 	ITM_FIGURE_TYBE,
-
+	EXIT_PLAY, 
 	PLAY_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
-	
+
 };
 
 
@@ -67,13 +72,13 @@ __declspec(selectany) //This line to prevent "redefinition error"
 struct UI_Info	//User Interface Info.
 {
 	GUI_MODE InterfaceMode;
-	
+
 	int	width, height,	    //Window width and height
-		wx , wy,			//Window starting coordinates
+		wx, wy,			//Window starting coordinates
 		StatusBarHeight,	//Status Bar Height
 		ToolBarHeight,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
 		MenuItemWidth;		//Width of each item in toolbar menu
-	
+
 
 	color DrawColor;		//Drawing color
 	color FillColor;		//Filling color
@@ -84,7 +89,7 @@ struct UI_Info	//User Interface Info.
 	int PenWidth;			//width of the pen that draws shapes
 
 	/// Add more members if needed
-	
+
 }UI;	//create a global object UI
 
 #endif
