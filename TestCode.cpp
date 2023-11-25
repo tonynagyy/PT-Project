@@ -308,10 +308,14 @@ int main()
 	pOut->PrintMessage("Testing Input ability to read strings");
 
 	///TODO: Add code here to 
+	string str = pIn->GetSrting(pOut);
+	pOut->PrintMessage("You Entered " + str + " click anywhere to continue");
 	
+
 	// 1- Read a string from the user on the status bar
 	// 2- After reading the string clear the status bar
 	// 3- print on the status bar "You Entered" then print the string
+	/*Done*/
 
 	pIn->GetPointClicked(x, y);	//Wait for any click
 	pOut->ClearDrawArea();
@@ -323,7 +327,6 @@ int main()
 	pOut->PrintMessage("TEST4: Testing Input ability to detect User Action, click anywhere");
 
 	ActionType ActType;
-
 	///TODO:  
 	//You must add a case for each action (both Draw mode and Play mode actions)
 	//Add cases for the missing actions below

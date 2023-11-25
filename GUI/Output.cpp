@@ -303,7 +303,6 @@ void Output::DrawHexagon(Point P1, GfxInfo RectGfxInfo, bool selected) const
 	pWind->DrawPolygon(xVertices, yVertices, 6, style);
 }
 
-
 //DRAW CIRCLE FUNCTION
 void Output::DrawCircle(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
 {
