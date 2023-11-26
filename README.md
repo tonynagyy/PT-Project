@@ -1,27 +1,4 @@
-<style>
-body {
-   background-color: #f0f0f0;
-   font-family: Arial, sans-serif;
-}
 
-h1, h2, h3 {
-   color: #333;
-}
-
-p, ul {
-   color: #666;
-}
-
-a {
-   color: #0066cc;
-   text-decoration: none;
-}
-
-a:hover {
-   color: #0044cc;
-   text-decoration: underline;
-}
-</style>
 
 # Team Information
 
