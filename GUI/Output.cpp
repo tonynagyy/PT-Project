@@ -83,7 +83,7 @@ void Output::ClearToolBar() const
 void Output::CreateDrawToolBar() const
 {
 	UI.InterfaceMode = MODE_DRAW;
-	string MenuItemImages[DRAW_ITM_COUNT1];
+	string MenuItemImages[DRAW_ITM_COUNT];
 
 	//You can draw the tool bar icons in any way you want.
 	//Below is one possible way
@@ -119,7 +119,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[YELLOWW] = "images\\MenuItems\\Menu_yellow.jpg";
 
 	//Draw menu item one image at a time
-	for (int i = 0; i < DRAW_ITM_COUNT1; i++)
+	for (int i = 0; i < DRAW_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar

@@ -43,7 +43,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	YELLOWW,
 	BLACKK,
 	ORANGEE,
-	DRAW_ITM_COUNT1,
+	DRAW_ITM_COUNT,
 	//no. of menu items ==> This should be the last line in this enum
 
 };
