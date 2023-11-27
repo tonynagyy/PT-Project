@@ -307,6 +307,7 @@ int main()
 	pOut->PrintMessage("Testing Input ability to read strings");
 
 	///TODO: Add code here to 
+	
 	string str = pIn->GetSrting(pOut);
 	pOut->PrintMessage("You Entered " + str + " click anywhere to continue");
 	

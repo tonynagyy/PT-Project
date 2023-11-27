@@ -63,4 +63,4 @@ struct GfxInfo	//Graphical info of each figure (you may add more members)
 
 };
 
-#endif
+#endif;

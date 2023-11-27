@@ -16,6 +16,10 @@ string Input::GetSrting(Output* pO) const
 {
 	string Label;
 	char Key;
+
+	pWind->FlushKeyQueue();
+	pWind->FlushMouseQueue();
+
 	while (1)
 	{
 		pWind->WaitKeyPress(Key);
@@ -137,17 +141,23 @@ ActionColour Input::GetColourAction() const
 	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
 
 		int Colour_Clicked = y / UI.ToolBarHeight - 1;
-		switch (Colour_Clicked)
-		{
-		case COL_GREEN: return GET_GREEN;
-		case COL_RED: return GET_RED;
-		case COL_YELLOW: return GET_YELLOW;
-		case COL_BLACK: return GET_BLACK;
-		case COL_BLUE: return GET_BLUE;
-		case COL_ORANGE: return GET_ORANGE;
+		int Color_clicked_X = (x / UI.MenuItemWidth);
 
-		default: break;
+		if (Color_clicked_X == ITM_COLOUR) //the click must be under colors icon
+		{
+			switch (Colour_Clicked)
+			{
+			case COL_GREEN: return GET_GREEN;
+			case COL_RED: return GET_RED;
+			case COL_YELLOW: return GET_YELLOW;
+			case COL_BLACK: return GET_BLACK;
+			case COL_BLUE: return GET_BLUE;
+			case COL_ORANGE: return GET_ORANGE;
+
+			default: break;
+			}
 		}
+		
 }
 	
 Input::~Input()
