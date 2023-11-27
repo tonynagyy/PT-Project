@@ -7,6 +7,8 @@
 
 class Output;   // forward declaration
 
+//bool COLOURRS = false;
+
 class Input		//The application manager should have a pointer to this class
 {
 private:
@@ -16,6 +18,7 @@ public:
 	void GetPointClicked(int& x, int& y) const; //Get coordinate where user clicks
 	string GetSrting(Output* pO) const;	 // Returns a string entered by the user
 	ActionType GetUserAction() const; // Read the user click and map to an action
+	ActionColour GetColourAction() const; // read colours
 
 	~Input();
 };

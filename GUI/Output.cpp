@@ -111,12 +111,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_UNDO] = "images\\MenuItems\\Menu_undo.jpg";
 	MenuItemImages[ITM_PLAYMODE] = "images\\MenuItems\\Menu_playmode.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[REDD] = "images\\MenuItems\\Menu_red.jpg";
-	MenuItemImages[GREENN] = "images\\MenuItems\\Menu_green.jpg";
-	MenuItemImages[BLUEE] = "images\\MenuItems\\Menu_blue.jpg";
-	MenuItemImages[BLACKK] = "images\\MenuItems\\Menu_black.jpg";
-	MenuItemImages[ORANGEE] = "images\\MenuItems\\Menu_orange.jpg";
-	MenuItemImages[YELLOWW] = "images\\MenuItems\\Menu_yellow.jpg";
+	MenuItemImages[ITM_COLOUR] = "images\\MenuItems\\Menu_colors.jpg";
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
@@ -161,7 +156,22 @@ void Output::ClearDrawArea() const
 	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+void Output::CreateColourMenu() const
+{
+	
 
+	string MenuColourImages[COLOUR_ITM_COUNT];
+
+	MenuColourImages[COL_RED] = "images\\MenuItems\\Menu_red.jpg";
+	MenuColourImages[COL_GREEN] = "images\\MenuItems\\Menu_green.jpg";
+	MenuColourImages[COL_BLUE] = "images\\MenuItems\\Menu_blue.jpg";
+	MenuColourImages[COL_BLACK] = "images\\MenuItems\\Menu_black.jpg";
+	MenuColourImages[COL_ORANGE] = "images\\MenuItems\\Menu_orange.jpg";
+	MenuColourImages[COL_YELLOW] = "images\\MenuItems\\Menu_yellow.jpg";
+	
+	for (int i = 0; i < COLOUR_ITM_COUNT; i++)
+		pWind->DrawImage(MenuColourImages[i], (DRAW_ITM_COUNT - 1) * UI.MenuItemWidth, (i + 1) * UI.ToolBarHeight, UI.MenuItemWidth, UI.ToolBarHeight);
+}
 void Output::PrintMessage(string msg) const	//Prints a message on status bar
 {
 	ClearStatusBar();	//First clear the status bar

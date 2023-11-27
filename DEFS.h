@@ -25,13 +25,8 @@ enum ActionType //The actions supported (you can add more if needed)
 	LOAD,
 	EXIT,
 	FILL, // fill the figure
-	HIGH_FRAME, // highlighted the frame of the figure 
-	GET_RED,
-	GET_GREEN,
-	GET_BLUE,
-	GET_YELLOW,
-	GET_BLACK,
-	GET_ORANGE,
+	HIGH_FRAME, // highlighted the frame of the figure
+	COLOURS, 
 	TO_DRAW,		//Switch interface to Draw mode
 	F1,
 	F2,
@@ -43,6 +38,15 @@ enum ActionType //The actions supported (you can add more if needed)
 	GET_EXIT_PLAY,
 
 	///TODO: Add the other action types of the two modes
+};
+enum ActionColour
+{
+	GET_RED,
+	GET_GREEN,
+	GET_BLUE,
+	GET_YELLOW,
+	GET_BLACK,
+	GET_ORANGE,
 };
 
 struct Point	//To be used for figures points

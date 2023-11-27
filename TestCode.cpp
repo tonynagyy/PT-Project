@@ -1,6 +1,5 @@
 #include "GUI\Input.h"
-#include "GUI\Output.h"
-
+#include "GUI\Output.h" 
 //This is a test code to test the Input and Output classes
 
 int main()
@@ -56,7 +55,7 @@ int main()
 	gfxInfo.isFilled = false;	//Figure is NOT filled
 	pOut->DrawRect(P1, P2, gfxInfo, false);
 	pOut->CreateDrawToolBar(); // if you draw on toolbar it will be cleared
-
+	
 
 	// 2.1.2 - Drawing highlighted non-filled rectangle
 	pOut->PrintMessage("Drawing a Rectangle ==> Highlighted non-filled, Click to Highlight");
@@ -440,27 +439,42 @@ int main()
 			pOut->CreatePlayToolBar();
 			break;
 
+		case COLOURS:
+			pOut->PrintMessage("Action: a click on Colours icon, Click anywhere");
+			pOut->CreateColourMenu();
+			ActionColour ActCol;
+				ActCol = pIn->GetColourAction();
+			
+			switch(ActCol)
+			{
+			case GET_GREEN:
+				pOut->PrintMessage("Action: a click on Green Colour Icon, Click anywhere");
+				break;
+			case GET_BLACK:
+				pOut->PrintMessage("Action: a click on black Colour Icon, Click anywhere");
+				break;
+			case GET_RED:
+				pOut->PrintMessage("Action: a click on red Colour Icon, Click anywhere");
+				break;
+			case GET_BLUE:
+				pOut->PrintMessage("Action: a click on blue Colour Icon, Click anywhere");
+				break;
+			case GET_ORANGE:
+				pOut->PrintMessage("Action: a click on orange Colour Icon, Click anywhere");
+				break;
+			case GET_YELLOW:
+				pOut->PrintMessage("Action: a click on yellow Colour Icon, Click anywhere");
+				break;
+
+			default: break;
+			}
+			pOut->ClearDrawArea();
+		break;
+
 		case STATUS:
 			pOut->PrintMessage("Action: a click on the Status Bar, Click anywhere");
 			break;
-		case GET_GREEN:
-			pOut->PrintMessage("Action: a click on Green Colour Icon, Click anywhere");
-			break;
-		case GET_BLACK:
-			pOut->PrintMessage("Action: a click on black Colour Icon, Click anywhere");
-			break;
-		case GET_RED:
-			pOut->PrintMessage("Action: a click on red Colour Icon, Click anywhere");
-			break;
-		case GET_BLUE:
-			pOut->PrintMessage("Action: a click on blue Colour Icon, Click anywhere");
-			break;
-		case GET_ORANGE:
-			pOut->PrintMessage("Action: a click on orange Colour Icon, Click anywhere");
-			break;
-		case GET_YELLOW:
-			pOut->PrintMessage("Action: a click on yellow Colour Icon, Click anywhere");
-			break;
+		
 		case PLAYING_AREA:
 			pOut->PrintMessage("Action: a click on the Playing Area, Click anywhere");
 			break;

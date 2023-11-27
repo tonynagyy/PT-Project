@@ -38,17 +38,19 @@ ActionType Input::GetUserAction() const
 	int x, y;
 
 	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
-
+	
 	if (UI.InterfaceMode == MODE_DRAW)	//GUI in the DRAW mode
 	{
+		int ClickedItemOrder = (x / UI.MenuItemWidth);
+		//Divide x coord of the point clicked by the menu item width (int division)
+		//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
 		//[1] If user clicks on the Toolbar
+
 		if (y >= 0 && y < UI.ToolBarHeight)
 		{
 			//Check whick Menu item was clicked
 			//==> This assumes that menu items are lined up horizontally <==
-			int ClickedItemOrder = (x / UI.MenuItemWidth);
-			//Divide x coord of the point clicked by the menu item width (int division)
-			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+			
 
 			switch (ClickedItemOrder)
 			{
@@ -72,12 +74,7 @@ ActionType Input::GetUserAction() const
 			case ITM_DRAWINGCLR: return HIGH_FRAME;
 			case ITM_FILLINGCLR: return FILL;
 			case ITM_PLAYMODE: return TO_PLAY;
-			case GREENN: return GET_GREEN;
-			case REDD: return GET_RED;
-			case YELLOWW: return GET_YELLOW;
-			case BLACKK: return GET_BLACK;
-			case BLUEE: return GET_BLUE;
-			case ORANGEE: return GET_ORANGE;
+			case ITM_COLOUR: return COLOURS;
 
 
 			default: return EMPTY;	//A click on empty place in desgin toolbar
@@ -89,6 +86,9 @@ ActionType Input::GetUserAction() const
 		{
 			return DRAWING_AREA;
 		}
+
+
+		
 
 		//[3] User clicks on the status bar
 		//if (y >= UI.height - UI.StatusBarHeight && y < UI.height)
@@ -125,8 +125,30 @@ ActionType Input::GetUserAction() const
 	// check if it is on status bar or not (whatever the mode)
 	if (y >= UI.height - UI.StatusBarHeight && y < UI.height)
 		return STATUS;
+
+	
 }
 /////////////////////////////////
+
+ActionColour Input::GetColourAction() const
+{
+	int x, y;
+
+	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
+
+		int Colour_Clicked = y / UI.ToolBarHeight - 1;
+		switch (Colour_Clicked)
+		{
+		case COL_GREEN: return GET_GREEN;
+		case COL_RED: return GET_RED;
+		case COL_YELLOW: return GET_YELLOW;
+		case COL_BLACK: return GET_BLACK;
+		case COL_BLUE: return GET_BLUE;
+		case COL_ORANGE: return GET_ORANGE;
+
+		default: break;
+		}
+}
 	
 Input::~Input()
 {

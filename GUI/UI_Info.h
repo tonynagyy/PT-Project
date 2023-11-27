@@ -37,12 +37,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_EXIT,//Exit item
 	ITM_DRAWINGCLR,
 	ITM_FILLINGCLR,
-	REDD,
-	GREENN,
-	BLUEE,
-	YELLOWW,
-	BLACKK,
-	ORANGEE,
+	ITM_COLOUR,
 	DRAW_ITM_COUNT,
 	//no. of menu items ==> This should be the last line in this enum
 
@@ -61,6 +56,17 @@ enum PlayMenuItem //The items of the Play menu (you should add more items)
 	EXIT_PLAY, 
 	PLAY_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
 
+};
+
+enum ColourMenuItem
+{
+	COL_RED,
+	COL_GREEN,
+	COL_BLUE,
+	COL_YELLOW,
+	COL_BLACK,
+	COL_ORANGE,
+	COLOUR_ITM_COUNT
 };
 
 
