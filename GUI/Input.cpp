@@ -17,8 +17,6 @@ string Input::GetSrting(Output* pO) const
 	string Label;
 	char Key;
 
-	pWind->FlushKeyQueue();
-	pWind->FlushMouseQueue();
 
 	while (1)
 	{
@@ -159,6 +157,16 @@ ActionColour Input::GetColourAction() const
 			}
 		}
 		
+}
+
+void Input::StopStoringClicks() const
+{
+	pWind->FlushMouseQueue();
+	
+}
+void Input::StopStoringKeys() const
+{
+	pWind->FlushKeyQueue();
 }
 	
 Input::~Input()

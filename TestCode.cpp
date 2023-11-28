@@ -307,9 +307,10 @@ int main()
 	pOut->PrintMessage("Testing Input ability to read strings");
 
 	///TODO: Add code here to 
+	pIn->StopStoringKeys();
 	string str = pIn->GetSrting(pOut);
 	pOut->PrintMessage("You Entered " + str + " click anywhere to continue");
-	
+	pIn->StopStoringClicks();
 
 	// 1- Read a string from the user on the status bar
 	// 2- After reading the string clear the status bar
