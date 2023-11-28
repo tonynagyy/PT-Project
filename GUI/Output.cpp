@@ -80,6 +80,13 @@ void Output::ClearToolBar() const
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 }
 
+void Output::ClearColourMenu() const
+{
+	pWind->SetPen(UI.BkGrndColor, 1);
+	pWind->SetBrush(UI.BkGrndColor);
+	pWind->DrawRectangle(ITM_COLOUR * UI.MenuItemWidth, UI.ToolBarHeight, UI.width, (COLOUR_ITM_COUNT + 1) * UI.ToolBarHeight);
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBar() const
 {
@@ -199,6 +206,38 @@ color Output::getCrntFillColor() const	//get current filling color
 int Output::getCrntPenWidth() const		//get current pen width
 {
 	return UI.PenWidth;
+}
+
+void Output::GetColour(Input* pIn, Output* pOut) const
+{
+	pOut->CreateColourMenu();
+	ActionColour ActCol;
+	ActCol = pIn->GetColourAction();
+
+	switch (ActCol)
+	{
+	case GET_GREEN:
+		pOut->PrintMessage("Action: a click on Green Colour Icon, Click anywhere");
+		break;
+	case GET_BLACK:
+		pOut->PrintMessage("Action: a click on black Colour Icon, Click anywhere");
+		break;
+	case GET_RED:
+		pOut->PrintMessage("Action: a click on red Colour Icon, Click anywhere");
+		break;
+	case GET_BLUE:
+		pOut->PrintMessage("Action: a click on blue Colour Icon, Click anywhere");
+		break;
+	case GET_ORANGE:
+		pOut->PrintMessage("Action: a click on orange Colour Icon, Click anywhere");
+		break;
+	case GET_YELLOW:
+		pOut->PrintMessage("Action: a click on yellow Colour Icon, Click anywhere");
+		break;
+
+	default: break;
+	}
+	pOut->ClearColourMenu();
 }
 
 

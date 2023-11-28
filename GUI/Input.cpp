@@ -34,6 +34,7 @@ string Input::GetSrting(Output* pO) const
 		if (pO)
 			pO->PrintMessage(Label);
 	}
+	
 }
 
 //This function reads the position where the user clicks to determine the desired action

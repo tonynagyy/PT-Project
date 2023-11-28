@@ -307,7 +307,6 @@ int main()
 	pOut->PrintMessage("Testing Input ability to read strings");
 
 	///TODO: Add code here to 
-	
 	string str = pIn->GetSrting(pOut);
 	pOut->PrintMessage("You Entered " + str + " click anywhere to continue");
 	
@@ -442,35 +441,8 @@ int main()
 
 		case COLOURS:
 			pOut->PrintMessage("Action: a click on Colours icon, Click anywhere");
-			pOut->CreateColourMenu();
-			ActionColour ActCol;
-				ActCol = pIn->GetColourAction();
-			
-			switch(ActCol)
-			{
-			case GET_GREEN:
-				pOut->PrintMessage("Action: a click on Green Colour Icon, Click anywhere");
-				break;
-			case GET_BLACK:
-				pOut->PrintMessage("Action: a click on black Colour Icon, Click anywhere");
-				break;
-			case GET_RED:
-				pOut->PrintMessage("Action: a click on red Colour Icon, Click anywhere");
-				break;
-			case GET_BLUE:
-				pOut->PrintMessage("Action: a click on blue Colour Icon, Click anywhere");
-				break;
-			case GET_ORANGE:
-				pOut->PrintMessage("Action: a click on orange Colour Icon, Click anywhere");
-				break;
-			case GET_YELLOW:
-				pOut->PrintMessage("Action: a click on yellow Colour Icon, Click anywhere");
-				break;
-
-			default: break;
-			}
-			pOut->ClearDrawArea();
-		break;
+			pOut->GetColour(pIn, pOut);
+			break;
 
 		case STATUS:
 			pOut->PrintMessage("Action: a click on the Status Bar, Click anywhere");
