@@ -1,6 +1,7 @@
 #include "Output.h"
 
-#define HEXA_RADIUS 50
+#define HEXA_RADIUS 80
+#define HEX_CALC  (sqrt((3) / 2) * HEXA_RADIUS)
 #define HALF_SQUARE_LENGTH 50 
 #define Circle_RADIUS(X,Y) sqrt((X) * (X) + (Y) * (Y))
 
@@ -291,8 +292,8 @@ void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo RectGfxInfo, boo
 //DRAW HEXAGON FUNCTION
 void Output::DrawHexagon(Point P1, GfxInfo RectGfxInfo, bool selected) const
 {
-	int xVertices[6] = { P1.x - HEXA_RADIUS, P1.x - HEXA_RADIUS, P1.x, P1.x + HEXA_RADIUS, P1.x + HEXA_RADIUS, P1.x };
-	int yVertices[6] = { P1.y + HEXA_RADIUS, P1.y - HEXA_RADIUS, P1.y - (2 * HEXA_RADIUS), P1.y - HEXA_RADIUS, P1.y + HEXA_RADIUS, P1.y + (2 * HEXA_RADIUS) };
+	int xVertices[6] = { P1.x - HEXA_RADIUS, P1.x - HEXA_RADIUS / 2, P1.x + HEXA_RADIUS / 2, P1.x + HEXA_RADIUS, P1.x + HEXA_RADIUS /2, P1.x - HEXA_RADIUS / 2};
+	int yVertices[6] = { P1.y, ceil(P1.y + HEX_CALC), ceil(P1.y + HEX_CALC), P1.y, ceil(P1.y - HEX_CALC), ceil(P1.y - HEX_CALC)};
 	color DrawingClr;
 	drawstyle style;
 
