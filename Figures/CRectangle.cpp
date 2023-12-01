@@ -1,6 +1,6 @@
 #include "CRectangle.h"
 
-CRectangle::CRectangle(const Point &P1, const Point &P2, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo), Corner1(P1), Corner2(P2){
+CRectangle::CRectangle(const Point &P1, const Point &P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo), Corner1(P1), Corner2(P2){
 }
 	
 

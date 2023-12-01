@@ -35,6 +35,7 @@ Output::Output()
 }
 
 
+
 Input* Output::CreateInput() const
 {
 	Input* pIn = new Input(pWind);
@@ -349,7 +350,15 @@ void Output::DrawHexagon(Point P1, GfxInfo RectGfxInfo, bool selected) const
 	pWind->DrawPolygon(xVertices, yVertices, 6, style);
 }
 
-//DRAW CIRCLE FUNCTION
+/*
+* DrawCircle - Draw a circle with a given center and radius
+* @P1 - The center of the circle
+* @P2 - A point on the circle
+* @RectGfxInfo - The graphics info of the circle
+* @selected - Whether the circle is selected or not
+* @Description - This function draws a circle with a given center and radius
+* Return void 
+*/
 void Output::DrawCircle(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
 {
 	int deltaX = P2.x - P1.x;
