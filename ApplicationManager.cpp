@@ -83,6 +83,9 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
+	// call the function that clears the drawing area
+	// pOut->ClearDrawArea();
+	// kerolos Edit i was asleep will check it in the morning 
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
