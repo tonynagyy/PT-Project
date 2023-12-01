@@ -6,7 +6,7 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddRectAction::AddRectAction(ApplicationManager *pApp):Action(pApp) {
+AddRectAction::AddRectAction(ApplicationManager *pApp) :Action(pApp) {
 }
 
 void AddRectAction::ReadActionParameters() 
