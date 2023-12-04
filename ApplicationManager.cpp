@@ -37,8 +37,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct = new AddRectAction(this);
 		break;
 	case DRAW_CIRC:
-		ptrToAct = new AddCircleAction (this);
-
+		ptrToAct = new AddCircleAction(this);
+		break;
 	case EXIT:
 		///create ExitAction here
 
@@ -85,9 +85,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
-	// call the function that clears the drawing area
-	// pOut->ClearDrawArea();
-	// kerolos Edit i was asleep will check it in the morning 
+	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }

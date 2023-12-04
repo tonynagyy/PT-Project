@@ -20,7 +20,6 @@ public:
 	ActionType GetUserAction() const; // Read the user click and map to an action
 	ActionColour GetColourAction() const; // read colours
 	void StopStoringClicks() const;
-
 	void StopStoringKeys() const;
 
 	~Input();

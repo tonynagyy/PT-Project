@@ -1,6 +1,12 @@
 #include "Output.h"
-
-
+int ciell(double x)
+{
+	int y = (int)x;
+	if (x > y)
+		return y + 1;
+	else
+		return y;
+}
 Output::Output()
 {
 	//Initialize user interface parameters
@@ -328,10 +334,10 @@ void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo RectGfxInfo, boo
 //DRAW HEXAGON FUNCTION
 void Output::DrawHexagon(Point P1, GfxInfo RectGfxInfo, bool selected) const
 {
-	int xVertices[6] = { P1.x - HEXA_RADIUS, P1.x - HEXA_RADIUS / 2, P1.x + HEXA_RADIUS / 2, P1.x + HEXA_RADIUS, P1.x + HEXA_RADIUS /2, P1.x - HEXA_RADIUS / 2};
-	int yVertices[6] = { P1.y, ceil(P1.y + HEX_CALC), ceil(P1.y + HEX_CALC), P1.y, ceil(P1.y - HEX_CALC), ceil(P1.y - HEX_CALC)};
 	color DrawingClr;
 	drawstyle style;
+	int xVertices[6] = {P1.x - HEXA_RADIUS, P1.x - HEXA_RADIUS / 2, P1.x + HEXA_RADIUS / 2, P1.x + HEXA_RADIUS, P1.x + HEXA_RADIUS /2, P1.x - HEXA_RADIUS / 2};
+	int yVertices[6] = {P1.y, ceil(P1.y + HEX_CALC), ceil(P1.y + HEX_CALC), P1.y, ceil(P1.y - HEX_CALC), ceil(P1.y - HEX_CALC)};
 
 	if (selected)
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
@@ -359,7 +365,7 @@ void Output::DrawHexagon(Point P1, GfxInfo RectGfxInfo, bool selected) const
 * @Description - This function draws a circle with a given center and radius
 * Return void 
 */
-void Output::DrawCircle(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
+void Output::DrawCircle(const Point &P1,const Point &P2, GfxInfo RectGfxInfo, bool selected) const
 {
 	int deltaX = P2.x - P1.x;
 	int deltaY = P2.y - P1.y;
@@ -379,8 +385,8 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) 
 	}
 	else
 		style = FRAME;
-
-	pWind->DrawCircle(P1.x, P1.y, Circle_RADIUS(deltaX, deltaY), style);
+	
+	pWind->DrawCircle(P1.x, P1.y, CIRCLE_RADIUS(deltaX, deltaY), style);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

@@ -2,10 +2,8 @@
 
 
 
- CCircle::CCircle(const Point&p1, const Point&p2, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), P1(p1), P2(p1){
-
-
-
+ CCircle::CCircle(const Point &p1, const Point &p2, GfxInfo FigureGfxInfo)
+	 : CFigure(FigureGfxInfo), P1(p1), P2(p2){
  }
  void CCircle::Draw(Output* pOut) const
 {
