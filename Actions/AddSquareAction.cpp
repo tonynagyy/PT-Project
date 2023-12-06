@@ -38,6 +38,6 @@ void AddSquareAction::Execute()
 	//Create a Square with the parameters read from the user
 	CSquare * R = new CSquare (center, SquareGfxInfo);
 
-	//Add the Hexagon to the list of figures
+	//Add the Square to the list of figures
 	pManager->AddFigure(R);
 }

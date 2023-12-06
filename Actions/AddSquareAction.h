@@ -3,19 +3,19 @@
 
 #include "Action.h"
 
-//Add Hexagon Action class
+//Add Square Action class
 class AddSquareAction : public Action
 {
 private:
-	Point center; //Hexagon center
+	Point center; //Square center
 	GfxInfo SquareGfxInfo;
 public:
 	AddSquareAction(ApplicationManager* pApp);
 
-	//Reads hexagon parameters
+	//Reads square parameters
 	virtual void ReadActionParameters();
 
-	//Add hexagon to the ApplicationManager
+	//Add square to the ApplicationManager
 	virtual void Execute();
 
 };
