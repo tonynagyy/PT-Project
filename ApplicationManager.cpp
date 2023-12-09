@@ -5,6 +5,7 @@
 #include "Actions\AddTriangleAction.h"
 #include "Actions\AddSquareAction.h"
 #include "Actions\SelectAction.h"
+#include "Actions\DeletefigAction.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -70,6 +71,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		this->UnSelect();
 		break;
 	
+	case DEL:
+		ptrToAct = new DeletefigAction(this);
+		break;
+
 	case EXIT:
 		///create ExitAction here
 
@@ -97,6 +102,29 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
 }
+// deleting the selected figure
+void ApplicationManager::DeleteFig(CFigure* pFig)
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i] == pFig)
+		{
+			FigList[i] = NULL;
+		}
+	}
+
+}
+//get pointer to the selected figure
+CFigure* ApplicationManager::GetSelectedFigFigure()
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			return FigList[i];
+		}
+	}
+}
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
 {
@@ -106,7 +134,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 	{
 		FigList[i]->SetSelected(false);
 	}
-
+	
 	for (int i = FigCount - 1; i >= 0; i--)
 	{
 		if (FigList[i]->InFigure(x, y))

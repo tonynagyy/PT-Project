@@ -31,6 +31,8 @@ public:
 	
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
+	void DeleteFig(CFigure* pFig);
+	CFigure* GetSelectedFigFigure();
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	void UnSelect();
 		
