@@ -4,6 +4,10 @@
 #include "..\defs.h"
 #include "..\GUI\Output.h"
 
+#define DEST(X1, Y1, X2, Y2) (sqrt((X1 - X2) * (X1 - X2) + (Y1 - Y2) * (Y1 - Y2)))
+#define DELTA(X1, X2) (abs(X1 - X2))
+
+
 //Base class for all figures
 class CFigure
 {
@@ -19,11 +23,17 @@ public:
 
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
+	virtual bool InFigure(int x, int y) = 0; // check if the point clicked is in the figure or not
 
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
 	
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
+	
+	// Calculate an area of a triangle using its 3 sides
+	// Its use is to check if the point is in or not 
+	float Tri_Area(int X1, int Y1, int X2, int Y2, int X3, int Y3);
+
 
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
@@ -33,8 +43,9 @@ public:
 
 	//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
 	//virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
-
-	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
+	
+	virtual double CalcArea() = 0;
+	virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 };
 
 #endif

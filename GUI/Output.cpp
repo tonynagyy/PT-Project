@@ -191,6 +191,16 @@ void Output::PrintMessage(string msg) const	//Prints a message on status bar
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
 	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.5), msg);
 }
+
+void Output::PrintNumber(int msg) const	//Prints a message on status bar
+{
+	//ClearStatusBar();	//First clear the status bar
+
+	pWind->SetPen(UI.MsgColor, 50);
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->DrawDouble(10, UI.height - (int)(UI.StatusBarHeight / 1.5), msg);
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 color Output::getCrntDrawColor() const	//get current drawing color
