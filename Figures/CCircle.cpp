@@ -27,6 +27,7 @@
  void CCircle::PrintInfo(Output* pOut)
  {
 	 pOut->PrintMessage("Figure: Circle     Area:");
+
  }
 
 

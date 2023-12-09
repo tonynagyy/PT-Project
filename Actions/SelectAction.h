@@ -25,6 +25,7 @@ public:
 	// get point and the figure from the user
 	virtual void ReadActionParameters();
 	virtual void Execute();
+	CFigure* Get_Fig();
 };
 
 

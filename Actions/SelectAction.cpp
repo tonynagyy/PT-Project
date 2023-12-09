@@ -25,6 +25,12 @@ void SelectAction::Execute()
 	ReadActionParameters();
 	if (Fig != nullptr)
 	{
+		Fig->SetSelected(true);
 		Fig->PrintInfo(pOut);
 	}
+}
+
+CFigure* SelectAction::Get_Fig()
+{
+	return Fig;
 }
