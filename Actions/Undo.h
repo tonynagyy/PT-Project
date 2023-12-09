@@ -2,9 +2,11 @@
 #define UNDO_H
 
 #include "Action.h"
-#include "../Figures/CFigure.h"
-#include "../ApplicationManager.h"
-
+#include "..\Figures\CFigure.h"
+#include "..\ApplicationManager.h"
+#include "..\GUI\input.h"
+#include "..\GUI\Output.h"
+#include "..\defs.h"
 
 #define max 200 
 

@@ -1,5 +1,5 @@
-#ifndef SELECTACTION_H
-#define SELECTACTION_H
+#ifndef DELETEACTION_H
+#define DELETEACTION_H
 
 
 #include "Action.h"

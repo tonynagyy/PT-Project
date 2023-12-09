@@ -15,3 +15,7 @@ void Undo::ReadActionParameters()
 
 
 }
+
+void Undo::Execute()
+{
+}
