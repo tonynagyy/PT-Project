@@ -38,27 +38,36 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	switch (ActType)
 	{
 	case DRAW_RECT:
+		this->UnSelect();
 		ptrToAct = new AddRectAction(this);
 		break;
 	
 	case DRAW_CIRC:
+		this->UnSelect();
 		ptrToAct = new AddCircleAction(this);
 		break;
 	
 	case DRAW_HEX:
+		this->UnSelect();
 		ptrToAct = new AddHexaAction(this);
 		break;
 	
 	case DRAW_TRI:
+		this->UnSelect();
 		ptrToAct = new AddTriangleAction(this);
 		break;
 	
 	case DRAW_SQ:
+		this->UnSelect();
 		ptrToAct = new AddSquareAction(this);
 		break;
 
 	case SELECT:
 		ptrToAct = new SelectAction(this);
+		break;
+
+	case DRAWING_AREA:
+		this->UnSelect();
 		break;
 	
 	case EXIT:
@@ -110,6 +119,14 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 	//Remember that ApplicationManager only calls functions do NOT implement it.
 
 	return nullptr;
+}
+void ApplicationManager::UnSelect()
+{
+	pOut->ClearStatusBar();
+	for (int i = 0; i < FigCount; i++)
+	{
+		FigList[i]->SetSelected(false);
+	}
 }
 //==================================================================================//
 //							Interface Management Functions							//

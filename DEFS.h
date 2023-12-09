@@ -28,9 +28,9 @@ enum ActionType //The actions supported (you can add more if needed)
 	HIGH_FRAME, // highlighted the frame of the figure
 	COLOURS, 
 	TO_DRAW,		//Switch interface to Draw mode
-	F1,
-	F2,
-	F3,
+	PICK_CLR_FIG,
+	PICK_FIG,
+	PICK_CLR,
 	EMPTY,			//A click on empty place in the toolbar
 	DRAWING_AREA,	//A click on the drawing area
 	PLAYING_AREA,

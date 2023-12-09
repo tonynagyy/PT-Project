@@ -28,9 +28,16 @@ void SelectAction::Execute()
 		Fig->SetSelected(true);
 		Fig->PrintInfo(pOut);
 	}
+	
 }
 
 CFigure* SelectAction::Get_Fig()
 {
 	return Fig;
+}
+
+void SelectAction::Unselect()
+{
+	if (Fig != nullptr)
+		Fig->SetSelected(false);
 }

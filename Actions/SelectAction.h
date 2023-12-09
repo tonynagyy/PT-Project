@@ -17,7 +17,7 @@ class SelectAction : public Action
 private:
 
 	Point P;
-	CFigure* Fig;
+	CFigure* Fig = nullptr;
 
 public:
 	SelectAction(ApplicationManager* pApp);
@@ -26,6 +26,7 @@ public:
 	virtual void ReadActionParameters();
 	virtual void Execute();
 	CFigure* Get_Fig();
+	void Unselect();
 };
 
 
