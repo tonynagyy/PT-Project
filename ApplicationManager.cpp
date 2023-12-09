@@ -119,9 +119,12 @@ CFigure* ApplicationManager::GetSelectedFigFigure()
 {
 	for (int i = 0; i < FigCount; i++)
 	{
-		if (FigList[i]->IsSelected())
+		if (FigList[i] != NULL)
 		{
-			return FigList[i];
+			if (FigList[i]->IsSelected())
+			{
+				return FigList[i];
+			}
 		}
 	}
 }
@@ -132,14 +135,20 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 	//if this point (x,y) does not belong to any figure return NULL
 	for (int i = 0; i < FigCount; i++)
 	{
-		FigList[i]->SetSelected(false);
+		if (FigList[i] != NULL)
+		{
+			FigList[i]->SetSelected(false);
+		}
 	}
 	
 	for (int i = FigCount - 1; i >= 0; i--)
 	{
-		if (FigList[i]->InFigure(x, y))
-		{		
-			return FigList[i];
+		if (FigList[i] != NULL)
+		{
+			if (FigList[i]->InFigure(x, y))
+			{
+				return FigList[i];
+			}
 		}
 	}
 
@@ -153,7 +162,10 @@ void ApplicationManager::UnSelect()
 	pOut->ClearStatusBar();
 	for (int i = 0; i < FigCount; i++)
 	{
-		FigList[i]->SetSelected(false);
+		if (FigList[i] != NULL)
+		{
+			FigList[i]->SetSelected(false);
+		}
 	}
 }
 //==================================================================================//
@@ -165,7 +177,12 @@ void ApplicationManager::UpdateInterface() const
 {
 	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
-		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+	{
+		if (FigList[i] != NULL)
+		{
+			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+		}
+	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
