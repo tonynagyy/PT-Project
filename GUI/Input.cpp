@@ -108,9 +108,9 @@ ActionType Input::GetUserAction() const
 			switch (ClickedItemOrder)
 			{
 			case ITM_DRAWMODE : return TO_DRAW;
-			case ITM_FIGURE_TYPE_AND_FILL_COLOR: return F1;
-			case ITM_FIGURE_FILL_COLOR: return F2;
-			case ITM_FIGURE_TYBE: return F3;
+			case ITM_FIGURE_TYPE_AND_FILL_COLOR: return PICK_CLR_FIG;
+			case ITM_FIGURE_FILL_COLOR: return PICK_CLR;
+			case ITM_FIGURE_TYBE: return PICK_FIG;
 			case EXIT_PLAY: return GET_EXIT_PLAY;
 
 			default: return EMPTY;

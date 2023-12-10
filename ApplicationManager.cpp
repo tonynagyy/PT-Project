@@ -6,6 +6,7 @@
 #include "Actions\AddSquareAction.h"
 #include "Actions\SelectAction.h"
 #include "Actions\DeletefigAction.h"
+#include "Actions\PickFigAction.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -75,6 +76,19 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct = new DeletefigAction(this);
 		break;
 
+	case TO_PLAY:
+		this->UnSelect();
+		pOut->CreatePlayToolBar();
+		break;
+
+	case TO_DRAW:
+		pOut->CreateDrawToolBar();
+		break;
+
+	case PICK_FIG:
+		ptrToAct = new PickFigAction(this);
+		break;
+
 	case EXIT:
 		///create ExitAction here
 
@@ -133,13 +147,6 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
-	for (int i = 0; i < FigCount; i++)
-	{
-		if (FigList[i] != NULL)
-		{
-			FigList[i]->SetSelected(false);
-		}
-	}
 	
 	for (int i = FigCount - 1; i >= 0; i--)
 	{
@@ -151,7 +158,6 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 			}
 		}
 	}
-
 	//Add your code here to search for a figure given a point x,y	
 	//Remember that ApplicationManager only calls functions do NOT implement it.
 
@@ -183,6 +189,16 @@ void ApplicationManager::UpdateInterface() const
 			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 		}
 	}
+}
+CFigure* ApplicationManager::RandomFigure()
+{
+	if (FigCount)
+		if (FigList[rand() % FigCount] != nullptr)
+			return FigList[rand() % FigCount];
+		else
+			RandomFigure();
+	else
+		return nullptr;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input

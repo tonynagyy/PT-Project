@@ -26,6 +26,8 @@ public:
 	virtual bool InFigure(int x, int y) = 0; // check if the point clicked is in the figure or not
 
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
+	virtual void FakeDraw(Output* pOut) = 0;
+	virtual int GetID() = 0;
 	
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
@@ -43,7 +45,7 @@ public:
 
 	//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
 	//virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
-	
+	virtual int Counter() = 0;
 	virtual double CalcArea() = 0;
 	virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 };

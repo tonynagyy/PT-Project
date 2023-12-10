@@ -8,6 +8,9 @@ class CRectangle : public CFigure
 private:
 	Point Corner1;	
 	Point Corner2;
+	static int Count;
+	int Num;
+
 public:
 	CRectangle(const Point &,const Point &, GfxInfo FigureGfxInfo );
 	virtual void Draw(Output* pOut) const;
@@ -15,6 +18,9 @@ public:
 
 	virtual double CalcArea();
 	virtual void PrintInfo(Output* pOut);
+	virtual int Counter();
+	virtual void FakeDraw(Output* pOut);
+	virtual int GetID();
 };
 
 #endif

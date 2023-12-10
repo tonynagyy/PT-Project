@@ -24,20 +24,14 @@ void SelectAction::Execute()
 	Output* pOut = pManager->GetOutput();
 	ReadActionParameters();
 	if (Fig != nullptr)
-	{
-		Fig->SetSelected(true);
-		Fig->PrintInfo(pOut);
-	}
-	
-}
-
-CFigure* SelectAction::Get_Fig()
-{
-	return Fig;
-}
-
-void SelectAction::Unselect()
-{
-	if (Fig != nullptr)
-		Fig->SetSelected(false);
+		if (Fig->IsSelected())
+		{
+			Fig->SetSelected(false);
+		}
+		else
+		{
+			pManager->UnSelect();
+			Fig->SetSelected(true);
+			Fig->PrintInfo(pOut);
+		}
 }

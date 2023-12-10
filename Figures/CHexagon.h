@@ -9,6 +9,8 @@ class CHexagon : public CFigure
 {
 private:
 	Point center;
+	static int Count;
+	int Num;
 	
 public:
 	CHexagon(const Point&, GfxInfo FigureGfxInfo);
@@ -16,6 +18,9 @@ public:
 	virtual bool InFigure(int x, int y);
 	virtual double CalcArea();
 	virtual void PrintInfo(Output *pOut);
+	virtual int Counter();
+	virtual void FakeDraw(Output* pOut);
+	virtual int GetID();
 
 };
 #endif

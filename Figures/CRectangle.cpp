@@ -1,7 +1,13 @@
 #include "CRectangle.h"
 
-CRectangle::CRectangle(const Point &P1, const Point &P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo), Corner1(P1), Corner2(P2){
-}
+int CRectangle::Count = 0;
+
+ CRectangle::CRectangle(const Point &P1, const Point &P2, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), Corner1(P1), Corner2(P2)
+ {
+	 ID = 3;
+  	Count++;
+	Num = Count;
+ }
 	
 
 void CRectangle::Draw(Output* pOut) const
@@ -24,5 +30,40 @@ double CRectangle::CalcArea()
 
 void CRectangle::PrintInfo(Output* pOut)
 {
-	pOut->PrintMessage("Figure: Rectangle  ");
+	string msg;
+
+	string S = "Rectangle number: ";
+	string S1 = "  Figure: Rectangle    Area: ";
+	string S2 = "  Center: (";
+	string S3 = " , ";
+	string S4 = ")   Is Filled :  ";
+	string S5 = " False";
+	string S6 = " True";
+	if (FigGfxInfo.isFilled)
+	{
+		string msg = S + to_string(Num) + S1 + to_string(CalcArea()) + S2 + to_string((Corner1.x + Corner2.x) / 2) + S3 + to_string((Corner1.y + Corner2.y) / 2) + S4 + S6;
+		pOut->PrintMessage(msg);
+	}
+	else
+	{
+		string msg = S + to_string(Num) + S1 + to_string(CalcArea()) + S2 + to_string((Corner1.x + Corner2.x) / 2) + S3 + to_string((Corner1.y + Corner2.y) / 2) + S4 + S5;
+		pOut->PrintMessage(msg);
+	}
+}
+
+int CRectangle::Counter()
+{
+	return Count;
+}
+
+void CRectangle::FakeDraw(Output* pOut)
+{
+	FigGfxInfo.DrawClr = LIGHTGOLDENRODYELLOW;
+	Draw(pOut);
+	FigGfxInfo.DrawClr = BLUE;
+}
+
+int CRectangle::GetID()
+{
+	return ID;
 }
