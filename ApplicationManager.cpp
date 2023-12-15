@@ -168,8 +168,8 @@ void ApplicationManager::SetInUndoList(Action* pAct)
 			Undoarray[4] = pAct->clone();
 		}
 
-		delete pAct;
-		pAct = NULL;
+		delete Redoarray[RedoCount];
+		Redoarray[RedoCount] = NULL;
 	}
 	//delete pAct;
 	//pAct = NULL;
@@ -193,9 +193,10 @@ void ApplicationManager::SetInRedoList(Action* pAct)
 		if (pAct != NULL)
 		{
 			Redoarray[RedoCount++] = pAct->clone();
-			delete pAct;
-			pAct = NULL;
 			UndoCount--;
+			delete Undoarray[UndoCount];
+			Undoarray[UndoCount] = NULL;
+			
 		}
 		else
 			Redoarray[RedoCount] = NULL;
@@ -244,8 +245,8 @@ void ApplicationManager::DeleteAllRedos()
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
-	if (FigCount < MaxFigCount)
-		FigList[FigCount++] = pFig;
+		if (FigCount < MaxFigCount)
+			FigList[FigCount++] = pFig;
 }
 
 // deleting the selected figure
