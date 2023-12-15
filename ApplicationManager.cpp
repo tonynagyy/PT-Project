@@ -188,7 +188,7 @@ Action* ApplicationManager::GetLastUndo()
 
 void ApplicationManager::SetInRedoList(Action* pAct)
 {
-	if (RedoCount < 4)
+	if (RedoCount <= 4)
 	{
 		if (pAct != NULL)
 		{
@@ -245,8 +245,15 @@ void ApplicationManager::DeleteAllRedos()
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
-		if (FigCount < MaxFigCount)
-			FigList[FigCount++] = pFig;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if ((FigList[i]->GetID() == pFig->GetID()) && (FigList[i]->GetNum() == pFig->GetNum()))
+			return;
+	}
+
+			if (FigCount < MaxFigCount)
+				FigList[FigCount++] = pFig;
+	
 }
 
 // deleting the selected figure

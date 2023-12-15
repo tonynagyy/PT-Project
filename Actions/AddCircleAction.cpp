@@ -48,19 +48,22 @@ void AddCircleAction::Execute()
 		ReadActionParameters();
 	}
 	
+	if (circle == NULL)
+	{
+		//Create a circle with the parameters read from the user
+		CCircle* circ = new CCircle(P1, P2, circleGfxInfo);
+		circle = circ;
+	}
 
-	//Create a circle with the parameters read from the user
-	CCircle* circ = new CCircle(P1, P2, circleGfxInfo);
-	circle = circ->clone();
 	//Add the circle to the list of figures
+	circle->Sethidden(false);
 	pManager->AddFigure(circle);
 	
-	delete circ;
 }
 
 void AddCircleAction::undo()
 {
-	pManager->DeleteFig(circle);
+	circle->Sethidden(true);
 }
 
 Action* AddCircleAction::clone() const

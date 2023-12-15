@@ -41,18 +41,22 @@ void AddHexaAction::Execute()
 		ReadActionParameters();
 	}
 
-	//Create a Hexagon with the parameters read from the user
-	CHexagon* H = new CHexagon(center, HexaGfxInfo);
-	hexa = H->clone();
+	if (hexa == NULL)
+	{
+		//Create a Hexagon with the parameters read from the user
+		CHexagon* H = new CHexagon(center, HexaGfxInfo);
+		hexa = H;
+	}
 	//Add the Hexagon to the list of figures
+	hexa->Sethidden(false);
 	pManager->AddFigure(hexa);
-	delete H;
+	
+
 }
 
 void AddHexaAction::undo()
 {
-
-	pManager->DeleteFig(hexa);
+	hexa->Sethidden(true);
 }
 
 Action* AddHexaAction::clone() const
