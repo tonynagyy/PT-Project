@@ -21,5 +21,9 @@ public:
 	virtual int Counter();
 	virtual void FakeDraw(Output* pOut);
 	virtual int GetID();
+	virtual int GetNum();
+
+	// make clone copy constructor
+	virtual CFigure* clone() const override;
 };
 #endif

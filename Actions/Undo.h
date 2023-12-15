@@ -7,17 +7,19 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 #include "..\defs.h"
+#include "Redo.h"
 
-#define max 200 
-
+#define MAX 5
 
 class Undo : public Action
 {
-	CFigure* action_list[max];
-	int actioncount;
-	CFigure* undoarray[5];
-	int topindex;
-
+	Action* UndoPtr;
+	CFigure* FigurePtr;
+	//Action* undoStack[MAX];
+	//int undoIndex;
+	//Action* redoStack [5];
+	//int redoIndex;
+	//Redo* redo;
  public:
 	 Undo(ApplicationManager* pApp);
 
@@ -27,6 +29,8 @@ class Undo : public Action
 
 	 virtual void Execute();
 
+	 virtual void undo();
 
+	 virtual Action* clone() const override;
 };
 #endif

@@ -182,6 +182,7 @@
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\PickFigAction.cpp" />
+    <ClCompile Include="Actions\Redo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -305,6 +306,7 @@
     <ClInclude Include="Actions\PickFigAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\Redo.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

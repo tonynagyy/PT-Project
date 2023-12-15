@@ -5,6 +5,7 @@
 #include "Figures\CFigure.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
+#include"Actions/Undo.h"
 
 //Main class that manages everything in the application.
 class ApplicationManager
@@ -19,7 +20,10 @@ private:
 	CFigure *SelectedFig; //Pointer to the selected figure
 	Input *pIn;/*pointer to the input */
 	Output *pOut;/*pointer to the output */
-
+	Action* Undoarray[5];/*array to save actions for undo*/
+	Action* Redoarray[5];/*array to save actions for redo*/
+	int UndoCount;
+	int RedoCount;
 public:	
 	ApplicationManager(); 
 	~ApplicationManager();
@@ -28,7 +32,12 @@ public:
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
 	void ExecuteAction(ActionType) ; //Creates an action and executes it
-	
+	void SetInUndoList(Action* pAct);
+	Action* GetLastUndo();
+	void SetInRedoList(Action* pAct);
+	Action* GetLastRedo();
+	void DeleteAllRedos();
+
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	void DeleteFig(CFigure* pFig);

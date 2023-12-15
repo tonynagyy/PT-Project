@@ -2,6 +2,7 @@
 
 DeletefigAction::DeletefigAction(ApplicationManager* pApp): Action(pApp)
 {
+	selectedfig = NULL;
 }
 
 void DeletefigAction::ReadActionParameters()
@@ -11,19 +12,33 @@ void DeletefigAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-
+	//selectedfig->clone();
 	selectedfig = pManager->GetSelectedFigFigure();
 
 }
 
 void DeletefigAction::Execute()
 {
-	ReadActionParameters();
-
+	if (selectedfig == NULL)
+	{
+		ReadActionParameters();
+	}
+	
 	if (selectedfig != nullptr)
 	{
 		pManager->DeleteFig(selectedfig);
 	}
+}
 
+void DeletefigAction::undo()
+{
+	selectedfig->SetSelected(false);
+	selectedfig->Sethidden(false);
+	//pManager->UpdateInterface();
+	//pManager->AddFigure(selectedfig);
+}
 
+Action* DeletefigAction::clone() const
+{
+	return new DeletefigAction(*this);
 }

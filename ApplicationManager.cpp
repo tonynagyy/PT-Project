@@ -7,6 +7,7 @@
 #include "Actions\SelectAction.h"
 #include "Actions\DeletefigAction.h"
 #include "Actions\PickFigAction.h"
+#include "Actions/Undo.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -16,10 +17,17 @@ ApplicationManager::ApplicationManager()
 	pIn = pOut->CreateInput();
 
 	FigCount = 0;
-
+	UndoCount = 0;
+	RedoCount = 0;
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
 		FigList[i] = NULL;
+
+	for (int i = 0; i < 5; i++)
+		Undoarray[i] = NULL;
+
+	for (int i = 0; i < 5; i++)
+		Redoarray[i] = NULL;
 }
 
 //==================================================================================//
@@ -42,30 +50,47 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case DRAW_RECT:
 		this->UnSelect();
 		ptrToAct = new AddRectAction(this);
+		ptrToAct->Execute();
+		SetInUndoList(ptrToAct);
+		ptrToAct = NULL;
+		DeleteAllRedos();
 		break;
 	
 	case DRAW_CIRC:
 		this->UnSelect();
 		ptrToAct = new AddCircleAction(this);
+		ptrToAct->Execute();
+		SetInUndoList(ptrToAct);
+		DeleteAllRedos();
 		break;
 	
 	case DRAW_HEX:
 		this->UnSelect();
 		ptrToAct = new AddHexaAction(this);
+		ptrToAct->Execute();
+		SetInUndoList(ptrToAct);
+		DeleteAllRedos();
 		break;
 	
 	case DRAW_TRI:
 		this->UnSelect();
 		ptrToAct = new AddTriangleAction(this);
+		ptrToAct->Execute();
+		SetInUndoList(ptrToAct);
+		DeleteAllRedos();
 		break;
 	
 	case DRAW_SQ:
 		this->UnSelect();
 		ptrToAct = new AddSquareAction(this);
+		ptrToAct->Execute();
+		SetInUndoList(ptrToAct);
+		DeleteAllRedos();
 		break;
 
 	case SELECT:
 		ptrToAct = new SelectAction(this);
+		ptrToAct->Execute();
 		break;
 
 	case DRAWING_AREA:
@@ -73,7 +98,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	
 	case DEL:
-		ptrToAct = new DeletefigAction(this);
+		ptrToAct = new DeletefigAction(this); 
+		ptrToAct->Execute();
+		SetInUndoList(ptrToAct);
 		break;
 
 	case TO_PLAY:
@@ -87,6 +114,17 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case PICK_FIG:
 		ptrToAct = new PickFigAction(this);
+		ptrToAct->Execute();
+		break;
+	
+	case UNDO:
+		ptrToAct = new Undo(this);
+		ptrToAct->Execute();
+		break;
+
+	case REDO:
+		ptrToAct = new Redo(this);
+		ptrToAct->Execute();
 		break;
 
 	case EXIT:
@@ -97,14 +135,107 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	}
-
+	
 	//Execute the created action
 	if (ptrToAct != NULL)
 	{
-		ptrToAct->Execute();//Execute
+		//ptrToAct->Execute();//Execute
 		delete ptrToAct;	//You may need to change this line depending to your implementation
 		ptrToAct = NULL;
 	}
+}
+
+void ApplicationManager::SetInUndoList(Action* pAct)
+{
+	//Undoarray[UndoCount] = pAct->clone();
+	if (pAct != NULL)
+	{
+
+		if (UndoCount <= 4)
+		{
+			Undoarray[UndoCount++] = pAct->clone();
+			
+		}
+		else
+		{
+			// If the undo stack is full, remove the oldest action
+			delete Undoarray[0];
+			Undoarray[0] = NULL;
+			for (int i = 0; i < 4; ++i)
+			{
+				Undoarray[i] = Undoarray[i + 1];
+			}
+			Undoarray[4] = pAct->clone();
+		}
+
+		delete pAct;
+		pAct = NULL;
+	}
+	//delete pAct;
+	//pAct = NULL;
+}
+Action* ApplicationManager::GetLastUndo()
+{
+	if (UndoCount > 0)
+	{
+		Action* pAction = Undoarray[UndoCount - 1];
+		//UndoCount--;
+		return pAction;
+	}
+	else
+		return NULL;
+}
+
+void ApplicationManager::SetInRedoList(Action* pAct)
+{
+	if (RedoCount < 4)
+	{
+		if (pAct != NULL)
+		{
+			Redoarray[RedoCount++] = pAct->clone();
+			delete pAct;
+			pAct = NULL;
+			UndoCount--;
+		}
+		else
+			Redoarray[RedoCount] = NULL;
+	}
+	/*
+	else
+	{
+		// If the undo stack is full, remove the oldest action
+		Redoarray[0] = NULL;
+		for (int i = 0; i < 4; ++i)
+		{
+			Redoarray[i] = Redoarray[i + 1];
+		}
+		Redoarray[4] = pAct;
+	}*/
+
+}
+Action* ApplicationManager::GetLastRedo()
+{
+	if (RedoCount > 0)
+	{
+		Action* pAction = Redoarray[RedoCount - 1];
+		RedoCount--;
+		//UndoCount++;
+		return pAction;
+	}
+	else
+		return NULL;
+}
+void ApplicationManager::DeleteAllRedos()
+{
+	for (int i = 0; i < 5; i++)
+	{
+		if (Redoarray[i] != NULL)
+		{
+			delete Redoarray[i];
+			Redoarray[i] = NULL;
+		}
+	}
+	RedoCount = 0;
 }
 //==================================================================================//
 //						Figures Management Functions								//
@@ -116,14 +247,20 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
 }
+
 // deleting the selected figure
 void ApplicationManager::DeleteFig(CFigure* pFig)
 {
 	for (int i = 0; i < FigCount; i++)
 	{
-		if (FigList[i] == pFig)
+		if (FigList[i] != NULL)
 		{
-			FigList[i] = NULL;
+			if ( (FigList[i]->GetNum() == pFig->GetNum()) && (FigList[i]->GetID() == pFig->GetID()) )
+			{
+				//delete FigList[i];
+				//FigList[i] = NULL;
+				FigList[i]->Sethidden(true);
+			}
 		}
 	}
 
@@ -137,7 +274,8 @@ CFigure* ApplicationManager::GetSelectedFigFigure()
 		{
 			if (FigList[i]->IsSelected())
 			{
-				return FigList[i];
+				SelectedFig = FigList[i];
+				return SelectedFig;
 			}
 		}
 	}
@@ -184,7 +322,7 @@ void ApplicationManager::UpdateInterface() const
 	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
 	{
-		if (FigList[i] != NULL)
+		if (FigList[i] != NULL && ! FigList[i]->IfHidden())
 		{
 			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 		}
@@ -217,7 +355,14 @@ ApplicationManager::~ApplicationManager()
 {
 	for (int i = 0; i < FigCount; i++)
 		delete FigList[i];
+
+	for (int i = 0; i < UndoCount && Undoarray[i]; i++)
+	{
+		delete Undoarray[i];
+	}
+
 	delete pIn;
 	delete pOut;
+
 
 }

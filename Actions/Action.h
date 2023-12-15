@@ -24,6 +24,9 @@ public:
 	//Execute action (code depends on action type)
 	virtual void Execute() = 0;
 
+	virtual void undo() = 0;
+
+	virtual Action* clone() const = 0;
 };
 
 #endif

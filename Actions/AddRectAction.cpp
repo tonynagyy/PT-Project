@@ -7,7 +7,14 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddRectAction::AddRectAction(ApplicationManager *pApp) :Action(pApp) {
+AddRectAction::AddRectAction(ApplicationManager *pApp) :Action(pApp) 
+{
+	P1.x = 0;
+	P1.y = 0;
+	P2.x = 0;
+	P2.y = 0;
+
+	rect = NULL;
 }
 
 void AddRectAction::ReadActionParameters() 
@@ -38,11 +45,35 @@ void AddRectAction::ReadActionParameters()
 void AddRectAction::Execute() 
 {
 	//This action needs to read some parameters first
-	ReadActionParameters();
+	if (P1.x == 0 && P1.y == 0 && P2.x == 0 && P2.y == 0)
+	{
+		ReadActionParameters();
+	}
+	
 	
 	//Create a rectangle with the parameters read from the user
 	CRectangle *R = new CRectangle(P1, P2, RectGfxInfo);
-
+	rect = R;
+	
 	//Add the rectangle to the list of figures
 	pManager->AddFigure(R);
+
+	//delete R;
+}
+
+void AddRectAction::undo()
+{
+	rect->Sethidden(true);
+	//pManager->DeleteFig(rect);
+}
+
+Action* AddRectAction::clone() const
+{
+	return new AddRectAction(*this);
+}
+
+AddRectAction::~AddRectAction()
+{
+	delete rect;
+	
 }

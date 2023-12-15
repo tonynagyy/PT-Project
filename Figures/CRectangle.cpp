@@ -67,3 +67,13 @@ int CRectangle::GetID()
 {
 	return ID;
 }
+
+int CRectangle::GetNum()
+{
+	return Num;
+}
+
+CFigure *CRectangle::clone() const
+{
+	return new CRectangle(*this);
+}

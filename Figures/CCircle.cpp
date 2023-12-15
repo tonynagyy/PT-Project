@@ -44,6 +44,11 @@ int CCircle::Count = 0;
 	 return ID;
  }
 
+ int CCircle::GetNum()
+ {
+	 return Num;
+ }
+
  void CCircle::PrintInfo(Output* pOut)
  {
 	 string msg;
@@ -67,7 +72,12 @@ int CCircle::Count = 0;
 	 }
 
 
+
  }
 
+ CFigure* CCircle::clone() const
+ {
+	 return new CCircle(*this);
+ }
 
 

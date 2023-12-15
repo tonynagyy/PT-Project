@@ -6,8 +6,12 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddSquareAction::AddSquareAction(ApplicationManager* pApp) :Action(pApp) {
+AddSquareAction::AddSquareAction(ApplicationManager* pApp) :Action(pApp) 
+{
+	center.x = 0;
+	center.y = 0;
 
+	square = NULL;
 }
 
 void AddSquareAction::ReadActionParameters()
@@ -33,11 +37,32 @@ void AddSquareAction::ReadActionParameters()
 void AddSquareAction::Execute()
 {
 	//This action needs to read some parameters first
-	ReadActionParameters();
+	if (center.x == 0 && center.y == 0)
+	{
+		ReadActionParameters();
+	}
+	
 
 	//Create a Square with the parameters read from the user
-	CSquare * R = new CSquare (center, SquareGfxInfo);
-
+	CSquare * S = new CSquare (center, SquareGfxInfo);
+	square = S->clone();
 	//Add the Square to the list of figures
-	pManager->AddFigure(R);
+	pManager->AddFigure(square);
+
+	delete S;
+}
+
+void AddSquareAction::undo()
+{
+	pManager->DeleteFig(square);
+}
+
+Action* AddSquareAction::clone() const
+{
+	return new AddSquareAction(*this);
+}
+
+AddSquareAction::~AddSquareAction()
+{
+	delete square;
 }

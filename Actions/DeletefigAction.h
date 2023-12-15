@@ -21,10 +21,10 @@ public:
 
 	virtual void ReadActionParameters();
 	virtual void Execute();
-	
-	
 
-
+	virtual void undo();
+	
+	virtual Action* clone() const override;
 
 
 };

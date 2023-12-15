@@ -6,7 +6,16 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddTriangleAction::AddTriangleAction(ApplicationManager* pApp) : Action(pApp) {
+AddTriangleAction::AddTriangleAction(ApplicationManager* pApp) : Action(pApp) 
+{
+	P1.x = 0;
+	P1.y = 0;
+	P2.x = 0;
+	P2.y = 0;
+	P3.x = 0;
+	P3.y = 0;
+
+	triangle = NULL;
 }
 
 void AddTriangleAction::ReadActionParameters()
@@ -40,11 +49,32 @@ void AddTriangleAction::ReadActionParameters()
 void AddTriangleAction::Execute()
 {
 	//This action needs to read some parameters first
-	ReadActionParameters();
+	if (P1.x == 0 && P1.y == 0 && P2.x == 0 && P2.y == 0 && P3.x == 0 && P3.y == 0)
+	{
+		ReadActionParameters();
+	}
+	
 
 	//Create a triangle with the parameters read from the user
-	CTriangle* R = new CTriangle(P1, P2, P3 ,triangleGfxInfo);
-
+	CTriangle* T = new CTriangle(P1, P2, P3 ,triangleGfxInfo);
+	triangle = T->clone();
 	//Add the rectangle to the list of figures
-	pManager->AddFigure(R);
+	pManager->AddFigure(triangle);
+
+	delete T;
+}
+
+void AddTriangleAction::undo()
+{
+	pManager->DeleteFig(triangle);
+}
+
+Action* AddTriangleAction::clone() const
+{
+	return new AddTriangleAction(*this);
+}
+
+AddTriangleAction::~AddTriangleAction()
+{
+	delete triangle;
 }

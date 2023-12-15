@@ -6,7 +6,11 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddHexaAction::AddHexaAction(ApplicationManager* pApp) :Action(pApp) {
+AddHexaAction::AddHexaAction(ApplicationManager* pApp) :Action(pApp) 
+{
+	hexa = NULL;
+	center.x = 0;
+	center.y = 0;
 }
 
 void AddHexaAction::ReadActionParameters()
@@ -32,11 +36,32 @@ void AddHexaAction::ReadActionParameters()
 void AddHexaAction::Execute()
 {
 	//This action needs to read some parameters first
-	ReadActionParameters();
+	if (center.x == 0 && center.y == 0)
+	{
+		ReadActionParameters();
+	}
 
 	//Create a Hexagon with the parameters read from the user
-	CHexagon* R = new CHexagon(center, HexaGfxInfo);
-
+	CHexagon* H = new CHexagon(center, HexaGfxInfo);
+	hexa = H->clone();
 	//Add the Hexagon to the list of figures
-	pManager->AddFigure(R);
+	pManager->AddFigure(hexa);
+	delete H;
 }
+
+void AddHexaAction::undo()
+{
+
+	pManager->DeleteFig(hexa);
+}
+
+Action* AddHexaAction::clone() const
+{
+	return new AddHexaAction(*this);
+}
+
+AddHexaAction::~AddHexaAction()
+{
+	delete hexa;
+}
+

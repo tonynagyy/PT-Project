@@ -26,9 +26,11 @@ public:
 	//Calculate the area
 	virtual double CalcArea();
 	virtual int GetID();
+	virtual int GetNum();
 
 	//Print the data of the figure on the status bar
 	virtual void PrintInfo(Output* pOut);
+	virtual CFigure* clone() const override;
 };
 
 #endif

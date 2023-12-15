@@ -66,3 +66,13 @@ int CSquare::GetID()
 {
 	return ID;
 }
+
+int CSquare::GetNum()
+{
+	return Num;
+}
+
+CFigure* CSquare::clone() const
+{
+	return new CSquare(*this);
+}

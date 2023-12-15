@@ -6,6 +6,7 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 {
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;
+	hidden = false;
 }
 
 void CFigure::SetSelected(bool s)
@@ -17,6 +18,17 @@ bool CFigure::IsSelected() const
 {
 	return Selected;
 }
+
+void CFigure::Sethidden(bool hd)
+{
+	hidden = hd;
+}
+
+bool CFigure::IfHidden()
+{
+	return hidden;
+}
+
 
 void CFigure::FakeDraw(Output* pOut)
 {

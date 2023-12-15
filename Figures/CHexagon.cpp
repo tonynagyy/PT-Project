@@ -99,3 +99,13 @@ int CHexagon::GetID()
 {
 	return ID;
 }
+
+int CHexagon::GetNum()
+{
+	return Num;
+}
+
+CFigure* CHexagon::clone() const
+{
+	return new CHexagon(*this);
+}

@@ -6,7 +6,14 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddCircleAction::AddCircleAction(ApplicationManager* pApp) :Action(pApp) {
+AddCircleAction::AddCircleAction(ApplicationManager* pApp) :Action(pApp)
+{
+	circle = NULL;
+	P1.x = 0;
+	P1.y = 0;
+	P2.x = 0;
+	P2.y = 0;
+
 }
 
 void AddCircleAction::ReadActionParameters()
@@ -34,12 +41,34 @@ void AddCircleAction::ReadActionParameters()
 }
 
 void AddCircleAction::Execute()
-{//This action needs to read some parameters first
-	ReadActionParameters();
+{
+	//This action needs to read some parameters first
+	if (P1.x == 0 && P1.y == 0 && P2.x == 0 && P2.y == 0)
+	{
+		ReadActionParameters();
+	}
+	
 
 	//Create a circle with the parameters read from the user
-	CCircle *circ = new CCircle(P1, P2, circleGfxInfo);
-
+	CCircle* circ = new CCircle(P1, P2, circleGfxInfo);
+	circle = circ->clone();
 	//Add the circle to the list of figures
-	pManager->AddFigure(circ);
+	pManager->AddFigure(circle);
+	
+	delete circ;
+}
+
+void AddCircleAction::undo()
+{
+	pManager->DeleteFig(circle);
+}
+
+Action* AddCircleAction::clone() const
+{
+	return new AddCircleAction(*this);
+}
+
+AddCircleAction::~AddCircleAction()
+{
+	delete circle;
 }

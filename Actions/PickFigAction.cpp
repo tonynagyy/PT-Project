@@ -121,3 +121,12 @@ bool PickFigAction::CheckAns()
 		return false;
 	}
 }
+
+void PickFigAction::undo()
+{
+}
+
+Action* PickFigAction::clone() const
+{
+	return new PickFigAction(*this);
+}

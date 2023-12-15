@@ -27,6 +27,10 @@ public:
 	virtual void Execute();
 	bool CheckAns();
 
+	virtual void undo();
+
+
+	virtual Action* clone() const override;
 };
 
 

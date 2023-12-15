@@ -35,3 +35,12 @@ void SelectAction::Execute()
 			Fig->PrintInfo(pOut);
 		}
 }
+
+void SelectAction::undo()
+{
+}
+
+Action* SelectAction::clone() const
+{
+	return new SelectAction(*this);
+}

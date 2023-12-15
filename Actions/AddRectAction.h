@@ -2,6 +2,7 @@
 #define ADD_RECT_ACTION_H
 
 #include "Action.h"
+#include "../Figures/CFigure.h"
 
 //Add Rectangle Action class
 class AddRectAction: public Action
@@ -9,6 +10,7 @@ class AddRectAction: public Action
 private:
 	Point P1, P2; //Rectangle Corners
 	GfxInfo RectGfxInfo;
+	CFigure* rect;
 public:
 	AddRectAction(ApplicationManager *pApp);
 
@@ -17,7 +19,11 @@ public:
 	
 	//Add rectangle to the ApplicationManager
 	virtual void Execute() ;
-	
+	virtual void undo();
+
+	virtual Action* clone() const override;
+
+	~AddRectAction();
 };
 
 #endif

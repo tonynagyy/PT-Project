@@ -70,3 +70,13 @@ int CTriangle::GetID()
 {
 	return ID;
 }
+
+int CTriangle::GetNum()
+{
+	return Num;
+}
+
+CFigure* CTriangle::clone() const
+{
+	return new CTriangle(*this);
+}

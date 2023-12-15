@@ -21,6 +21,9 @@ public:
 	// get point and the figure from the user
 	virtual void ReadActionParameters();
 	virtual void Execute();
+	virtual void undo();
+
+	virtual Action* clone() const override;
 };
 
 
