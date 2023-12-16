@@ -17,14 +17,14 @@ public:
 	window* CreateWind(int, int, int, int) const; //creates the application window
 	void CreateDrawToolBar() const;	//creates Draw mode toolbar & menu
 	void CreatePlayToolBar() const;	//creates Play mode toolbar & menu
-	void CreateColourMenu() const; // creats a colour menu 
+	void CreateColourMenu(DrawMenuItem ITM) const; // creats a colour menu 
 	void CreateStatusBar() const;	//create the status bar
 
 	Input* CreateInput() const; //creates a pointer to the Input object	
 	void ClearStatusBar() const;	//Clears the status bar
 	void ClearDrawArea() const;	//Clears the drawing area
 	void ClearToolBar() const; //Clears the tool bar
-	void ClearColourMenu() const;
+	//void ClearColourMenu() const;
 
 	// -- Figures Drawing functions
 	void DrawRect(const Point &P1,const  Point &P2, GfxInfo RectGfxInfo, bool selected = false) const;  //Draw a rectangle
@@ -41,7 +41,7 @@ public:
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
 	int getCrntPenWidth() const;		//get current pen width
-	void GetColour(Input* pIn, Output* pOut) const;
+	color GetColour(Input* pIn, Output* pOut, DrawMenuItem ITM) const;
 	~Output();
 };
 

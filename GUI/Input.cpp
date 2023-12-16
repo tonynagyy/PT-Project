@@ -73,10 +73,10 @@ ActionType Input::GetUserAction() const
 			case ITM_HEXAGON: return DRAW_HEX;
 			case ITM_TRIANGLE: return DRAW_TRI;
 			case ITM_SQUARE: return DRAW_SQ;
-			case ITM_DRAWINGCLR: return HIGH_FRAME;
-			case ITM_FILLINGCLR: return FILL;
+			case ITM_DRAWINGCLR: return DRAW_COLOUR;
+			case ITM_FILLINGCLR: return FILL_COLOUR;
 			case ITM_PLAYMODE: return TO_PLAY;
-			case ITM_COLOUR: return COLOURS;
+			//case ITM_COLOUR: return COLOURS;
 
 
 			default: return EMPTY;	//A click on empty place in desgin toolbar
@@ -130,7 +130,7 @@ ActionType Input::GetUserAction() const
 }
 /////////////////////////////////
 
-ActionColour Input::GetColourAction() const
+ActionColour Input::GetColourAction(DrawMenuItem ITM) const
 {
 	int x, y;
 
@@ -139,7 +139,7 @@ ActionColour Input::GetColourAction() const
 		int Colour_Clicked = y / UI.ToolBarHeight - 1;
 		int Color_clicked_X = (x / UI.MenuItemWidth);
 
-		if (Color_clicked_X == ITM_COLOUR) //the click must be under colors icon
+		if (Color_clicked_X == ITM) //the click must be under colors icon
 		{
 			switch (Colour_Clicked)
 			{

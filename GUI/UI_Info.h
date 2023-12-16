@@ -37,7 +37,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_EXIT,//Exit item
 	ITM_DRAWINGCLR,
 	ITM_FILLINGCLR,
-	ITM_COLOUR,
+	//ITM_COLOUR,
 	DRAW_ITM_COUNT,
 	//no. of menu items ==> This should be the last line in this enum
 

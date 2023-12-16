@@ -7,7 +7,9 @@
 #include "Actions\SelectAction.h"
 #include "Actions\DeletefigAction.h"
 #include "Actions\PickFigAction.h"
-#include "Actions/Undo.h"
+#include "Actions\Undo.h"
+#include "Actions\SelectFillColour.h"
+#include "Actions\SelectDrawColour.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -125,6 +127,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case REDO:
 		ptrToAct = new Redo(this);
 		ptrToAct->Execute();
+		break;
+
+	case FILL_COLOUR:
+		ptrToAct = new SelectFillColour(this);
+		ptrToAct->Execute();
+		SetInUndoList(ptrToAct);
+		break;
+
+	case DRAW_COLOUR:
+		ptrToAct = new SelectDrawColour(this);
+		ptrToAct->Execute();
+		SetInUndoList(ptrToAct);
 		break;
 
 	case EXIT:
@@ -274,7 +288,7 @@ void ApplicationManager::DeleteFig(CFigure* pFig)
 
 }
 //get pointer to the selected figure
-CFigure* ApplicationManager::GetSelectedFigFigure()
+CFigure* ApplicationManager::GetSelectedFigure()
 {
 	for (int i = 0; i < FigCount; i++)
 	{
@@ -287,6 +301,7 @@ CFigure* ApplicationManager::GetSelectedFigFigure()
 			}
 		}
 	}
+	return nullptr;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
@@ -371,6 +386,4 @@ ApplicationManager::~ApplicationManager()
 
 	delete pIn;
 	delete pOut;
-
-
 }

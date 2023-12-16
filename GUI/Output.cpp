@@ -1,4 +1,6 @@
 #include "Output.h"
+
+
 int ciell(double x)
 {
 	int y = (int)x;
@@ -82,14 +84,14 @@ void Output::ClearToolBar() const
 	pWind->SetBrush(UI.BkGrndColor);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 }
-
+/*
 void Output::ClearColourMenu() const
 {
 	pWind->SetPen(UI.BkGrndColor, 1);
 	pWind->SetBrush(UI.BkGrndColor);
 	pWind->DrawRectangle(ITM_COLOUR * UI.MenuItemWidth, UI.ToolBarHeight, UI.width, (COLOUR_ITM_COUNT + 1) * UI.ToolBarHeight);
 }
-
+*/
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBar() const
 {
@@ -122,7 +124,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_UNDO] = "images\\MenuItems\\Menu_undo.jpg";
 	MenuItemImages[ITM_PLAYMODE] = "images\\MenuItems\\Menu_playmode.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_COLOUR] = "images\\MenuItems\\Menu_colors.jpg";
+	//MenuItemImages[ITM_COLOUR] = "images\\MenuItems\\Menu_colors.jpg";
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
@@ -167,7 +169,7 @@ void Output::ClearDrawArea() const
 	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-void Output::CreateColourMenu() const
+void Output::CreateColourMenu(DrawMenuItem ITM) const 
 {
 	
 
@@ -181,8 +183,9 @@ void Output::CreateColourMenu() const
 	MenuColourImages[COL_YELLOW] = "images\\MenuItems\\Menu_yellow.jpg";
 	
 	for (int i = 0; i < COLOUR_ITM_COUNT; i++)
-		pWind->DrawImage(MenuColourImages[i], (DRAW_ITM_COUNT - 1) * UI.MenuItemWidth, (i + 1) * UI.ToolBarHeight, UI.MenuItemWidth, UI.ToolBarHeight);
+		pWind->DrawImage(MenuColourImages[i], (ITM) * UI.MenuItemWidth, (i + 1) * UI.ToolBarHeight, UI.MenuItemWidth, UI.ToolBarHeight);
 }
+
 void Output::PrintMessage(string msg) const	//Prints a message on status bar
 {
 	ClearStatusBar();	//First clear the status bar
@@ -221,36 +224,42 @@ int Output::getCrntPenWidth() const		//get current pen width
 	return UI.PenWidth;
 }
 
-void Output::GetColour(Input* pIn, Output* pOut) const
+color Output::GetColour(Input* pIn, Output* pOut, DrawMenuItem ITM) const
 {
-	pOut->CreateColourMenu();
+	pOut->CreateColourMenu(ITM);
 	ActionColour ActCol;
-	ActCol = pIn->GetColourAction();
+	ActCol = pIn->GetColourAction(ITM);
 
 	switch (ActCol)
 	{
 	case GET_GREEN:
 		pOut->PrintMessage("Action: a click on Green Colour Icon, Click anywhere");
+		return GREEN;
 		break;
 	case GET_BLACK:
 		pOut->PrintMessage("Action: a click on black Colour Icon, Click anywhere");
+		return BLACK;
 		break;
 	case GET_RED:
 		pOut->PrintMessage("Action: a click on red Colour Icon, Click anywhere");
+		return RED;
 		break;
 	case GET_BLUE:
 		pOut->PrintMessage("Action: a click on blue Colour Icon, Click anywhere");
+		return BLUE;
 		break;
 	case GET_ORANGE:
 		pOut->PrintMessage("Action: a click on orange Colour Icon, Click anywhere");
+		return ORANGE;
 		break;
 	case GET_YELLOW:
 		pOut->PrintMessage("Action: a click on yellow Colour Icon, Click anywhere");
+		return YELLOW;
 		break;
 
 	default: break;
 	}
-	pOut->ClearColourMenu();
+	return NULL;
 }
 
 

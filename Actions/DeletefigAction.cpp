@@ -13,7 +13,7 @@ void DeletefigAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	//selectedfig->clone();
-	selectedfig = pManager->GetSelectedFigFigure();
+	selectedfig = pManager->GetSelectedFigure();
 
 }
 

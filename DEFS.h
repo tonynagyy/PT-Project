@@ -24,9 +24,9 @@ enum ActionType //The actions supported (you can add more if needed)
 	SAVE,
 	LOAD,
 	EXIT,
-	FILL, // fill the figure
-	HIGH_FRAME, // highlighted the frame of the figure
-	COLOURS, 
+	FILL_COLOUR, // fill the figure
+	DRAW_COLOUR, // highlighted the frame of the figure
+	//COLOURS, 
 	TO_DRAW,		//Switch interface to Draw mode
 	PICK_CLR_FIG,
 	PICK_FIG,

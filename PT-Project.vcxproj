@@ -136,6 +136,8 @@
     <ClCompile Include="Actions\PickFigAction.cpp" />
     <ClCompile Include="Actions\Redo.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
+    <ClCompile Include="Actions\SelectDrawColour.cpp" />
+    <ClCompile Include="Actions\SelectFillColour.cpp" />
     <ClCompile Include="Actions\Undo.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
@@ -194,6 +196,8 @@
     <ClInclude Include="Actions\PickFigAction.h" />
     <ClInclude Include="Actions\Redo.h" />
     <ClInclude Include="Actions\SelectAction.h" />
+    <ClInclude Include="Actions\SelectDrawColour.h" />
+    <ClInclude Include="Actions\SelectFillColour.h" />
     <ClInclude Include="Actions\Undo.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
