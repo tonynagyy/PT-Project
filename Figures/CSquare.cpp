@@ -72,6 +72,16 @@ int CSquare::GetNum()
 	return Num;
 }
 
+color CSquare::GetDrawClr()
+{
+	return FigGfxInfo.DrawClr;
+}
+
+color CSquare::GetFillClr()
+{
+	return FigGfxInfo.FillClr;
+}
+
 CFigure* CSquare::clone() const
 {
 	return new CSquare(*this);

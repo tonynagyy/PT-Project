@@ -55,6 +55,16 @@ int CFigure::GetID()
 	return ID;
 }
 
+color CFigure::GetDrawClr()
+{
+	return FigGfxInfo.DrawClr;
+}
+
+color CFigure::GetFillClr()
+{
+	return FigGfxInfo.FillClr;
+}
+
 void CFigure::ChngFillClr(color Fclr)
 {
 	FigGfxInfo.isFilled = true;

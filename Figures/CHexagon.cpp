@@ -105,6 +105,16 @@ int CHexagon::GetNum()
 	return Num;
 }
 
+color CHexagon::GetDrawClr()
+{
+	return FigGfxInfo.DrawClr;
+}
+
+color CHexagon::GetFillClr()
+{
+	return FigGfxInfo.FillClr;
+}
+
 CFigure* CHexagon::clone() const
 {
 	return new CHexagon(*this);

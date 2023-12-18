@@ -2,6 +2,7 @@
 
 SelectDrawColour::SelectDrawColour(ApplicationManager* pApp) : Action(pApp)
 {
+	Fig = NULL;
 }
 
 void SelectDrawColour::ReadActionParameters()
@@ -10,8 +11,12 @@ void SelectDrawColour::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
+	if (Fig == NULL)
+	{
+		Fig = pManager->GetSelectedFigure();
+		IniDrawClr = Fig->GetDrawClr();
+	}
 
-	Fig = pManager->GetSelectedFigure();
 	if (Fig)
 	{
 		pOut->PrintMessage("Select the drawing colour");
@@ -25,7 +30,10 @@ void SelectDrawColour::ReadActionParameters()
 
 void SelectDrawColour::Execute()
 {
-	ReadActionParameters();
+	if (Fig == NULL)
+	{
+		ReadActionParameters();
+	}
 
 	if (Fig)
 	{
@@ -36,9 +44,10 @@ void SelectDrawColour::Execute()
 
 void SelectDrawColour::undo()
 {
+	Fig->ChngDrawClr(IniDrawClr);
 }
 
 Action* SelectDrawColour::clone()  const
 {
-	return nullptr;
+	return new SelectDrawColour(*this);
 }

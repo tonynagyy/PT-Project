@@ -34,6 +34,8 @@ public:
 	virtual void FakeDraw(Output* pOut) = 0;
 	virtual int GetID() = 0;
 	virtual int GetNum() = 0;
+	virtual color GetDrawClr();
+	virtual color GetFillClr();
 
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color

@@ -9,7 +9,7 @@ class SelectFillColour : public Action
 {
 	color Clr;
 	CFigure* Fig;
-
+	color IniFillColour;
 public:
 
 	SelectFillColour(ApplicationManager* pApp);

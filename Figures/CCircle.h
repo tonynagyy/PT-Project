@@ -27,6 +27,8 @@ public:
 	virtual double CalcArea();
 	virtual int GetID();
 	virtual int GetNum();
+	virtual color GetDrawClr();
+	virtual color GetFillClr();
 
 	//Print the data of the figure on the status bar
 	virtual void PrintInfo(Output* pOut);

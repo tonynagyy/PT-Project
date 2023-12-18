@@ -22,6 +22,8 @@ public:
 	virtual void FakeDraw(Output* pOut);
 	virtual int GetID();
 	virtual int GetNum();
+	virtual color GetDrawClr();
+	virtual color GetFillClr();
 
 	// make clone copy constructor
 	virtual CFigure* clone() const override;

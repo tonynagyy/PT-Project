@@ -73,6 +73,16 @@ int CRectangle::GetNum()
 	return Num;
 }
 
+color CRectangle::GetDrawClr()
+{
+	return FigGfxInfo.DrawClr;
+}
+
+color CRectangle::GetFillClr()
+{
+	return FigGfxInfo.FillClr;
+}
+
 CFigure *CRectangle::clone() const
 {
 	return new CRectangle(*this);

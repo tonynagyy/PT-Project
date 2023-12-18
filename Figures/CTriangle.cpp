@@ -76,6 +76,16 @@ int CTriangle::GetNum()
 	return Num;
 }
 
+color CTriangle::GetDrawClr()
+{
+	return FigGfxInfo.DrawClr;
+}
+
+color CTriangle::GetFillClr()
+{
+	return FigGfxInfo.FillClr;
+}
+
 CFigure* CTriangle::clone() const
 {
 	return new CTriangle(*this);

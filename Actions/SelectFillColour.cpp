@@ -2,6 +2,7 @@
 
 SelectFillColour::SelectFillColour(ApplicationManager* pApp) : Action(pApp)
 {
+	Fig = NULL;
 }
 
 void SelectFillColour::ReadActionParameters()
@@ -10,8 +11,10 @@ void SelectFillColour::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-
+	
 	Fig = pManager->GetSelectedFigure();
+	IniFillColour = Fig->GetFillClr();
+
 	if (Fig)
 	{
 		pOut->PrintMessage("Select the filling colour");
@@ -25,7 +28,10 @@ void SelectFillColour::ReadActionParameters()
 
 void SelectFillColour::Execute()
 {
-	ReadActionParameters();
+	if (Fig == NULL)
+	{
+		ReadActionParameters();
+	}
 
 	if (Fig)
 	{
@@ -36,9 +42,10 @@ void SelectFillColour::Execute()
 
 void SelectFillColour::undo()
 {
+	Fig->ChngFillClr(IniFillColour);
 }
 
 Action* SelectFillColour::clone()  const
 {
-	return nullptr;
+	return new SelectFillColour(*this);
 }

@@ -49,6 +49,16 @@ int CCircle::Count = 0;
 	 return Num;
  }
 
+ color CCircle::GetDrawClr()
+ {
+	 return FigGfxInfo.DrawClr;
+ }
+
+ color CCircle::GetFillClr()
+ {
+	 return FigGfxInfo.FillClr;
+ }
+
  void CCircle::PrintInfo(Output* pOut)
  {
 	 string msg;

@@ -133,12 +133,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct = new SelectFillColour(this);
 		ptrToAct->Execute();
 		SetInUndoList(ptrToAct);
+		DeleteAllRedos();
 		break;
 
 	case DRAW_COLOUR:
 		ptrToAct = new SelectDrawColour(this);
 		ptrToAct->Execute();
 		SetInUndoList(ptrToAct);
+		DeleteAllRedos();
 		break;
 
 	case EXIT:
@@ -383,7 +385,9 @@ ApplicationManager::~ApplicationManager()
 	{
 		delete Undoarray[i];
 	}
+	
+	DeleteAllRedos();
 
-	delete pIn;
+	delete pIn;  
 	delete pOut;
 }
