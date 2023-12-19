@@ -13,7 +13,11 @@ void SelectFillColour::ReadActionParameters()
 
 	
 	Fig = pManager->GetSelectedFigure();
-	IniFillColour = Fig->GetFillClr();
+
+	if (Fig != NULL)
+	{
+		IniFillColour = Fig->GetFillClr();
+	}
 
 	if (Fig)
 	{
@@ -35,14 +39,18 @@ void SelectFillColour::Execute()
 
 	if (Fig)
 	{
-		if (Clr != NULL)
+		//if (Clr != NULL )
 			Fig->ChngFillClr(Clr);
 	}
 }
 
 void SelectFillColour::undo()
 {
-	Fig->ChngFillClr(IniFillColour);
+	if (Fig != NULL)
+	{
+		Fig->ChngFillClr(IniFillColour);
+	}
+
 }
 
 Action* SelectFillColour::clone()  const
