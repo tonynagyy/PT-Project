@@ -50,6 +50,9 @@ public:
 	Output *GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
 
+	void saveAll(ofstream &outfile) ;
+	int getFigCount() ;
+
 	// -- Functions related to play mode 
 	CFigure *RandomFigure();
 };

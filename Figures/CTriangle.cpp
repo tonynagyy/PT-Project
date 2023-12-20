@@ -86,6 +86,14 @@ color CTriangle::GetFillClr()
 	return FigGfxInfo.FillClr;
 }
 
+void CTriangle::Save(ofstream& outFile) {
+//	TRIANG 3 10 20 70 30 220 190 BLACK RED
+	outFile << "TRIANG\t" << ID << "\t" << P1.x << "\t" << P1.y << "\t" << P2.x << "\t" << P2.y << "\t" << P3.x << "\t" << P3.y << "\t";
+	outFile << FigGfxInfo.DrawClr << "\t";
+	outFile << FigGfxInfo.FillClr << endl;
+}
+
+
 CFigure* CTriangle::clone() const
 {
 	return new CTriangle(*this);

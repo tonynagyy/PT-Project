@@ -115,6 +115,12 @@ color CHexagon::GetFillClr()
 	return FigGfxInfo.FillClr;
 }
 
+void CHexagon::Save(ofstream& outFile) {
+	outFile << "HEX\t" << ID << center.x << "\t" << center.y << "\t";
+	outFile << FigGfxInfo.DrawClr << "\t";
+	outFile << FigGfxInfo.FillClr << endl;
+}
+
 CFigure* CHexagon::clone() const
 {
 	return new CHexagon(*this);

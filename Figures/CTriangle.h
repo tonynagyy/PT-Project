@@ -24,6 +24,7 @@ public:
 	virtual int GetNum();
 	virtual color GetDrawClr();
 	virtual color GetFillClr();
+	void Save(ofstream &outFile) override;
 
 	// make clone copy constructor
 	virtual CFigure* clone() const override;

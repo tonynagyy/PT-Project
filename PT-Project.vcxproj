@@ -135,6 +135,7 @@
     <ClCompile Include="Actions\DeletefigAction.cpp" />
     <ClCompile Include="Actions\PickFigAction.cpp" />
     <ClCompile Include="Actions\Redo.cpp" />
+    <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\SelectDrawColour.cpp" />
     <ClCompile Include="Actions\SelectFillColour.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="GUI\Input.cpp" />
     <ClCompile Include="GUI\Output.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
+    <ClCompile Include="helper.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +197,7 @@
     <ClInclude Include="Actions\DeletefigAction.h" />
     <ClInclude Include="Actions\PickFigAction.h" />
     <ClInclude Include="Actions\Redo.h" />
+    <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\SelectDrawColour.h" />
     <ClInclude Include="Actions\SelectFillColour.h" />
@@ -232,6 +235,7 @@
     <ClInclude Include="GUI\UI_Info.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
+    <ClInclude Include="helper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

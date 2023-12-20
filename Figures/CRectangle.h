@@ -3,6 +3,7 @@
 
 #include "CFigure.h"
 
+
 class CRectangle : public CFigure
 {
 private:
@@ -24,6 +25,7 @@ public:
 	virtual int GetNum();
 	virtual color GetDrawClr();
 	virtual color GetFillClr();
+	void Save(ofstream &outFile) override;
 
 	virtual CFigure* clone() const override;
 };

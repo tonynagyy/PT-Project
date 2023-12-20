@@ -134,7 +134,6 @@ const color DARKGOLDENROD = color(184, 134, 11);
 const color ROSYBROWN = color(188, 143, 143);
 const color INDIAN = color(205, 92, 92);
 const color INDIANRED = color(205, 92, 92);
-const color SADDLEBROWN = color(139, 69, 19);
 const color SIENNA = color(160, 82, 45);
 const color PERU = color(205, 133, 63);
 const color BURLYWOOD = color(222, 184, 135);
@@ -149,6 +148,7 @@ const color DARKSALMON = color(233, 150, 122);
 const color SALMON = color(250, 128, 114);
 const color LIGHTSALMON = color(255, 160, 122);
 const color ORANGE = color(255, 165, 0);
+
 const color DARKORANGE = color(255, 140, 0);
 const color CORAL = color(255, 127, 80);
 const color LIGHTCORAL = color(240, 128, 128);
@@ -183,4 +183,4 @@ const color DARKRED = color(139, 0, 0);
 const color LIGHTGREEN = color(144, 238, 144);
 
 
-#endif //COLOR_H
+#endif //COLOR_H 

@@ -21,7 +21,7 @@ public:
 	virtual void Execute() ;
 	virtual void undo();
 
-	virtual Action* clone() const override;
+	Action* clone() const override;
 
 	~AddRectAction();
 };

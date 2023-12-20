@@ -83,6 +83,17 @@ color CRectangle::GetFillClr()
 	return FigGfxInfo.FillClr;
 }
 
+void CRectangle::Save(ofstream& outFile) {
+	//RECT 1 100 200 17 30 BLUE RED
+	outFile << "RECT\t" << ID << "\t";
+	outFile << Corner1.x << "\t" << Corner1.y << "\t";
+	outFile << Corner2.x << "\t" << Corner2.y << "\t";
+	//GfxInfo FigGfxInfo;	//Figure graphis info
+	outFile << FigGfxInfo.DrawClr << "\t";
+	outFile << FigGfxInfo.FillClr << "\t";
+	outFile << endl;
+}
+
 CFigure *CRectangle::clone() const
 {
 	return new CRectangle(*this);

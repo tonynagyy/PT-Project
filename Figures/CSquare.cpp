@@ -82,6 +82,12 @@ color CSquare::GetFillClr()
 	return FigGfxInfo.FillClr;
 }
 
+void CSquare::Save(ofstream& outFile) {
+	outFile << "SQ\t" << ID << center.x << "\t" << center.y << "\t";
+	outFile << FigGfxInfo.DrawClr << "\t";
+	outFile << FigGfxInfo.FillClr << endl;
+}
+
 CFigure* CSquare::clone() const
 {
 	return new CSquare(*this);

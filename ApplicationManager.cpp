@@ -10,6 +10,7 @@
 #include "Actions\Undo.h"
 #include "Actions\SelectFillColour.h"
 #include "Actions\SelectDrawColour.h"
+#include "Actions\SaveAction.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -141,6 +142,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct->Execute();
 		SetInUndoList(ptrToAct);
 		DeleteAllRedos();
+		break;
+	case SAVE:
+		ptrToAct = new SaveAction(this);
+		ptrToAct->Execute();
 		break;
 
 	case EXIT:
@@ -350,6 +355,20 @@ void ApplicationManager::UpdateInterface() const
 		if (FigList[i] != NULL && ! FigList[i]->IfHidden())
 		{
 			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+		}
+	}
+}
+int ApplicationManager::getFigCount() 
+{
+	return FigCount;
+}
+void ApplicationManager::saveAll(ofstream &outFile) 
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i] != NULL)
+		{
+			FigList[i]->Save(outFile);
 		}
 	}
 }

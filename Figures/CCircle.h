@@ -33,6 +33,7 @@ public:
 	//Print the data of the figure on the status bar
 	virtual void PrintInfo(Output* pOut);
 	virtual CFigure* clone() const override;
+	void Save(ofstream &OutFile) override;
 };
 
 #endif

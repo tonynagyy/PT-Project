@@ -80,14 +80,20 @@ int CCircle::Count = 0;
 		 string msg = S + to_string(Num) + S1 + to_string(CalcArea()) + S2 + to_string(P1.x) + S3 + to_string(P1.y) + S4 + S5;
 		 pOut->PrintMessage(msg);
 	 }
-
-
-
  }
+
 
  CFigure* CCircle::clone() const
  {
 	 return new CCircle(*this);
+ }
+
+ void CCircle::Save(ofstream& OutFile)
+ {
+	 OutFile << "CIRC\t" << ID << "\t";
+	 OutFile << P1.x << "\t" << P1.y << "\t" << P2.x << "\t" << P2.y << "\t";
+	 OutFile << FigGfxInfo.DrawClr << "\t";
+	 OutFile << FigGfxInfo.FillClr << endl;
  }
 
 
