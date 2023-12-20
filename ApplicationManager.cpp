@@ -366,7 +366,7 @@ void ApplicationManager::saveAll(ofstream &outFile)
 {
 	for (int i = 0; i < FigCount; i++)
 	{
-		if (FigList[i] != NULL)
+		if (FigList[i] != NULL && ! FigList[i]->IfHidden())
 		{
 			FigList[i]->Save(outFile);
 		}

@@ -116,7 +116,7 @@ color CHexagon::GetFillClr()
 }
 
 void CHexagon::Save(ofstream& outFile) {
-	outFile << "HEX\t" << ID << center.x << "\t" << center.y << "\t";
+	outFile << "HEX\t" << ID << "\t" << center.x << "\t" << center.y << "\t";
 	outFile << FigGfxInfo.DrawClr << "\t";
 	outFile << FigGfxInfo.FillClr << endl;
 }

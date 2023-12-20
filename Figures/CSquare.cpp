@@ -83,7 +83,7 @@ color CSquare::GetFillClr()
 }
 
 void CSquare::Save(ofstream& outFile) {
-	outFile << "SQ\t" << ID << center.x << "\t" << center.y << "\t";
+	outFile << "SQ\t" << ID << "\t" << center.x << "\t" << center.y << "\t";
 	outFile << FigGfxInfo.DrawClr << "\t";
 	outFile << FigGfxInfo.FillClr << endl;
 }
