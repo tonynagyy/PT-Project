@@ -98,7 +98,7 @@ CFigure* CTriangle::clone() const
 {
 	return new CTriangle(*this);
 }
-
+ 
 void CTriangle::move(double x, double y)
 {
 	double centerx = (P1.x + P2.x + P3.x) / 3.0;
