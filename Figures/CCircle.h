@@ -34,6 +34,7 @@ public:
 	virtual void PrintInfo(Output* pOut);
 	virtual CFigure* clone() const override;
 	void Save(ofstream &OutFile) override;
+	virtual void move(double x, double y) override ;
 };
 
 #endif

@@ -125,3 +125,9 @@ CFigure* CHexagon::clone() const
 {
 	return new CHexagon(*this);
 }
+
+void CHexagon::move(double x, double y)
+{
+	center.x = x;
+	center.y = y;
+}

@@ -59,6 +59,9 @@ public:
 	virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 
 	virtual CFigure* clone() const = 0;
+
+	virtual void move(double x, double y) = 0;
+
 };
 
 #endif

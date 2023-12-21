@@ -1,4 +1,6 @@
 #include "CRectangle.h"
+#include "../Actions/AddRectAction.h"
+#include "CCircle.h"
 
 int CRectangle::Count = 0;
 
@@ -97,4 +99,18 @@ void CRectangle::Save(ofstream& outFile) {
 CFigure *CRectangle::clone() const
 {
 	return new CRectangle(*this);
+}
+
+void CRectangle::move(double x, double y)
+{
+	double centerx = (Corner1.x + Corner2.x) / 2.0;
+	double centery = (Corner1.y + Corner2.y) / 2.0;
+	double shiftx = x - centerx;
+	double shifty = y - centery;
+	Corner1.x = Corner1.x + shiftx;
+	Corner2.x = Corner2.x + shiftx;
+	Corner1.y = Corner1.y + shifty;
+	Corner2.y = Corner2.y + shifty;
+
+
 }

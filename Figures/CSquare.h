@@ -25,7 +25,7 @@ public:
 	virtual color GetDrawClr();
 	virtual color GetFillClr();
 	void Save(ofstream &outFile) override;
-
+	virtual void move(double x, double y);
 
 	virtual CFigure *clone() const override;
 };

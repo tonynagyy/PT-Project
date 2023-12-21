@@ -12,6 +12,8 @@
 #include "Actions\SelectDrawColour.h"
 #include "Actions\SaveAction.h"
 #include "Actions\clearall.h"
+#include "Actions\MoveAction.h"
+
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -103,6 +105,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	
 	case DEL:
 		ptrToAct = new DeletefigAction(this); 
+		ptrToAct->Execute();
+		SetInUndoList(ptrToAct);
+		break;
+
+	case MOVE:
+		ptrToAct = new MoveAction(this);
 		ptrToAct->Execute();
 		SetInUndoList(ptrToAct);
 		break;

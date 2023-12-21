@@ -389,6 +389,7 @@ void Output::DrawCircle(const Point &P1,const Point &P2, GfxInfo RectGfxInfo, bo
 {
 	int deltaX = P2.x - P1.x;
 	int deltaY = P2.y - P1.y;
+	int radius = CIRCLE_RADIUS(deltaX, deltaY);
 	color DrawingClr;
 	drawstyle style;
 
@@ -406,7 +407,7 @@ void Output::DrawCircle(const Point &P1,const Point &P2, GfxInfo RectGfxInfo, bo
 	else
 		style = FRAME;
 	
-	pWind->DrawCircle(P1.x, P1.y, CIRCLE_RADIUS(deltaX, deltaY), style);
+	pWind->DrawCircle(P1.x, P1.y, radius, style);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

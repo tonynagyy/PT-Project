@@ -28,5 +28,6 @@ public:
 
 
 	virtual CFigure* clone() const override;
+	virtual void move(double x, double y) override;
 };
 #endif

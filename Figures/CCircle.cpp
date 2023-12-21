@@ -1,4 +1,5 @@
 #include "CCircle.h"
+#include <cmath>
 
 int CCircle::Count = 0;
 
@@ -95,5 +96,19 @@ int CCircle::Count = 0;
 	 OutFile << FigGfxInfo.DrawClr << "\t";
 	 OutFile << FigGfxInfo.FillClr << endl;
  }
+
+ void CCircle::move(double x, double y)
+ {
+	 
+      double shiftx = x - P1.x;
+	 double shifty = y - P1.y;
+	 P1.x = x;
+	 P2.x = P2.x +shiftx;
+	 P1.y = y;
+	 P2.y = P2.y +shifty;
+
+ }
+
+ 
 
 

@@ -88,6 +88,12 @@ void CSquare::Save(ofstream& outFile) {
 	outFile << FigGfxInfo.FillClr << endl;
 }
 
+void CSquare::move(double x, double y)
+{
+	center.x = x;
+	center.y = y;
+}
+
 CFigure* CSquare::clone() const
 {
 	return new CSquare(*this);
