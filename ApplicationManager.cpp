@@ -11,6 +11,7 @@
 #include "Actions\SelectFillColour.h"
 #include "Actions\SelectDrawColour.h"
 #include "Actions\SaveAction.h"
+#include "Actions\clearall.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -147,6 +148,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct = new SaveAction(this);
 		ptrToAct->Execute();
 		break;
+	case CLEAR:
+		ptrToAct = new clearAll(this);
+		ptrToAct->Execute();
+		break;
 
 	case EXIT:
 		///create ExitAction here
@@ -258,6 +263,32 @@ void ApplicationManager::DeleteAllRedos()
 		}
 	}
 	RedoCount = 0;
+}
+void ApplicationManager::DeleteFigList()
+{
+	for (int i = 0; i < FigCount; i++) {
+		delete FigList[i];
+		FigList[i] = NULL;
+	}
+}
+void ApplicationManager::Deleteundoarray()
+{
+
+	for (int i = 0; i < UndoCount && Undoarray[i]; i++) {
+		delete Undoarray[i];
+		Undoarray[i] = NULL;
+	}
+
+}
+void ApplicationManager::Clearall()
+{
+	DeleteFigList();
+	Deleteundoarray();
+	DeleteAllRedos();
+	FigCount = 0;
+	UndoCount = 0;
+	RedoCount = 0;
+	
 }
 //==================================================================================//
 //						Figures Management Functions								//
@@ -397,16 +428,10 @@ Output* ApplicationManager::GetOutput() const
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
-	for (int i = 0; i < FigCount; i++)
-		delete FigList[i];
-
-	for (int i = 0; i < UndoCount && Undoarray[i]; i++)
-	{
-		delete Undoarray[i];
-	}
 	
-	DeleteAllRedos();
-
+	Clearall();
 	delete pIn;  
 	delete pOut;
+	pIn = NULL;
+	pOut = NULL;
 }

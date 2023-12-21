@@ -37,6 +37,9 @@ public:
 	void SetInRedoList(Action* pAct);
 	Action* GetLastRedo();
 	void DeleteAllRedos();
+	void DeleteFigList();
+	void Deleteundoarray();
+	void Clearall();
 
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
