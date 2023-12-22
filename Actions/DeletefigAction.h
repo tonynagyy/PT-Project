@@ -12,7 +12,7 @@
 
 class DeletefigAction : public Action
 {
-	CFigure* selectedfig = nullptr;
+	CFigure* selectedfig = nullptr; // pointer to figure to be deleted 
 
 
 
@@ -20,12 +20,12 @@ public:
 	DeletefigAction(ApplicationManager* pApp);
 
 	virtual void ReadActionParameters();
+
 	virtual void Execute();
 
-	virtual void undo();
-	
+	virtual void undo(); // undoing the delete operation by adding the figure deleted	
 	virtual Action* clone() const override;
 
-
+	~DeletefigAction();
 };
 #endif;

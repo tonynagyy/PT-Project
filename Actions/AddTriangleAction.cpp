@@ -57,12 +57,10 @@ void AddTriangleAction::Execute()
 	if (triangle == NULL)
 	{
 		//Create a triangle with the parameters read from the user
-		CTriangle* T = new CTriangle(P1, P2, P3, triangleGfxInfo);
-		triangle = T;
+		triangle = new CTriangle(P1, P2, P3, triangleGfxInfo);
 	}
 
 	//Add the rectangle to the list of figures
-	triangle->Sethidden(false);
 	pManager->AddFigure(triangle);
 
 
@@ -70,7 +68,7 @@ void AddTriangleAction::Execute()
 
 void AddTriangleAction::undo()
 {
-	triangle->Sethidden(true);
+	pManager->DeleteFig(triangle);
 }
 
 Action* AddTriangleAction::clone() const
@@ -81,4 +79,5 @@ Action* AddTriangleAction::clone() const
 AddTriangleAction::~AddTriangleAction()
 {
 	delete triangle;
+	triangle = NULL;
 }

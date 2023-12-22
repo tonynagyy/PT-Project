@@ -16,6 +16,7 @@ class ApplicationManager
 
 private:
 	int FigCount;		//Actual number of figures
+	int Actualfigcounter;	//Actual number of figures
 	CFigure *FigList[MaxFigCount];	//List of all figures (Array of pointers)
 	CFigure *SelectedFig; //Pointer to the selected figure
 	Input *pIn;/*pointer to the input */
@@ -40,10 +41,13 @@ public:
 	void DeleteFigList();
 	void Deleteundoarray();
 	void Clearall();
+	
 
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	void DeleteFig(CFigure* pFig);
+	void Changefillcolor(CFigure* pFig ,color clr);
+	void Changedrawcolor(CFigure* pFig, color clr);
 	CFigure* GetSelectedFigure();
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	void UnSelect();
@@ -54,7 +58,7 @@ public:
 	void UpdateInterface() const;	//Redraws all the drawing window	
 
 	void saveAll(ofstream &outfile) ;
-	int getFigCount() ;
+	int getActFigCount() ;
 
 	// -- Functions related to play mode 
 	CFigure *RandomFigure();

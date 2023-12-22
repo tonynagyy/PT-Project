@@ -44,11 +44,10 @@ void AddHexaAction::Execute()
 	if (hexa == NULL)
 	{
 		//Create a Hexagon with the parameters read from the user
-		CHexagon* H = new CHexagon(center, HexaGfxInfo);
-		hexa = H;
+		hexa = new CHexagon(center, HexaGfxInfo);
 	}
+
 	//Add the Hexagon to the list of figures
-	hexa->Sethidden(false);
 	pManager->AddFigure(hexa);
 	
 
@@ -56,7 +55,7 @@ void AddHexaAction::Execute()
 
 void AddHexaAction::undo()
 {
-	hexa->Sethidden(true);
+	pManager->DeleteFig(hexa);
 }
 
 Action* AddHexaAction::clone() const
@@ -67,5 +66,6 @@ Action* AddHexaAction::clone() const
 AddHexaAction::~AddHexaAction()
 {
 	delete hexa;
+	hexa = NULL;
 }
 

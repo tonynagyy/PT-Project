@@ -21,6 +21,8 @@ public:
 	virtual void undo();
 
 	virtual Action* clone()  const override;
+
+	~SelectDrawColour();
 };
 
 #endif

@@ -1,13 +1,16 @@
 #include "CCircle.h"
 #include <cmath>
 
-int CCircle::Count = 0;
+//int CCircle::Count = 0;
 
  CCircle::CCircle(const Point &p1, const Point &p2, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), P1(p1), P2(p2)
  {
-	 ID = 5;
+	 
+	 //ID = 5;
 	 Count++;
-	 Num = Count;
+	 //Num = Count;
+	
+	 ID = Count;
  }
  void CCircle::Draw(Output* pOut) const
 {
@@ -21,11 +24,12 @@ int CCircle::Count = 0;
 	 return (DEST(P1.x, P1.y, x, y) < DEST(P1.x, P1.y, P2.x, P2.y));
  }
 
+ /*
  int CCircle::Counter()
  {
 	 return Count;
  }
-
+ */
  void CCircle::FakeDraw(Output* pOut)
  {
 	 FigGfxInfo.DrawClr = LIGHTGOLDENRODYELLOW;
@@ -45,10 +49,22 @@ int CCircle::Count = 0;
 	 return ID;
  }
 
+ /*
  int CCircle::GetNum()
  {
 	 return Num;
  }
+
+ void CCircle::DecNum()
+ {
+	 Num--;
+ }
+
+ void CCircle::IncNum()
+ {
+	 Num++;
+ }
+ */
 
  color CCircle::GetDrawClr()
  {
@@ -64,7 +80,7 @@ int CCircle::Count = 0;
  {
 	 string msg;
 
-	 string S = "Circle number: ";
+	 string S = "Circle ID: ";
 	 string S1 = "  Figure: Circle    Area: ";
 	 string S2 = "  Center: (";
 	 string S3 = " , ";
@@ -73,12 +89,12 @@ int CCircle::Count = 0;
 	 string S6 = " True";
 	 if (FigGfxInfo.isFilled)
 	 {
-		 string msg = S + to_string(Num) + S1 + to_string(CalcArea()) + S2 + to_string(P1.x) + S3 + to_string(P1.y) + S4 + S6;
+		 string msg = S + to_string(ID) + S1 + to_string(CalcArea()) + S2 + to_string(P1.x) + S3 + to_string(P1.y) + S4 + S6;
 		 pOut->PrintMessage(msg);
 	 }
 	 else
 	 {
-		 string msg = S + to_string(Num) + S1 + to_string(CalcArea()) + S2 + to_string(P1.x) + S3 + to_string(P1.y) + S4 + S5;
+		 string msg = S + to_string(ID) + S1 + to_string(CalcArea()) + S2 + to_string(P1.x) + S3 + to_string(P1.y) + S4 + S5;
 		 pOut->PrintMessage(msg);
 	 }
  }

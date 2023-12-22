@@ -51,19 +51,17 @@ void AddCircleAction::Execute()
 	if (circle == NULL)
 	{
 		//Create a circle with the parameters read from the user
-		CCircle* circ = new CCircle(P1, P2, circleGfxInfo);
-		circle = circ;
+		circle = new CCircle(P1, P2, circleGfxInfo);
 	}
 
 	//Add the circle to the list of figures
-	circle->Sethidden(false);
 	pManager->AddFigure(circle);
 	
 }
 
 void AddCircleAction::undo()
 {
-	circle->Sethidden(true);
+	pManager->DeleteFig(circle);
 }
 
 Action* AddCircleAction::clone() const
@@ -74,4 +72,5 @@ Action* AddCircleAction::clone() const
 AddCircleAction::~AddCircleAction()
 {
 	delete circle;
+	circle = NULL;
 }

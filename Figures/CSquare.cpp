@@ -1,12 +1,15 @@
 #include "CSquare.h"
 
-int CSquare::Count = 0;
+//int CSquare::Count = 0;
 
 CSquare::CSquare(const Point&p1, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), center(p1) 
 {
-	ID = 2;
+	
+	//ID = 2;
 	Count++;
-	Num = Count;
+	//Num = Count;
+	
+	ID = Count;
 }
 
 void CSquare::Draw(Output* pOut) const
@@ -31,7 +34,7 @@ void CSquare::PrintInfo(Output* pOut)
 {
 	string msg;
 
-	string S = "Square number: ";
+	string S = "Square ID: ";
 	string S1 = "  Figure: Square    Area: ";
 	string S2 = "  Center: (";
 	string S3 = " , ";
@@ -40,20 +43,21 @@ void CSquare::PrintInfo(Output* pOut)
 	string S6 = " True";
 	if (FigGfxInfo.isFilled)
 	{
-		string msg = S + to_string(Num) + S1 + to_string(CalcArea()) + S2 + to_string(center.x) + S3 + to_string(center.y) + S4 + S6;
+		string msg = S + to_string(ID) + S1 + to_string(CalcArea()) + S2 + to_string(center.x) + S3 + to_string(center.y) + S4 + S6;
 		pOut->PrintMessage(msg);
 	}
 	else
 	{
-		string msg = S + to_string(Num) + S1 + to_string(CalcArea()) + S2 + to_string(center.x) + S3 + to_string(center.y) + S4 + S5;
+		string msg = S + to_string(ID) + S1 + to_string(CalcArea()) + S2 + to_string(center.x) + S3 + to_string(center.y) + S4 + S5;
 		pOut->PrintMessage(msg);
 	}
 }
-
+/*
 int CSquare::Counter()
 {
 	return Count;
 }
+*/
 
 void CSquare::FakeDraw(Output* pOut)
 {
@@ -67,11 +71,22 @@ int CSquare::GetID()
 	return ID;
 }
 
+/*
 int CSquare::GetNum()
 {
 	return Num;
 }
 
+void CSquare::IncNum()
+{
+	Num++;
+}
+
+void CSquare::DecNum()
+{
+	Num--;
+}
+*/
 color CSquare::GetDrawClr()
 {
 	return FigGfxInfo.DrawClr;

@@ -2,36 +2,7 @@
 #include "..\helper.h"
 
 ///*
-//* operator<< - overloading the << operator to save the colors
-//* @param outFile - ofstream object
-//* @param c - color object
-//* Description: overloading the << operator to save the colors for red, green, blue, black, orange, yellow and no fill
-//*/
-//std::ofstream& operator<<(std::ofstream& outFile,  color& c) {
-//   color newColor = c;
-//
-//   if (newColor == BLACK) {
-//	   outFile << "BLACK" << std::endl;
-//   }
-//   else if (newColor == RED) {
-//	   outFile << "RED" << std::endl;
-//   }
-//   else if (newColor == GREEN) {
-//	   outFile << "GREEN" << std::endl;
-//   }
-//   else if (newColor == BLUE) {
-//	   outFile << "BLUE" << std::endl;
-//   }
-//   else if (newColor == ORANGE) {
-//	   outFile << "ORANGE" << std::endl;
-//   }
-//   else if (newColor == YELLOW) {
-//	   outFile << "YELLOW" << std::endl;
-//   } else {
-//	   outFile << "NO_FILL" << std::endl;
-//   }
-//   return outFile;
-//}
+
 
 /*
 * SaveAction - constructor function
@@ -66,7 +37,7 @@ void SaveAction::ReadActionParameters() {
 void SaveAction::Execute()
 {
 	Output* outPtr = pManager->GetOutput();
-	int figCount = pManager->getFigCount();
+	int figCount = pManager->getActFigCount();
 	ReadActionParameters();
 	outFile.open(fileName);
 

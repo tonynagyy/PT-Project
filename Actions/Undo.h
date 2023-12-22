@@ -13,8 +13,8 @@
 
 class Undo : public Action
 {
-	Action* UndoPtr;
-	CFigure* FigurePtr;
+	Action* UndoPtr; // pointer to last Undoable action
+	//CFigure* FigurePtr;
 	//Action* undoStack[MAX];
 	//int undoIndex;
 	//Action* redoStack [5];

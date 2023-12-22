@@ -9,8 +9,8 @@ class CRectangle : public CFigure
 private:
 	Point Corner1;	
 	Point Corner2;
-	static int Count;
-	int Num;
+	//static int Count;
+	//static int Num;
 
 public:
 	CRectangle(const Point &,const Point &, GfxInfo FigureGfxInfo );
@@ -19,10 +19,12 @@ public:
 
 	virtual double CalcArea();
 	virtual void PrintInfo(Output* pOut);
-	virtual int Counter();
+	//virtual int Counter();
 	virtual void FakeDraw(Output* pOut);
 	virtual int GetID();
-	virtual int GetNum();
+	//virtual int GetNum();
+	//virtual void IncNum();
+	//virtual void DecNum();
 	virtual color GetDrawClr();
 	virtual color GetFillClr();
 	void Save(ofstream &outFile) override;
@@ -31,5 +33,5 @@ public:
 	virtual void move(double x, double y) override;
 	
 };
-
+//int CRectangle::Num = 0;
 #endif

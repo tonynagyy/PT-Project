@@ -14,7 +14,15 @@ void DeletefigAction::ReadActionParameters()
 
 	//selectedfig->clone();
 	selectedfig = pManager->GetSelectedFigure();
-
+	if (selectedfig == NULL)
+	{
+		pOut->PrintMessage("Select the figure you want to delete first");
+	}
+	else
+	{
+		selectedfig = pManager->GetSelectedFigure()->clone();
+		pOut->PrintMessage("delete the selected figure");
+	}
 }
 
 void DeletefigAction::Execute()
@@ -27,18 +35,23 @@ void DeletefigAction::Execute()
 	if (selectedfig != nullptr)
 	{
 		pManager->DeleteFig(selectedfig);
+		
 	}
 }
 
-void DeletefigAction::undo()
+void DeletefigAction::undo()  // undoing the delete operation by adding the figure deleted
 {
 	selectedfig->SetSelected(false);
-	selectedfig->Sethidden(false);
-	//pManager->UpdateInterface();
-	//pManager->AddFigure(selectedfig);
+	pManager->AddFigure(selectedfig);
 }
 
 Action* DeletefigAction::clone() const
 {
 	return new DeletefigAction(*this);
+}
+
+DeletefigAction::~DeletefigAction()
+{
+	delete selectedfig;
+	selectedfig = NULL;	
 }

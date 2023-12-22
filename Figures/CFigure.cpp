@@ -3,6 +3,8 @@
 color CFigure::DrwClr = NULL;
 color CFigure::FlClr = NULL;
 
+int CFigure::Count = 0;
+
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 {
 
@@ -16,6 +18,8 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 	}
 	Selected = false;
 	hidden = false;
+
+	//ID++;
 }
 
 void CFigure::SetSelected(bool s)
@@ -55,6 +59,7 @@ int CFigure::GetID()
 	return ID;
 }
 
+
 color CFigure::GetDrawClr()
 {
 	return FigGfxInfo.DrawClr;
@@ -67,7 +72,10 @@ color CFigure::GetFillClr()
 
 void CFigure::ChngFillClr(color Fclr)
 {
-	FigGfxInfo.isFilled = true;
+	if (Fclr == SNOW )
+		FigGfxInfo.isFilled = false;
+	else
+		FigGfxInfo.isFilled = true;
 	FlClr = Fclr;
 	FigGfxInfo.FillClr = Fclr;
 }

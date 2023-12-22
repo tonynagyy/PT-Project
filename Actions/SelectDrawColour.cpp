@@ -12,7 +12,7 @@ void SelectDrawColour::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	
-	Fig = pManager->GetSelectedFigure();
+	Fig = pManager->GetSelectedFigure()->clone();
 
 	if (Fig != NULL)
 	{
@@ -42,7 +42,8 @@ void SelectDrawColour::Execute()
 	if (Fig)
 	{
 		//if (Clr != NULL)
-			Fig->ChngDrawClr(Clr);
+			//Fig->ChngDrawClr(Clr);
+		pManager->Changedrawcolor(Fig, Clr);
 	}
 }
 
@@ -50,11 +51,17 @@ void SelectDrawColour::undo()
 {
 	if (Fig != NULL)
 	{
-		Fig->ChngDrawClr(IniDrawClr);
+		pManager->Changedrawcolor(Fig, IniDrawClr);
 	}
 }
 
 Action* SelectDrawColour::clone()  const
 {
 	return new SelectDrawColour(*this);
+}
+
+SelectDrawColour::~SelectDrawColour()
+{
+	delete Fig;
+	Fig = NULL;
 }

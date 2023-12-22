@@ -11,40 +11,29 @@ void Redo::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 
-	Redoptr = pManager->GetLastRedo();
+	Redoptr = pManager->GetLastRedo();  //Get the last undoable action
 
-	//pManager->SetInUndoList(Redoptr);
-
-	if (Redoptr != NULL)
-	{
+	if (Redoptr != NULL){
 		pOut->PrintMessage("Redo the Last Action");
 	}
-	else
-	{
+	else{
 		pOut->PrintMessage("No Action to Redo");
 	}
-
-
-
-
 }
 
 void Redo::Execute()
 {
-	ReadActionParameters();
+	ReadActionParameters(); // set the redo action parameters
 
 	if (Redoptr != NULL)
 	{
-		Redoptr->Execute();
+		Redoptr->Execute(); //  Calling the Execute function of the action to be redone
 	}
 
-	pManager->SetInUndoList(Redoptr);
-
-	//delete Redoptr;
-	//Redoptr = NULL;
+	pManager->SetInUndoList(Redoptr); // set the redo action in the undo list to be undone later if wanted
 }
 
-void Redo::undo()
+void Redo::undo()  // No implementation needed
 {
 }
 

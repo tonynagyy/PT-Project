@@ -45,11 +45,10 @@ void AddSquareAction::Execute()
 	if (square == NULL)
 	{
 		//Create a Square with the parameters read from the user
-		CSquare* S = new CSquare(center, SquareGfxInfo);
-		square = S;
+		square = new CSquare(center, SquareGfxInfo);
 	}
+
 	//Add the Square to the list of figures
-	square->Sethidden(false);
 	pManager->AddFigure(square);
 
 	
@@ -57,7 +56,7 @@ void AddSquareAction::Execute()
 
 void AddSquareAction::undo()
 {
-	square->Sethidden(true);
+	pManager->DeleteFig(square);
 }
 
 Action* AddSquareAction::clone() const
@@ -68,4 +67,5 @@ Action* AddSquareAction::clone() const
 AddSquareAction::~AddSquareAction()
 {
 	delete square;
+	square = NULL;
 }

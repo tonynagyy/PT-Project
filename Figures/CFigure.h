@@ -14,13 +14,15 @@ class CFigure
 {
 protected:
 	int ID;		//Each figure has an ID
+	static int Count;	//counting the figures 
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	static color DrwClr;
 	static color FlClr;
 	bool hidden;
 	/// Add more parameters if needed.
-
+private:
+	//static int ID;
 public:
 	CFigure(GfxInfo FigureGfxInfo);
 
@@ -34,7 +36,6 @@ public:
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
 	virtual void FakeDraw(Output* pOut) = 0;
 	virtual int GetID() = 0;
-	virtual int GetNum() = 0;
 	virtual color GetDrawClr();
 	virtual color GetFillClr();
 
@@ -54,7 +55,7 @@ public:
 
 	virtual void Save(ofstream& outFile);	//Save the figure parameters to the file
 	//virtual void Load(ifstream &Infile) ;	//Load the figure parameters to the file
-	virtual int Counter() = 0;
+	//virtual int Counter() = 0;
 	virtual double CalcArea() = 0;
 	virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 
@@ -63,5 +64,5 @@ public:
 	virtual void move(double x, double y) = 0;
 
 };
-
+//int CFigure::ID = 0;
 #endif

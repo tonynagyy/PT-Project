@@ -1,12 +1,15 @@
 #include "CTriangle.h"
 
-int CTriangle::Count = 0;
+//int CTriangle::Count = 0;
 
-CTriangle::CTriangle(const Point&p1, const Point&p2, const Point&p3, GfxInfo FigureGfxInfo)	: CFigure(FigureGfxInfo) , P1(p1) , P2(p2) , P3(p3)
+CTriangle::CTriangle(const Point& p1, const Point& p2, const Point& p3, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), P1(p1), P2(p2), P3(p3)
 {
-	ID = 1;
+
+	//ID = 1;
 	Count++;
-	Num = Count;
+	//Num = Count;
+
+	ID = Count;
 }
 
 void CTriangle::Draw(Output* pOut) const
@@ -33,7 +36,7 @@ double CTriangle::CalcArea()
 
 void CTriangle::PrintInfo(Output* pOut)
 {
-	string S = "Triangle number: ";
+	string S = "Triangle ID: ";
 	string S1 = "  Figure: Triangle    Area: ";
 	string S2 = "  Center: (";
 	string S3 = " , ";
@@ -42,23 +45,24 @@ void CTriangle::PrintInfo(Output* pOut)
 	string S6 = " True";
 	if (FigGfxInfo.isFilled)
 	{
-		string msg = S + to_string(Num) + S1 + to_string(CalcArea()) + S2 + to_string((P1.x + P2.x + P3.x) / 3) + S3 + to_string((P1.y + P2.y + P3.y) / 3) + S4 + S6;
+		string msg = S + to_string(ID) + S1 + to_string(CalcArea()) + S2 + to_string((P1.x + P2.x + P3.x) / 3) + S3 + to_string((P1.y + P2.y + P3.y) / 3) + S4 + S6;
 		pOut->PrintMessage(msg);
 	}
 	else
 	{
-		string msg = S + to_string(Num) + S1 + to_string(CalcArea()) + S2 + to_string((P1.x + P2.x + P3.x) / 3) + S3 + to_string((P1.y + P2.y + P3.y) / 3) + S4 + S5;
+		string msg = S + to_string(ID) + S1 + to_string(CalcArea()) + S2 + to_string((P1.x + P2.x + P3.x) / 3) + S3 + to_string((P1.y + P2.y + P3.y) / 3) + S4 + S5;
 		pOut->PrintMessage(msg);
 	}
 	
 
 }
 
+/*
 int CTriangle::Counter()
 {
 	return Count;
 }
-
+*/
 void CTriangle::FakeDraw(Output* pOut)
 {
 	FigGfxInfo.DrawClr = LIGHTGOLDENRODYELLOW;
@@ -70,12 +74,22 @@ int CTriangle::GetID()
 {
 	return ID;
 }
-
+/*
 int CTriangle::GetNum()
 {
 	return Num;
 }
 
+void CTriangle::IncNum()
+{
+	Num++;
+}
+
+void CTriangle::DecNum()
+{
+	Num--;
+}
+*/
 color CTriangle::GetDrawClr()
 {
 	return FigGfxInfo.DrawClr;

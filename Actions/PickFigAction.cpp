@@ -11,7 +11,7 @@ void PickFigAction::ReadActionParameters()
 
 	Fig = pManager->RandomFigure();
 	int i = 0;
-
+	/*
 	if (Fig)
 		if (dynamic_cast<CRectangle*>(Fig) != nullptr)
 		{
@@ -84,7 +84,7 @@ void PickFigAction::ReadActionParameters()
 		}
 	else
 		pOut->PrintMessage("There is no figures to play");
-
+*/
 }
 
 void PickFigAction::Execute()

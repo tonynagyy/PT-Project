@@ -1,12 +1,15 @@
 #include "CHexagon.h"
 
-int CHexagon::Count = 0;
+//int CHexagon::Count = 0;
 
 CHexagon::CHexagon(const Point&p1,  GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo) , center(p1) 
 {
-	ID = 4;
+	
+	//ID = 4;
 	Count++;
-	Num = Count;
+	//Num = Count;
+	
+	ID = Count;
 }
 
 void CHexagon::Draw(Output* pOut) const
@@ -64,7 +67,7 @@ void CHexagon::PrintInfo(Output* pOut)
 {
 	string msg;
 
-	string S = "Hexagon number: ";
+	string S = "Hexagon ID: ";
 	string S1 = "  Figure: Hexagon    Area: ";
 	string S2 = "  Center: (";
 	string S3 = " , ";
@@ -73,21 +76,21 @@ void CHexagon::PrintInfo(Output* pOut)
 	string S6 = " True";
 	if (FigGfxInfo.isFilled)
 	{
-		string msg = S + to_string(Num) + S1 + to_string(CalcArea()) + S2 + to_string(center.x) + S3 + to_string(center.y) + S4 + S6;
+		string msg = S + to_string(ID) + S1 + to_string(CalcArea()) + S2 + to_string(center.x) + S3 + to_string(center.y) + S4 + S6;
 		pOut->PrintMessage(msg);
 	}
 	else
 	{
-		string msg = S + to_string(Num) + S1 + to_string(CalcArea()) + S2 + to_string(center.x) + S3 + to_string(center.y) + S4 + S5;
+		string msg = S + to_string(ID) + S1 + to_string(CalcArea()) + S2 + to_string(center.x) + S3 + to_string(center.y) + S4 + S5;
 		pOut->PrintMessage(msg);
 	}
 }
-
+/*
 int CHexagon::Counter()
 {
 	return Count;
 }
-
+*/
 void CHexagon::FakeDraw(Output* pOut)
 {
 	FigGfxInfo.DrawClr = LIGHTGOLDENRODYELLOW;
@@ -99,11 +102,22 @@ int CHexagon::GetID()
 {
 	return ID;
 }
-
+/*
 int CHexagon::GetNum()
 {
 	return Num;
 }
+
+void CHexagon::DecNum()
+{
+	Num--;
+}
+
+void CHexagon::IncNum()
+{
+	Num++;
+}
+*/
 
 color CHexagon::GetDrawClr()
 {

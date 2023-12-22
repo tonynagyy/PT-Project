@@ -53,22 +53,25 @@ void AddRectAction::Execute()
 	if (rect == NULL)
 	{
 		//Create a rectangle with the parameters read from the user
-		CRectangle* R = new CRectangle(P1, P2, RectGfxInfo);
-		rect = R;
-	}
+		 rect = new CRectangle(P1, P2, RectGfxInfo);
+		//rect = R->clone();
+	 }
 
 
-	rect->Sethidden(false);
+	//rect->Sethidden(false);
 	//Add the rectangle to the list of figures
 	pManager->AddFigure(rect);
-
+	//R->IncNum();
 	
+
+	//delete R;
+	//R = NULL;
 }
 
 void AddRectAction::undo()
 {
-	rect->Sethidden(true);
-	//pManager->DeleteFig(rect);
+	//rect->Sethidden(true);
+	pManager->DeleteFig(rect);
 }
 
 Action* AddRectAction::clone() const

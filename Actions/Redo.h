@@ -20,7 +20,7 @@ public:
 	int redoIndex;
 	Undo* undoing;
 	*/
-	Action* Redoptr;	
+	Action* Redoptr;	// pointer to last Redoable action
 public:
 	Redo(ApplicationManager* pApp);
 

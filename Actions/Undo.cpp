@@ -3,7 +3,7 @@
 Undo::Undo(ApplicationManager* pApp):Action(pApp)
 {
 	UndoPtr = NULL;
-	FigurePtr = NULL;
+	//FigurePtr = NULL;
 	//UndoPtr = new Action(pApp);
 }
 
@@ -13,16 +13,14 @@ void Undo::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 
-	UndoPtr = pManager->GetLastUndo();
+	UndoPtr = pManager->GetLastUndo(); //Get the last undoable action 
 	
 
 
-	if (UndoPtr != NULL)
-	{
+	if (UndoPtr != NULL){
 		pOut->PrintMessage("Undo the Last Action");
 	}
-	else
-	{
+	else{
 		pOut->PrintMessage("No Action to Undo");
 	}
 
@@ -33,25 +31,18 @@ void Undo::ReadActionParameters()
 
 void Undo::Execute()
 {
-	ReadActionParameters();
+	ReadActionParameters(); // set the undo action parameters
 
 	if (UndoPtr != NULL)
 	{
-		UndoPtr->undo();
+		UndoPtr->undo();  // Calling the undo function of the action to be undone
 	}
 
-	pManager->SetInRedoList(UndoPtr);
-	/*
-	if (undoIndex >= 0) {
-		// Move the last action from the undo stack to the redo stack
-		redoStack[++redoIndex] = undoStack[undoIndex--];
-		redoStack[redoIndex]->undo();
-	}
-	*/
-	
+	pManager->SetInRedoList(UndoPtr);  // set the undoable action in redo list to be redone later if wanted
+
 }
 
-void Undo::undo()
+void Undo::undo() // No implementation needed
 {
 }
 

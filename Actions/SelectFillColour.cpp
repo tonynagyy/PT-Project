@@ -12,7 +12,7 @@ void SelectFillColour::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	
-	Fig = pManager->GetSelectedFigure();
+	Fig = pManager->GetSelectedFigure()->clone();
 
 	if (Fig != NULL)
 	{
@@ -40,7 +40,9 @@ void SelectFillColour::Execute()
 	if (Fig)
 	{
 		//if (Clr != NULL )
-			Fig->ChngFillClr(Clr);
+		pManager->Changefillcolor(Fig, Clr);
+			//Fig->ChngFillClr(Clr);
+		
 	}
 }
 
@@ -48,7 +50,7 @@ void SelectFillColour::undo()
 {
 	if (Fig != NULL)
 	{
-		Fig->ChngFillClr(IniFillColour);
+		pManager->Changefillcolor(Fig, IniFillColour);
 	}
 
 }
@@ -56,4 +58,10 @@ void SelectFillColour::undo()
 Action* SelectFillColour::clone()  const
 {
 	return new SelectFillColour(*this);
+}
+
+SelectFillColour::~SelectFillColour()
+{
+	delete Fig;
+	Fig = NULL;
 }

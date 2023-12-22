@@ -23,6 +23,7 @@ ApplicationManager::ApplicationManager()
 	pIn = pOut->CreateInput();
 
 	FigCount = 0;
+	Actualfigcounter = 0;
 	UndoCount = 0;
 	RedoCount = 0;
 	//Create an array of figure pointers and set them to NULL		
@@ -107,6 +108,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct = new DeletefigAction(this); 
 		ptrToAct->Execute();
 		SetInUndoList(ptrToAct);
+		DeleteAllRedos();
 		break;
 
 	case MOVE:
@@ -201,9 +203,16 @@ void ApplicationManager::SetInUndoList(Action* pAct)
 			}
 			Undoarray[4] = pAct->clone();
 		}
-
-		delete Redoarray[RedoCount];
-		Redoarray[RedoCount] = NULL;
+		if (RedoCount < 5)
+		{
+			delete Redoarray[RedoCount];
+			Redoarray[RedoCount] = NULL;
+		}
+		else
+		{
+			delete Redoarray[RedoCount - 1];
+			Redoarray[RedoCount - 1] = NULL;
+		}
 	}
 	//delete pAct;
 	//pAct = NULL;
@@ -298,6 +307,7 @@ void ApplicationManager::Clearall()
 	RedoCount = 0;
 	
 }
+
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
@@ -305,14 +315,26 @@ void ApplicationManager::Clearall()
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
+	/*
 	for (int i = 0; i < FigCount; i++)
 	{
 		if ((FigList[i]->GetID() == pFig->GetID()) && (FigList[i]->GetNum() == pFig->GetNum()))
 			return;
 	}
+	*/
+	//pFig->IncNum();
 
-			if (FigCount < MaxFigCount)
-				FigList[FigCount++] = pFig;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i] == NULL)
+		{
+			FigList[i] = pFig->clone();
+			return;
+		}
+	}
+
+	if (FigCount < MaxFigCount)
+		FigList[FigCount++] = pFig->clone();
 	
 }
 
@@ -323,15 +345,41 @@ void ApplicationManager::DeleteFig(CFigure* pFig)
 	{
 		if (FigList[i] != NULL)
 		{
-			if ( (FigList[i]->GetNum() == pFig->GetNum()) && (FigList[i]->GetID() == pFig->GetID()) )
+			if ( /*FigList[i]->GetNum() == pFig->GetNum()) && */ (FigList[i]->GetID() == pFig->GetID()))
 			{
-				//delete FigList[i];
-				//FigList[i] = NULL;
-				FigList[i]->Sethidden(true);
+				delete FigList[i];
+				FigList[i] = NULL;
+				//FigList[i]->Sethidden(true);
 			}
 		}
 	}
 
+}
+void ApplicationManager::Changefillcolor(CFigure* pFig ,color clr)
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i] != NULL)
+		{
+			if (FigList[i]->GetID() == pFig->GetID())
+			{
+				FigList[i]->ChngFillClr(clr);
+			}
+		}
+	}
+}
+void ApplicationManager::Changedrawcolor(CFigure* pFig, color clr)
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i] != NULL)
+		{
+			if (FigList[i]->GetID() == pFig->GetID())
+			{
+				FigList[i]->ChngDrawClr(clr);
+			}
+		}
+	}
 }
 //get pointer to the selected figure
 CFigure* ApplicationManager::GetSelectedFigure()
@@ -391,21 +439,29 @@ void ApplicationManager::UpdateInterface() const
 	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
 	{
-		if (FigList[i] != NULL && ! FigList[i]->IfHidden())
+		if (FigList[i] != NULL)
 		{
 			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 		}
 	}
 }
-int ApplicationManager::getFigCount() 
+int ApplicationManager::getActFigCount() 
 {
-	return FigCount;
+	Actualfigcounter = 0;
+
+	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i] != NULL) {
+			Actualfigcounter++;
+		}
+	}
+
+	return Actualfigcounter;
 }
 void ApplicationManager::saveAll(ofstream &outFile) 
 {
 	for (int i = 0; i < FigCount; i++)
 	{
-		if (FigList[i] != NULL && ! FigList[i]->IfHidden())
+		if (FigList[i] != NULL)
 		{
 			FigList[i]->Save(outFile);
 		}
