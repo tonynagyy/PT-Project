@@ -19,14 +19,16 @@ public:
 	virtual bool InFigure(int x, int y);
 	virtual double CalcArea();
 	virtual void PrintInfo(Output *pOut);
-	//virtual int Counter();
+	
 	virtual void FakeDraw(Output* pOut);
+
 	virtual int GetID();
-	//virtual int GetNum();
-	//virtual void DecNum();
-	//virtual void IncNum();
+	
+	virtual Point Getcenter();
 	virtual color GetDrawClr();
 	virtual color GetFillClr();
+
+
 	void Save(ofstream &outFile) override;
 	void Load(ifstream &inFile) override;
 

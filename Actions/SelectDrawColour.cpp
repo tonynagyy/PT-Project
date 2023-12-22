@@ -38,8 +38,6 @@ void SelectDrawColour::Execute()
 
 	if (Fig)
 	{
-		//if (Clr != NULL)
-			//Fig->ChngDrawClr(Clr);
 		pManager->Changedrawcolor(Fig, Clr);
 	}
 }

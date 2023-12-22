@@ -64,6 +64,11 @@
  }
  */
 
+ Point CCircle::Getcenter()
+ {
+	 return P1;
+ }
+
  color CCircle::GetDrawClr()
  {
 	 return FigGfxInfo.DrawClr;

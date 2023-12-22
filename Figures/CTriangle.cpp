@@ -71,6 +71,13 @@ int CTriangle::GetID()
 {
 	return ID;
 }
+Point CTriangle::Getcenter()
+{
+	Point center;
+	center.x = (P1.x + P2.x + P3.x) / 3;
+	center.y = (P1.y + P2.y + P3.y) / 3;
+	return center;
+}
 /*
 int CTriangle::GetNum()
 {

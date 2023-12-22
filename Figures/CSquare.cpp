@@ -70,6 +70,11 @@ int CSquare::GetID()
 	return ID;
 }
 
+Point CSquare::Getcenter()
+{
+	return center;
+}
+
 /*
 int CSquare::GetNum()
 {

@@ -40,6 +40,7 @@ public:
 	virtual int GetID() = 0;
 	virtual color GetDrawClr();
 	virtual color GetFillClr();
+	virtual Point Getcenter() = 0;
 	int GetIdentifier();
 
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color

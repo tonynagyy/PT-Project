@@ -26,11 +26,10 @@ public:
 
 	//Calculate the area
 	virtual double CalcArea();
-	virtual int GetID();
-	//virtual int GetNum();
-	//virtual void DecNum();
-	//virtual void IncNum();
 
+	virtual int GetID();
+	
+	virtual Point Getcenter();
 	virtual color GetDrawClr();
 	virtual color GetFillClr();
 

@@ -50,6 +50,8 @@ public:
 	void DeleteFig(CFigure* pFig);
 	void Changefillcolor(CFigure* pFig ,color clr);
 	void Changedrawcolor(CFigure* pFig, color clr);
+	void Movefigure(CFigure* pFig, int x, int y);
+
 	CFigure* GetSelectedFigure();
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	void UnSelect();

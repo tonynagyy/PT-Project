@@ -11,8 +11,8 @@
 class MoveAction : public Action{
 private:
 	CFigure* Selectedfig = nullptr;
-	Point Selectedpoint;
-
+	Point NewcenterPoint;
+	Point InicenterPoint;
 
 public:
 	MoveAction(ApplicationManager* pApp);
@@ -22,6 +22,6 @@ public:
 	Action* clone() const override;
 
 
-
+	~MoveAction();
 };
 #endif

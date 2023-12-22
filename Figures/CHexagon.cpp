@@ -100,22 +100,12 @@ int CHexagon::GetID()
 {
 	return ID;
 }
-/*
-int CHexagon::GetNum()
-{
-	return Num;
-}
 
-void CHexagon::DecNum()
-{
-	Num--;
-}
 
-void CHexagon::IncNum()
+Point CHexagon::Getcenter()
 {
-	Num++;
+	return center;
 }
-*/
 
 color CHexagon::GetDrawClr()
 {

@@ -9,12 +9,20 @@ void MoveAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+	
 	Selectedfig = pManager->GetSelectedFigure();
 
-	pOut->PrintMessage(" select the place you want to move the figure to");
-	pIn->GetPointClicked(Selectedpoint.x, Selectedpoint.y);
-	
-	pOut->ClearStatusBar();
+	if (Selectedfig != NULL)
+	{
+		Selectedfig = pManager->GetSelectedFigure()->clone();
+		InicenterPoint = Selectedfig->Getcenter();
+
+		pOut->PrintMessage("click new point to move the figure to it");
+		 
+		pIn->GetPointClicked(NewcenterPoint.x, NewcenterPoint.y);
+	}
+	else
+		pOut->PrintMessage("Select a figure first to be moved");
 }
 
 void MoveAction::Execute()
@@ -23,17 +31,28 @@ void MoveAction::Execute()
 	{
 		ReadActionParameters();
 	}
+
 	if (Selectedfig != nullptr)
 	{
-		Selectedfig->move(Selectedpoint.x, Selectedpoint.y);
+		pManager->Movefigure(Selectedfig, NewcenterPoint.x, NewcenterPoint.y);
 	}
 }
 
 void MoveAction::undo()
 {
+	if (Selectedfig != NULL)
+	{
+		pManager->Movefigure(Selectedfig, InicenterPoint.x, InicenterPoint.y);
+	}
 }
 
 Action* MoveAction::clone() const
 {
-	return nullptr;
+	return new MoveAction(*this);
+}
+
+MoveAction::~MoveAction()
+{
+	delete Selectedfig;
+	Selectedfig = NULL;
 }

@@ -20,14 +20,15 @@ public:
 
 	virtual double CalcArea();
 	virtual void PrintInfo(Output* pOut);
-	//virtual int Counter();
+	
 	virtual void FakeDraw(Output* pOut);
+
 	virtual int GetID();
-	//virtual int GetNum();
-	//virtual void IncNum();
-	//virtual void DecNum();
+	
+	virtual Point Getcenter();
 	virtual color GetDrawClr();
 	virtual color GetFillClr();
+
 	void Save(ofstream &outFile) override;
 	void Load(ifstream &Infile) override;
 	

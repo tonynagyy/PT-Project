@@ -81,8 +81,8 @@ void Output::ClearStatusBar() const
 void Output::ClearToolBar() const
 {
 	//Clear Status bar by drawing a filled white rectangle
-	pWind->SetPen(UI.BkGrndColor, 5);
-	pWind->SetBrush(UI.BkGrndColor);
+	pWind->SetPen(UI.StatusBarColor, 5);
+	pWind->SetBrush(UI.StatusBarColor);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 }
 /*
@@ -129,9 +129,9 @@ void Output::CreateDrawToolBar() const
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < DRAW_ITM_COUNT; i++) {
-		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-		pWind->SetPen(DARKRED, 3);
-		pWind->DrawLine(UI.MenuItemWidth * i, 0, UI.MenuItemWidth * i, UI.ToolBarHeight);
+		pWind->DrawImage(MenuItemImages[i], (i * UI.MenuItemWidth) + 5 , 5, UI.MenuItemWidth - 10, UI.ToolBarHeight - 10);
+		//pWind->SetPen(DARKRED, 3);
+		//pWind->DrawLine(UI.MenuItemWidth * i, 0, UI.MenuItemWidth * i, UI.ToolBarHeight);
 	}
 	//Draw a line under the toolbar
 	pWind->SetPen(DARKRED, 5);

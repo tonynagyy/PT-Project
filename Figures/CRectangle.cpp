@@ -67,6 +67,14 @@ int CRectangle::GetID()
 }
 
 
+Point CRectangle::Getcenter()
+{
+	Point center;
+	center.x = (Corner1.x + Corner2.x) / 2;
+	center.y = (Corner1.y + Corner2.y) / 2;
+	return center;
+}
+
 color CRectangle::GetDrawClr()
 {
 	return FigGfxInfo.DrawClr;

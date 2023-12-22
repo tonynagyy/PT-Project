@@ -117,6 +117,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct = new MoveAction(this);
 		ptrToAct->Execute();
 		SetInUndoList(ptrToAct);
+		DeleteAllRedos();
 		this->UnSelect();
 		break;
 
@@ -161,15 +162,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		DeleteAllRedos();
 		this->UnSelect();
 		break;
+
 	case SAVE:
 		this->UnSelect();
 		ptrToAct = new SaveAction(this);
 		ptrToAct->Execute();
 		break;
+
 	case CLEAR:
 		ptrToAct = new clearAll(this);
 		ptrToAct->Execute();
 		break;
+
 	case LOAD:
 		this->UnSelect();
 		ptrToAct = new LoadAction(this);
@@ -196,7 +200,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 void ApplicationManager::SetInUndoList(Action* pAct)
 {
-	//Undoarray[UndoCount] = pAct->clone();
 	if (pAct != NULL)
 	{
 
@@ -216,6 +219,7 @@ void ApplicationManager::SetInUndoList(Action* pAct)
 			}
 			Undoarray[4] = pAct->clone();
 		}
+
 		if (RedoCount < 5)
 		{
 			delete Redoarray[RedoCount];
@@ -227,9 +231,8 @@ void ApplicationManager::SetInUndoList(Action* pAct)
 			Redoarray[RedoCount - 1] = NULL;
 		}
 	}
-	//delete pAct;
-	//pAct = NULL;
 }
+
 Action* ApplicationManager::GetLastUndo()
 {
 	if (UndoCount > 0)
@@ -257,18 +260,7 @@ void ApplicationManager::SetInRedoList(Action* pAct)
 		else
 			Redoarray[RedoCount] = NULL;
 	}
-	/*
-	else
-	{
-		// If the undo stack is full, remove the oldest action
-		Redoarray[0] = NULL;
-		for (int i = 0; i < 4; ++i)
-		{
-			Redoarray[i] = Redoarray[i + 1];
-		}
-		Redoarray[4] = pAct;
-	}*/
-
+	
 }
 Action* ApplicationManager::GetLastRedo()
 {
@@ -394,6 +386,19 @@ void ApplicationManager::Changedrawcolor(CFigure* pFig, color clr)
 		}
 	}
 }
+void ApplicationManager::Movefigure(CFigure* pFig, int x, int y)
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i] != NULL)
+		{
+			if (FigList[i]->GetID() == pFig->GetID())
+			{
+				FigList[i]->move(x, y);
+			}
+		}
+	}
+}
 //get pointer to the selected figure
 CFigure* ApplicationManager::GetSelectedFigure()
 {
@@ -433,7 +438,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 }
 void ApplicationManager::UnSelect()
 {
-	pOut->ClearStatusBar();
+	//pOut->ClearStatusBar();
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i] != NULL)
