@@ -8,6 +8,7 @@
 #include "Actions\DeletefigAction.h"
 #include "Actions\PickFigAction.h"
 #include "Actions\PickClrAction.h"
+#include "Actions\PickClrFig.h"
 #include "Actions\Undo.h"
 #include "Actions\SelectFillColour.h"
 #include "Actions\SelectDrawColour.h"
@@ -137,6 +138,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case PICK_CLR:
 		ptrToAct = new PickClrAction(this);
+		ptrToAct->Execute();
+		break;
+
+	case PICK_CLR_FIG:
+		ptrToAct = new PickClrFigAction(this);
 		ptrToAct->Execute();
 		break;
 	
@@ -520,6 +526,14 @@ bool ApplicationManager::CheckPlay()
 {
 	for (int i = 0; i < FigCount; i++)
 		if (FigList[i] && !FigList[i]->IsFilled() && !FigList[i]->IfHidden())
+			return true;
+	return false;
+}
+
+bool ApplicationManager::CheckPlay(int I, color clr)
+{
+	for (int i = 0; i < FigCount; i++)
+		if (FigList[i] && FigList[i]->GetFillClr() == clr && FigList[i]->GetIdentifier() == I && !FigList[i]->IfHidden())
 			return true;
 	return false;
 }

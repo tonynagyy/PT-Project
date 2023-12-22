@@ -1,5 +1,5 @@
-#ifndef PICKCLRACTION_H
-#define PICKCLRACTION_H
+#ifndef PICKCLRFigACTION_H
+#define PICKCLRFigACTION_H
 
 #include "..\ApplicationManager.h"
 #include "Action.h"
@@ -13,7 +13,7 @@
 #include "..\Figures\CSquare.h"
 #include "..\Figures\CTriangle.h"
 
-class PickClrAction : public Action
+class PickClrFigAction : public Action
 {
 	int CountWrg = 0; // Counter for wrong answers
 	int CountCrt = 0; // Counter for correct answers
@@ -22,10 +22,11 @@ class PickClrAction : public Action
 	CFigure* CheckFig;
 
 public:
-	PickClrAction(ApplicationManager* pApp);
+	PickClrFigAction(ApplicationManager* pApp);
 	virtual void ReadActionParameters();
 	virtual void Execute();
 	bool CheckAns();
+	string ColourToString(CFigure* F);  // convert the colour to string
 
 	virtual void undo();
 
