@@ -20,6 +20,7 @@ class PickClrAction : public Action
 	Point P;
 	CFigure* Fig;
 	CFigure* CheckFig;
+	bool Exit = false; // check if the user want to exit from the game
 
 public:
 	PickClrAction(ApplicationManager* pApp);

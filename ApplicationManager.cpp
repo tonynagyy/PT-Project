@@ -147,6 +147,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct->Execute();
 		break;
 	
+	case PLAYING_AREA:
+		pOut->ClearStatusBar();
+		break;
+
+	case GET_EXIT_PLAY:
+		break;
+
 	case UNDO:
 		this->UnSelect();
 		ptrToAct = new Undo(this);

@@ -20,6 +20,7 @@ class PickFigAction : public Action
 	Point P;
 	CFigure* Fig;
 	CFigure* CheckFig;
+	bool Exit = false; // check if the user want to exit from the game
 
 public:
 	PickFigAction(ApplicationManager* pApp);
@@ -31,6 +32,8 @@ public:
 
 
 	virtual Action* clone() const override;
+
+	~PickFigAction();
 };
 
 

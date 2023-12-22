@@ -81,8 +81,8 @@ void Output::ClearStatusBar() const
 void Output::ClearToolBar() const
 {
 	//Clear Status bar by drawing a filled white rectangle
-	pWind->SetPen(UI.StatusBarColor, 5);
-	pWind->SetBrush(UI.StatusBarColor);
+	pWind->SetPen(UI.BkGrndColor, 5);
+	pWind->SetBrush(UI.BkGrndColor);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 }
 /*
@@ -96,6 +96,8 @@ void Output::ClearColourMenu() const
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBar() const
 {
+	ClearToolBar();
+
 	UI.InterfaceMode = MODE_DRAW;
 	string MenuItemImages[DRAW_ITM_COUNT];
 
