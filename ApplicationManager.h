@@ -67,6 +67,9 @@ public:
 	// -- Functions related to play mode 
 	CFigure *RandomFigure(); // choose a random figure
 	bool CheckPlay(int I);  // check if there is a figure with the same identifier or not
+	bool CheckPlay(color clr); // check if there is a figure with the same colour or not
+	bool CheckPlay(); // check if there is a non-filled figure or not
+	bool CheckPlay(int I, color clr); // check if there is a figure with the same identifier and colour or not
 	void DrawingBack(); // return the figures after playing
 };
 

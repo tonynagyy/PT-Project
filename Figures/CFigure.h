@@ -40,6 +40,8 @@ public:
 	virtual int GetID() = 0;
 	virtual color GetDrawClr();
 	virtual color GetFillClr();
+	
+	bool IsFilled();
 	virtual Point Getcenter() = 0;
 	int GetIdentifier();
 
