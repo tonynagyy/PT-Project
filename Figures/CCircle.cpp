@@ -87,7 +87,7 @@
 	 string S6 = " True";
 	 if (FigGfxInfo.isFilled)
 	 {
-		 string msg = S + to_string(ID) + S1 + to_string(CalcArea()) + S2 + to_string(P1.x) + S3 + to_string(P1.y) + S4 + S6;
+		 string msg = S + to_string(FigGfxInfo.isFilled) + S1 + to_string(CalcArea()) + S2 + to_string(P1.x) + S3 + to_string(P1.y) + S4 + S6;
 		 pOut->PrintMessage(msg);
 	 }
 	 else

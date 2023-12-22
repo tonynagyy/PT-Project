@@ -74,6 +74,11 @@ color CFigure::GetFillClr()
 	return FigGfxInfo.FillClr;
 }
 
+bool CFigure::IsFilled()
+{
+	return FigGfxInfo.isFilled;
+}
+
 void CFigure::ChngFillClr(color Fclr)
 {
 	if (Fclr == SNOW )
