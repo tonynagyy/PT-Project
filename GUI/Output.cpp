@@ -351,7 +351,7 @@ void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo RectGfxInfo, boo
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, 3);
 	if (RectGfxInfo.isFilled)
 	{
 		style = FILLED;

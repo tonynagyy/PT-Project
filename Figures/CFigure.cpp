@@ -21,6 +21,12 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 
 }
 
+CFigure::CFigure()
+{
+	SetSelected(false);
+	Sethidden(false);
+}
+
 void CFigure::SetSelected(bool s)
 {
 	Selected = s;

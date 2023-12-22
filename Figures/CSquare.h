@@ -14,8 +14,8 @@ private:
 
 public:
 	CSquare(const Point&, GfxInfo FigureGfxInfo);
-	//CSquare() = default;
-	CSquare();
+	CSquare() = default;
+	//CSquare();
 	virtual void Draw(Output* pOut) const;
 	virtual bool InFigure(int x, int y);
 	virtual double CalcArea();
