@@ -5,10 +5,8 @@
 CSquare::CSquare(const Point&p1, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), center(p1) 
 {
 	
-	//ID = 2;
+	Identifier = 2;
 	Count++;
-	//Num = Count;
-	
 	ID = Count;
 }
 

@@ -6,9 +6,8 @@
 
  CRectangle::CRectangle(const Point &P1, const Point &P2, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), Corner1(P1), Corner2(P2)
  {
-	 //ID = 3;
+	Identifier = 3;
   	Count++;
-	//Num = Count;
 	ID = Count;
  }
 	
