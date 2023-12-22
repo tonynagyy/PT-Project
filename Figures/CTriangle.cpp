@@ -2,12 +2,10 @@
 
 //int CTriangle::Count = 0;
 
-CTriangle::CTriangle(const Point& p1, const Point& p2, const Point& p3, GfxInfo FigureGfxInfo) :
-	CFigure(FigureGfxInfo), P1(p1), P2(p2), P3(p3) {
-	//ID = 1;
+CTriangle::CTriangle(const Point& p1, const Point& p2, const Point& p3, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), P1(p1), P2(p2), P3(p3) 
+{
+	Identifier = 1;
 	Count++;
-	//Num = Count;
-
 	ID = Count;
 }
 

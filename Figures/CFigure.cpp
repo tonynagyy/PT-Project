@@ -19,7 +19,6 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 	Selected = false;
 	hidden = false;
 
-	//ID++;
 }
 
 void CFigure::SetSelected(bool s)
@@ -57,6 +56,11 @@ void CFigure::ChngDrawClr(color Dclr)
 int CFigure::GetID()
 {
 	return ID;
+}
+
+int CFigure::GetIdentifier()
+{
+	return Identifier;
 }
 
 

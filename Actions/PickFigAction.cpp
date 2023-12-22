@@ -5,13 +5,16 @@ PickFigAction::PickFigAction(ApplicationManager* pApp) : Action(pApp)
 
 void PickFigAction::ReadActionParameters()
 {
+	Fig = pManager->RandomFigure();	
+}
+
+void PickFigAction::Execute()
+{
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
 
-	Fig = pManager->RandomFigure();
-	int i = 0;
-	/*
+	ReadActionParameters();
+
 	if (Fig)
 		if (dynamic_cast<CRectangle*>(Fig) != nullptr)
 		{
@@ -20,11 +23,11 @@ void PickFigAction::ReadActionParameters()
 			{
 				if (CheckAns())
 				{
-					i++;
-					Fig->FakeDraw(pOut);
+					Fig->Sethidden(true);
+					pManager->UpdateInterface();
 				}
 
-			}while (Fig->Counter() - i);
+			} while (pManager->CheckPlay(Fig->GetIdentifier()));
 		}
 
 		else if (dynamic_cast<CCircle*>(Fig) != nullptr)
@@ -34,11 +37,11 @@ void PickFigAction::ReadActionParameters()
 			{
 				if (CheckAns())
 				{
-					i++;
-					Fig->FakeDraw(pOut);
+					Fig->Sethidden(true);
+					pManager->UpdateInterface();
 				}
 
-			} while (Fig->Counter() - i);
+			} while (pManager->CheckPlay(Fig->GetIdentifier()));
 		}
 
 		else if (dynamic_cast<CHexagon*>(Fig) != nullptr)
@@ -48,11 +51,11 @@ void PickFigAction::ReadActionParameters()
 			{
 				if (CheckAns())
 				{
-					i++;
-					Fig->FakeDraw(pOut);
+					Fig->Sethidden(true);
+					pManager->UpdateInterface();
 				}
 
-			} while (Fig->Counter() - i);
+			} while (pManager->CheckPlay(Fig->GetIdentifier()));
 		}
 
 		else if (dynamic_cast<CTriangle*>(Fig) != nullptr)
@@ -62,11 +65,11 @@ void PickFigAction::ReadActionParameters()
 			{
 				if (CheckAns())
 				{
-					i++;
-					Fig->FakeDraw(pOut);
+					Fig->Sethidden(true);
+					pManager->UpdateInterface();
 				}
 
-			} while (Fig->Counter() - i);
+			} while (pManager->CheckPlay(Fig->GetIdentifier()));
 		}
 
 		else
@@ -76,20 +79,16 @@ void PickFigAction::ReadActionParameters()
 			{
 				if (CheckAns())
 				{
-					i++;
-					Fig->FakeDraw(pOut);
+					Fig->Sethidden(true);
+					pManager->UpdateInterface();
 				}
 
-			} while (Fig->Counter() - i);
+			} while (pManager->CheckPlay(Fig->GetIdentifier()));
 		}
 	else
 		pOut->PrintMessage("There is no figures to play");
-*/
-}
 
-void PickFigAction::Execute()
-{
-	ReadActionParameters();
+	pManager->DrawingBack();
 
 }
 
@@ -107,7 +106,7 @@ bool PickFigAction::CheckAns()
 	pIn->GetPointClicked(P.x, P.y);
 	CheckFig = pManager->GetFigure(P.x, P.y);
 
-	if (CheckFig && CheckFig->GetID() == Fig->GetID())
+	if (CheckFig && CheckFig->GetIdentifier() == Fig->GetIdentifier() && !CheckFig->IfHidden())
 	{
 		Fig = CheckFig;
 		string msg1 = sentence1 + to_string(++CountCrt) + sentence2 + to_string(CountWrg);

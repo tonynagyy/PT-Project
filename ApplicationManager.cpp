@@ -446,7 +446,7 @@ void ApplicationManager::UpdateInterface() const
 	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
 	{
-		if (FigList[i] != NULL)
+		if (FigList[i] != NULL && !FigList[i]->IfHidden())
 		{
 			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 		}
@@ -487,6 +487,22 @@ CFigure* ApplicationManager::RandomFigure()
 	else
 		return nullptr;
 }
+
+bool ApplicationManager::CheckPlay(int I)
+{
+	for (int i = 0; i < FigCount; i++)
+		if (FigList[i] && FigList[i]->GetIdentifier() == I && !FigList[i]->IfHidden())
+			return true;
+	return false;
+}
+
+void ApplicationManager::DrawingBack()
+{
+	for (int i = 0; i < FigCount; i++)
+		if (FigList[i])
+			FigList[i]->Sethidden(false);
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input* ApplicationManager::GetInput() const

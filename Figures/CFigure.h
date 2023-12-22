@@ -14,6 +14,7 @@ class CFigure
 {
 protected:
 	int ID;		//Each figure has an ID
+	int Identifier; // It is an integer to distinguishes eash shape from the other
 	static int Count;	//counting the figures 
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
@@ -39,6 +40,7 @@ public:
 	virtual int GetID() = 0;
 	virtual color GetDrawClr();
 	virtual color GetFillClr();
+	int GetIdentifier();
 
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color

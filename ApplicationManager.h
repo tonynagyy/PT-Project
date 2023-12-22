@@ -25,7 +25,9 @@ private:
 	Action* Redoarray[5];/*array to save actions for redo*/
 	int UndoCount;
 	int RedoCount;
+
 public:	
+
 	ApplicationManager(); 
 	~ApplicationManager();
 	
@@ -61,7 +63,9 @@ public:
 	int getActFigCount() ;
 
 	// -- Functions related to play mode 
-	CFigure *RandomFigure();
+	CFigure *RandomFigure(); // choose a random figure
+	bool CheckPlay(int I);  // check if there is a figure with the same identifier or not
+	void DrawingBack(); // return the figures after playing
 };
 
 #endif

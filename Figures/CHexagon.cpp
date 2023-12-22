@@ -5,10 +5,8 @@
 CHexagon::CHexagon(const Point&p1,  GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo) , center(p1) 
 {
 	
-	//ID = 4;
+	Identifier = 4;
 	Count++;
-	//Num = Count;
-	
 	ID = Count;
 }
 
