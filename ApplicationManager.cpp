@@ -13,6 +13,7 @@
 #include "Actions\SaveAction.h"
 #include "Actions\clearall.h"
 #include "Actions\MoveAction.h"
+#include "Actions\LoadAction.h"
 
 
 //Constructor
@@ -157,10 +158,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case SAVE:
 		ptrToAct = new SaveAction(this);
 		ptrToAct->Execute();
+		this->UnSelect();
 		break;
 	case CLEAR:
 		ptrToAct = new clearAll(this);
 		ptrToAct->Execute();
+		break;
+	case LOAD:
+		ptrToAct = new LoadAction(this);
+		ptrToAct->Execute();
+		this->UnSelect();
 		break;
 
 	case EXIT:
@@ -457,12 +464,15 @@ int ApplicationManager::getActFigCount()
 
 	return Actualfigcounter;
 }
-void ApplicationManager::saveAll(ofstream &outFile) 
-{
-	for (int i = 0; i < FigCount; i++)
-	{
-		if (FigList[i] != NULL)
-		{
+/**
+ * saveAll: save all figures in the the file
+ * Parameters: ofstream &outFile
+ * Return: void
+ * Description: save all figures in the figlist into the file
+*/
+void ApplicationManager::saveAll(ofstream &outFile)  {
+	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i] != NULL) {
 			FigList[i]->Save(outFile);
 		}
 	}

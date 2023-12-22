@@ -11,3 +11,4 @@ using std::endl;
 using std::string;
 
 std::ofstream& operator<<(std::ofstream& outFile, color& c);
+color & operator>>(std::ifstream& inFile, color& c);

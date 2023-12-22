@@ -113,6 +113,12 @@
 	 OutFile << FigGfxInfo.FillClr << endl;
  }
 
+ void CCircle::Load(ifstream& inFile) {
+	 inFile >> ID >> P1.x >> P1.y >> P2.x >> P2.y;
+	 inFile >> FigGfxInfo.DrawClr;
+	 inFile >> FigGfxInfo.FillClr;
+ }
+
  void CCircle::move(double x, double y)
  {
 	 

@@ -15,6 +15,7 @@ private:
 	//int Num;
 
 public:
+	CCircle() = default;
 	CCircle(const Point&, const Point&, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
 	virtual bool InFigure(int x, int y);
@@ -37,6 +38,7 @@ public:
 	virtual void PrintInfo(Output* pOut);
 	virtual CFigure* clone() const override;
 	void Save(ofstream &OutFile) override;
+	void Load(ifstream &inFile) override;
 	virtual void move(double x, double y) override ;
 };
 

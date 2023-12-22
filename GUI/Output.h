@@ -40,6 +40,8 @@ public:
 
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
+	void setCrntDrawColor(color c);
+	void setCrntFillColor(color c);
 	int getCrntPenWidth() const;		//get current pen width
 	color GetColour(Input* pIn, Output* pOut, DrawMenuItem ITM) const;
 	~Output();

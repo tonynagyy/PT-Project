@@ -135,6 +135,12 @@ void CHexagon::Save(ofstream& outFile) {
 	outFile << FigGfxInfo.FillClr << endl;
 }
 
+void CHexagon::Load(ifstream& inFile) {
+	inFile >> ID >> center.x >> center.y;
+	inFile >> FigGfxInfo.DrawClr;
+	inFile >> FigGfxInfo.FillClr;
+}
+
 CFigure* CHexagon::clone() const
 {
 	return new CHexagon(*this);

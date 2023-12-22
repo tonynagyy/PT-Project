@@ -13,6 +13,7 @@ private:
 	//int Num;
 	
 public:
+	CHexagon() = default;
 	CHexagon(const Point&, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
 	virtual bool InFigure(int x, int y);
@@ -27,6 +28,7 @@ public:
 	virtual color GetDrawClr();
 	virtual color GetFillClr();
 	void Save(ofstream &outFile) override;
+	void Load(ifstream &inFile) override;
 
 
 	virtual CFigure* clone() const override;

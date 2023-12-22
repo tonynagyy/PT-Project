@@ -134,6 +134,8 @@
     <ClCompile Include="Actions\AddTriangleAction.cpp" />
     <ClCompile Include="Actions\clearall.cpp" />
     <ClCompile Include="Actions\DeletefigAction.cpp" />
+    <ClCompile Include="Actions\LoadAction.cpp" />
+    <ClCompile Include="Actions\LoadActioncpp.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
     <ClCompile Include="Actions\PickFigAction.cpp" />
     <ClCompile Include="Actions\Redo.cpp" />
@@ -198,6 +200,7 @@
     <ClInclude Include="Actions\AddTriangleAction.h" />
     <ClInclude Include="Actions\clearall.h" />
     <ClInclude Include="Actions\DeletefigAction.h" />
+    <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
     <ClInclude Include="Actions\PickFigAction.h" />
     <ClInclude Include="Actions\Redo.h" />

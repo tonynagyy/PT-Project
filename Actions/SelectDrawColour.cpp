@@ -12,14 +12,11 @@ void SelectDrawColour::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	
-	Fig = pManager->GetSelectedFigure()->clone();
-
-	if (Fig != NULL)
-	{
+	Fig = pManager->GetSelectedFigure();
+	if (Fig != NULL) {
+		Fig = pManager->GetSelectedFigure()->clone();
 		IniDrawClr = Fig->GetDrawClr();
 	}
-		
-	
 
 	if (Fig)
 	{

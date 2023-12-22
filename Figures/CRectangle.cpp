@@ -89,6 +89,16 @@ void CRectangle::Save(ofstream& outFile) {
 	outFile << endl;
 }
 
+void CRectangle::Load(ifstream& Infile)
+{
+		//RECT 1 100 200 17 30 BLUE RED
+	Infile >> ID;
+	Infile >> Corner1.x >> Corner1.y;
+	Infile >> Corner2.x >> Corner2.y;
+	Infile >> FigGfxInfo.DrawClr;
+	Infile >> FigGfxInfo.FillClr;
+}
+
 CFigure *CRectangle::clone() const
 {
 	return new CRectangle(*this);

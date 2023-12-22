@@ -218,7 +218,14 @@ color Output::getCrntFillColor() const	//get current filling color
 
 	return UI.FillColor;
 }
+void Output::setCrntDrawColor(color c) {
+	UI.DrawColor = c;
+}
+void Output::setCrntFillColor(color c) {
+	UI.FillColor = c;
+}
 //////////////////////////////////////////////////////////////////////////////////////////
+
 
 int Output::getCrntPenWidth() const		//get current pen width
 {

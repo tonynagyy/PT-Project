@@ -25,6 +25,7 @@ private:
 	//static int ID;
 public:
 	CFigure(GfxInfo FigureGfxInfo);
+	CFigure() = default;
 
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
@@ -54,7 +55,7 @@ public:
 
 
 	virtual void Save(ofstream& outFile);	//Save the figure parameters to the file
-	//virtual void Load(ifstream &Infile) ;	//Load the figure parameters to the file
+	virtual void Load(ifstream &Infile) ;	//Load the figure parameters to the file
 	//virtual int Counter() = 0;
 	virtual double CalcArea() = 0;
 	virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar

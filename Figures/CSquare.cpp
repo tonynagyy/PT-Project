@@ -109,6 +109,12 @@ void CSquare::move(double x, double y)
 	center.y = y;
 }
 
+void CSquare::Load(ifstream& Infile) {
+	Infile >> ID >> center.x >> center.y;
+	Infile >> FigGfxInfo.DrawClr;
+	Infile >> FigGfxInfo.FillClr;
+}
+
 CFigure* CSquare::clone() const
 {
 	return new CSquare(*this);

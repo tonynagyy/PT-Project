@@ -12,10 +12,11 @@ void SelectFillColour::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	
-	Fig = pManager->GetSelectedFigure()->clone();
+	Fig = pManager->GetSelectedFigure();
 
-	if (Fig != NULL)
+	if (Fig != NULL) 
 	{
+		Fig = pManager->GetSelectedFigure()->clone();
 		IniFillColour = Fig->GetFillClr();
 	}
 

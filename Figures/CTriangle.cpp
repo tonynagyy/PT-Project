@@ -2,9 +2,8 @@
 
 //int CTriangle::Count = 0;
 
-CTriangle::CTriangle(const Point& p1, const Point& p2, const Point& p3, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), P1(p1), P2(p2), P3(p3)
-{
-
+CTriangle::CTriangle(const Point& p1, const Point& p2, const Point& p3, GfxInfo FigureGfxInfo) :
+	CFigure(FigureGfxInfo), P1(p1), P2(p2), P3(p3) {
 	//ID = 1;
 	Count++;
 	//Num = Count;
@@ -105,6 +104,12 @@ void CTriangle::Save(ofstream& outFile) {
 	outFile << "TRIANG\t" << ID << "\t" << P1.x << "\t" << P1.y << "\t" << P2.x << "\t" << P2.y << "\t" << P3.x << "\t" << P3.y << "\t";
 	outFile << FigGfxInfo.DrawClr << "\t";
 	outFile << FigGfxInfo.FillClr << endl;
+}
+
+void CTriangle::Load(ifstream& Infile) {
+	Infile >> ID >> P1.x >> P1.y >> P2.x >> P2.y >> P3.x >> P3.y;
+	Infile >> FigGfxInfo.DrawClr;
+	Infile >> FigGfxInfo.FillClr;
 }
 
 
