@@ -268,8 +268,8 @@ color Output::GetColour(Input* pIn, Output* pOut, DrawMenuItem ITM) const
 		pOut->PrintMessage("Action: a click on yellow Colour Icon, Click anywhere");
 		return YELLOW;
 		break;
-
-	default: break;
+	default:
+		break;
 	}
 	return NULL;
 }
