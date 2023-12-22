@@ -69,10 +69,11 @@ void LoadAction::Execute()
 			pManager->AddFigure(fig);
 		}
 		inFile.close();
-	} else {
-		Output* outPtr = pManager->GetOutput();
+
+	}	else {
+		//Output* outPtr = pManager->GetOutput();
 		outPtr->PrintMessage("file is not open or not found");
-		outPtr->ClearStatusBar();
+		//outPtr->ClearStatusBar();
 	}
 
 }

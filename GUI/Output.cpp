@@ -30,7 +30,7 @@ Output::Output()
 	UI.MsgColor = SNOW;		//Messages color
 	UI.BkGrndColor = SNOW;	//Background color
 	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
-	UI.StatusBarColor = BLACK;
+	UI.StatusBarColor = DARKRED;
 	UI.PenWidth = 3;	//width of the figures frames
 
 
@@ -81,7 +81,7 @@ void Output::ClearStatusBar() const
 void Output::ClearToolBar() const
 {
 	//Clear Status bar by drawing a filled white rectangle
-	pWind->SetPen(UI.BkGrndColor, 1);
+	pWind->SetPen(UI.BkGrndColor, 5);
 	pWind->SetBrush(UI.BkGrndColor);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 }
@@ -98,7 +98,7 @@ void Output::CreateDrawToolBar() const
 {
 	UI.InterfaceMode = MODE_DRAW;
 	string MenuItemImages[DRAW_ITM_COUNT];
-
+	ClearToolBar();
 	//You can draw the tool bar icons in any way you want.
 	//Below is one possible way
 
@@ -128,11 +128,13 @@ void Output::CreateDrawToolBar() const
 	//MenuItemImages[ITM_COLOUR] = "images\\MenuItems\\Menu_colors.jpg";
 
 	//Draw menu item one image at a time
-	for (int i = 0; i < DRAW_ITM_COUNT; i++)
+	for (int i = 0; i < DRAW_ITM_COUNT; i++) {
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-
+		pWind->SetPen(DARKRED, 3);
+		pWind->DrawLine(UI.MenuItemWidth * i, 0, UI.MenuItemWidth * i, UI.ToolBarHeight);
+	}
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(DARKRED, 5);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 
 }
@@ -152,11 +154,13 @@ void Output::CreatePlayToolBar() const
 	MenuItemImages2[EXIT_PLAY] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//Draw menu item one image at a time
-	for (int i = 0; i < PLAY_ITM_COUNT; i++)
+	for (int i = 0; i < PLAY_ITM_COUNT; i++) {
 		pWind->DrawImage(MenuItemImages2[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-
+		pWind->SetPen(DARKRED, 3);
+		pWind->DrawLine(UI.MenuItemWidth * i, 0, UI.MenuItemWidth * i, UI.ToolBarHeight);
+	}
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(DARKRED, 5);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 
 	///TODO: write code to create Play mode menu
@@ -284,7 +288,7 @@ void Output::DrawRect(const Point &P1, const Point &P2, GfxInfo RectGfxInfo, boo
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, 3);
 	drawstyle style;
 	if (RectGfxInfo.isFilled)
 	{
@@ -316,7 +320,7 @@ void Output::DrawSquare(Point P1, GfxInfo RectGfxInfo, bool selected) const
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, 3);
 	if (RectGfxInfo.isFilled)
 	{
 		style = FILLED;
@@ -371,7 +375,7 @@ void Output::DrawHexagon(Point P1, GfxInfo RectGfxInfo, bool selected) const
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, 3);
 	if (RectGfxInfo.isFilled)
 	{
 		style = FILLED;
@@ -405,7 +409,7 @@ void Output::DrawCircle(const Point &P1,const Point &P2, GfxInfo RectGfxInfo, bo
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, 3);
 	if (RectGfxInfo.isFilled)
 	{
 		style = FILLED;

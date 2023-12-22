@@ -12,6 +12,10 @@ CSquare::CSquare(const Point&p1, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 	ID = Count;
 }
 
+CSquare::CSquare()
+{
+	SetSelected(false);
+}
 void CSquare::Draw(Output* pOut) const
 {
     //Call Output::DrawSquare to draw a square on the screen	

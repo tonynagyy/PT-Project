@@ -97,6 +97,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case SELECT:
+		this->UnSelect();
 		ptrToAct = new SelectAction(this);
 		ptrToAct->Execute();
 		break;
@@ -116,6 +117,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct = new MoveAction(this);
 		ptrToAct->Execute();
 		SetInUndoList(ptrToAct);
+		this->UnSelect();
 		break;
 
 	case TO_PLAY:
@@ -133,11 +135,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	
 	case UNDO:
+		this->UnSelect();
 		ptrToAct = new Undo(this);
 		ptrToAct->Execute();
 		break;
 
 	case REDO:
+		this->UnSelect();
 		ptrToAct = new Redo(this);
 		ptrToAct->Execute();
 		break;
@@ -147,6 +151,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct->Execute();
 		SetInUndoList(ptrToAct);
 		DeleteAllRedos();
+		this->UnSelect();
 		break;
 
 	case DRAW_COLOUR:
@@ -154,20 +159,21 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct->Execute();
 		SetInUndoList(ptrToAct);
 		DeleteAllRedos();
+		this->UnSelect();
 		break;
 	case SAVE:
+		this->UnSelect();
 		ptrToAct = new SaveAction(this);
 		ptrToAct->Execute();
-		this->UnSelect();
 		break;
 	case CLEAR:
 		ptrToAct = new clearAll(this);
 		ptrToAct->Execute();
 		break;
 	case LOAD:
+		this->UnSelect();
 		ptrToAct = new LoadAction(this);
 		ptrToAct->Execute();
-		this->UnSelect();
 		break;
 
 	case EXIT:
