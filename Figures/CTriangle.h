@@ -19,10 +19,10 @@ public:
 	virtual bool InFigure(int x, int y);
 	virtual double CalcArea();
 	virtual void PrintInfo(Output *pOut);
-	
-	virtual void FakeDraw(Output* pOut);
 
 	virtual int GetID();
+
+	virtual bool IsDrawn();
 
 	virtual Point Getcenter();
 	virtual color GetDrawClr();

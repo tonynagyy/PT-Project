@@ -4,18 +4,22 @@
 
 //int CRectangle::Count = 0;
 
- CRectangle::CRectangle(const Point &P1, const Point &P2, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), Corner1(P1), Corner2(P2)
- {
+CRectangle::CRectangle(const Point& P1, const Point& P2, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), Corner1(P1), Corner2(P2)
+{
 	Identifier = 3;
-  	Count++;
-	ID = Count;
- }
+	if (CalcArea() && IsDrawn())
+	{
+		Count++;
+		ID = Count;
+	}
+}
 	
 
 void CRectangle::Draw(Output* pOut) const
 {
-	//Call Output::DrawRect to draw a rectangle on the screen	
-	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
+	if (isDrawn)
+		//Call Output::DrawRect to draw a rectangle on the screen	
+		pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
 }
 
 bool CRectangle::InFigure(int x, int y)
@@ -53,13 +57,12 @@ void CRectangle::PrintInfo(Output* pOut)
 	}
 }
 
-
-void CRectangle::FakeDraw(Output* pOut)
+bool CRectangle::IsDrawn()
 {
-	FigGfxInfo.DrawClr = LIGHTGOLDENRODYELLOW;
-	Draw(pOut);
-	FigGfxInfo.DrawClr = BLUE;
+	isDrawn = !(Corner1.y < UI.ToolBarHeight || Corner1.y > UI.height - UI.StatusBarHeight || Corner2.y < UI.ToolBarHeight || Corner2.y > UI.height - UI.StatusBarHeight);
+	return isDrawn;
 }
+
 
 int CRectangle::GetID()
 {

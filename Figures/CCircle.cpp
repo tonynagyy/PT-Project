@@ -3,17 +3,23 @@
 
 //int CCircle::Count = 0;
 
- CCircle::CCircle(const Point &p1, const Point &p2, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), P1(p1), P2(p2)
- {
-	 
-	 Identifier = 5;
-	 Count++;
-	 ID = Count;
- }
+CCircle::CCircle(const Point& p1, const Point& p2, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), P1(p1), P2(p2)
+{
+
+	Identifier = 5;
+	if (CalcArea() && IsDrawn())
+	{
+		Count++;
+		ID = Count;
+	}
+	
+}
+
  void CCircle::Draw(Output* pOut) const
 {
 	//Call Output::DrawCircle to draw a circle on the screen	
-	 pOut->DrawCircle(P1, P2, FigGfxInfo, Selected);
+	 if (isDrawn)
+		pOut->DrawCircle(P1, P2, FigGfxInfo, Selected);
 }
 
  bool CCircle::InFigure(int x, int y)
@@ -28,12 +34,7 @@
 	 return Count;
  }
  */
- void CCircle::FakeDraw(Output* pOut)
- {
-	 FigGfxInfo.DrawClr = LIGHTGOLDENRODYELLOW;
-	 Draw(pOut);
-	 FigGfxInfo.DrawClr = BLUE;
- }
+
 
  double CCircle::CalcArea()
  {
@@ -77,6 +78,13 @@
  color CCircle::GetFillClr()
  {
 	 return FigGfxInfo.FillClr;
+ }
+
+ bool CCircle::IsDrawn()
+ {
+	 isDrawn = !((P1.y - CIRCLE_RADIUS(DELTA(P1.x, P2.x), DELTA(P1.y, P2.y))) < UI.ToolBarHeight || P1.y + CIRCLE_RADIUS(DELTA(P1.x, P2.x), DELTA(P1.y, P2.y)) > UI.height - UI.StatusBarHeight);
+	 
+	 return isDrawn;
  }
 
  void CCircle::PrintInfo(Output* pOut)

@@ -2,19 +2,23 @@
 
 //int CSquare::Count = 0;
 
-CSquare::CSquare(const Point&p1, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), center(p1) 
+CSquare::CSquare(const Point& p1, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), center(p1)
 {
-	
+
 	Identifier = 2;
-	Count++;
-	ID = Count;
+	if (CalcArea() && IsDrawn()) 
+	{
+		Count++;
+		ID = Count;
+	}
 }
 
 
 void CSquare::Draw(Output* pOut) const
 {
-    //Call Output::DrawSquare to draw a square on the screen	
-    pOut->DrawSquare(center, FigGfxInfo, Selected);
+	if (isDrawn)
+		//Call Output::DrawSquare to draw a square on the screen	
+		pOut->DrawSquare(center, FigGfxInfo, Selected);
 }
 
 bool CSquare::InFigure(int x, int y)
@@ -51,6 +55,11 @@ void CSquare::PrintInfo(Output* pOut)
 		pOut->PrintMessage(msg);
 	}
 }
+bool CSquare::IsDrawn()
+{
+	isDrawn = !(center.y - HALF_SQUARE_LENGTH < UI.ToolBarHeight || center.y + HALF_SQUARE_LENGTH > UI.height - UI.StatusBarHeight);
+	return isDrawn;
+}
 /*
 int CSquare::Counter()
 {
@@ -58,12 +67,6 @@ int CSquare::Counter()
 }
 */
 
-void CSquare::FakeDraw(Output* pOut)
-{
-	FigGfxInfo.DrawClr = LIGHTGOLDENRODYELLOW;
-	Draw(pOut);
-	FigGfxInfo.DrawClr = BLUE;
-}
 
 int CSquare::GetID()
 {

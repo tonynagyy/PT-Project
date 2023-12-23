@@ -1,23 +1,25 @@
 #include "CFigure.h"
 
-color CFigure::DrwClr = NULL;
-color CFigure::FlClr = NULL;
+//color CFigure::DrwClr = NULL;
+//color CFigure::FlClr = NULL;
 
 int CFigure::Count = 0;
+//bool CFigure::WrngDrw = false;
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 {
-
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
-	if (DrwClr != NULL)
-		FigGfxInfo.DrawClr = DrwClr;
-	if (FlClr != NULL)
-	{
-		FigGfxInfo.FillClr = FlClr;
-		FigGfxInfo.isFilled = true;
-	}
+
+	FigGfxInfo.DrawClr = UI.DrawColor;
+	FigGfxInfo.FillClr = UI.FillColor;
+	if (FigGfxInfo.FillClr == SNOW)
+			FigGfxInfo.isFilled = false;
+	else
+			FigGfxInfo.isFilled = true;
+
 	Selected = false;
 	hidden = false;
+
 
 }
 
@@ -47,15 +49,8 @@ bool CFigure::IfHidden()
 	return hidden;
 }
 
-
-void CFigure::FakeDraw(Output* pOut)
-{
-	Draw(pOut);
-}
-
 void CFigure::ChngDrawClr(color Dclr)
 {
-	DrwClr = Dclr;
 	FigGfxInfo.DrawClr = Dclr;
 }
 
@@ -91,7 +86,6 @@ void CFigure::ChngFillClr(color Fclr)
 		FigGfxInfo.isFilled = false;
 	else
 		FigGfxInfo.isFilled = true;
-	FlClr = Fclr;
 	FigGfxInfo.FillClr = Fclr;
 }
 
@@ -99,6 +93,7 @@ float CFigure::Tri_Area(int X1, int Y1, int X2, int Y2, int X3, int Y3) {
 	// Calculate the area of the triangle using its corner points
 	return abs((X1 * (Y2 - Y3) + X2 * (Y3 - Y1) + X3 * (Y1 - Y2)) / 2.0);
 }
+
 
 void CFigure::Save(ofstream& outFile) {
 }

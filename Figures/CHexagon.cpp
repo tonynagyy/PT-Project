@@ -2,18 +2,22 @@
 
 //int CHexagon::Count = 0;
 
-CHexagon::CHexagon(const Point&p1,  GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo) , center(p1) 
+CHexagon::CHexagon(const Point& p1, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), center(p1)
 {
-	
+
 	Identifier = 4;
-	Count++;
-	ID = Count;
+	if (CalcArea() && IsDrawn()) 
+	{
+		Count++;
+		ID = Count;
+	}
 }
 
 void CHexagon::Draw(Output* pOut) const
 {
-	//Call Output::DrawHexagon to draw a hexagon on the screen	
-	pOut->DrawHexagon(center, FigGfxInfo, Selected);
+	if (isDrawn)
+		//Call Output::DrawHexagon to draw a hexagon on the screen	
+		pOut->DrawHexagon(center, FigGfxInfo, Selected);
 }
 
 bool CHexagon::InFigure(int x, int y)
@@ -89,16 +93,16 @@ int CHexagon::Counter()
 	return Count;
 }
 */
-void CHexagon::FakeDraw(Output* pOut)
-{
-	FigGfxInfo.DrawClr = LIGHTGOLDENRODYELLOW;
-	Draw(pOut);
-	FigGfxInfo.DrawClr = BLUE;
-}
 
 int CHexagon::GetID()
 {
 	return ID;
+}
+
+bool CHexagon::IsDrawn()
+{
+	isDrawn = !(ceil(center.y - HEX_CALC) < UI.ToolBarHeight || ceil(center.y + HEX_CALC) > UI.height - UI.StatusBarHeight);
+	return isDrawn;
 }
 
 

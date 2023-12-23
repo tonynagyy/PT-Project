@@ -219,7 +219,6 @@ color Output::getCrntDrawColor() const	//get current drawing color
 
 color Output::getCrntFillColor() const	//get current filling color
 {
-
 	return UI.FillColor;
 } 
 void Output::setCrntDrawColor(color c) {
@@ -288,7 +287,7 @@ void Output::DrawRect(const Point &P1, const Point &P2, GfxInfo RectGfxInfo, boo
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, 3);
 	drawstyle style;
 	if (RectGfxInfo.isFilled)
 	{
@@ -320,7 +319,7 @@ void Output::DrawSquare(Point P1, GfxInfo RectGfxInfo, bool selected) const
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, 3);
 	if (RectGfxInfo.isFilled)
 	{
 		style = FILLED;
@@ -375,7 +374,7 @@ void Output::DrawHexagon(Point P1, GfxInfo RectGfxInfo, bool selected) const
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, 3);
 	if (RectGfxInfo.isFilled)
 	{
 		style = FILLED;
@@ -409,7 +408,7 @@ void Output::DrawCircle(const Point &P1,const Point &P2, GfxInfo RectGfxInfo, bo
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, 3);
 	if (RectGfxInfo.isFilled)
 	{
 		style = FILLED;

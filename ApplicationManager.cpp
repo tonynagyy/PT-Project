@@ -107,6 +107,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case DRAWING_AREA:
 		this->UnSelect();
+		pOut->ClearStatusBar();
 		break;
 	
 	case DEL:
@@ -345,27 +346,22 @@ void ApplicationManager::Clearall()
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
-	/*
-	for (int i = 0; i < FigCount; i++)
+	if (pFig->CalcArea() && pFig->IsDrawn())
 	{
-		if ((FigList[i]->GetID() == pFig->GetID()) && (FigList[i]->GetNum() == pFig->GetNum()))
-			return;
-	}
-	*/
-	//pFig->IncNum();
-
-	for (int i = 0; i < FigCount; i++)
-	{
-		if (FigList[i] == NULL)
+		for (int i = 0; i < FigCount; i++)
 		{
-			FigList[i] = pFig->clone();
-			return;
+			if (FigList[i] == NULL)
+			{
+				FigList[i] = pFig->clone();
+				return;
+			}
 		}
-	}
 
-	if (FigCount < MaxFigCount)
-		FigList[FigCount++] = pFig->clone();
-	
+		if (FigCount < MaxFigCount)
+			FigList[FigCount++] = pFig->clone();
+	}
+	else
+		pOut->PrintMessage("A7A, Ya 3rs Ersm s7");
 }
 
 // deleting the selected figure
@@ -483,8 +479,8 @@ void ApplicationManager::UpdateInterface() const
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i] != NULL && !FigList[i]->IfHidden())
-		{
-			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+		{ 
+				FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 		}
 	}
 }

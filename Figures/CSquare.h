@@ -21,7 +21,7 @@ public:
 	virtual double CalcArea();
 	virtual void PrintInfo(Output *pOut);
 	
-	virtual void FakeDraw(Output* pOut);
+	virtual bool IsDrawn();
 
 	virtual int GetID();
 	

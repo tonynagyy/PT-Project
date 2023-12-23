@@ -58,10 +58,9 @@ void AddRectAction::Execute()
 	 }
 
 
-	//rect->Sethidden(false);
 	//Add the rectangle to the list of figures
 	pManager->AddFigure(rect);
-	//R->IncNum();
+
 	
 
 	//delete R;
@@ -70,7 +69,6 @@ void AddRectAction::Execute()
 
 void AddRectAction::undo()
 {
-	//rect->Sethidden(true);
 	pManager->DeleteFig(rect);
 }
 

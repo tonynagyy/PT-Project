@@ -31,6 +31,8 @@ void SelectDrawColour::ReadActionParameters()
 
 void SelectDrawColour::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+
 	if (Fig == NULL)
 	{
 		ReadActionParameters();
@@ -40,6 +42,8 @@ void SelectDrawColour::Execute()
 	{
 		pManager->Changedrawcolor(Fig, Clr);
 	}
+
+	pOut->setCrntDrawColor(Clr);
 }
 
 void SelectDrawColour::undo()
