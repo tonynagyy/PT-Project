@@ -32,5 +32,7 @@ class Undo : public Action
 	 virtual void undo();
 
 	 virtual Action* clone() const override;
+
+	 ~Undo();
 };
 #endif

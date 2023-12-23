@@ -71,6 +71,6 @@ PlayRecAction* PlayRecAction::clone() const
 
 PlayRecAction::~PlayRecAction()
 {
-	//delete RecordedActions;
-	//RecordedActions = NULL;
+	delete RecordedActions;
+	RecordedActions = NULL;
 }

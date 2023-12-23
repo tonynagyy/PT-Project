@@ -2,6 +2,7 @@
 
 Redo::Redo(ApplicationManager* pApp) :Action(pApp)
 {
+	Redoptr = NULL;
 }
 
 void Redo::ReadActionParameters()
@@ -9,9 +10,14 @@ void Redo::ReadActionParameters()
 
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-
+	
 
 	Redoptr = pManager->GetLastRedo();  //Get the last undoable action
+
+	if (Redoptr != NULL)
+	{
+		Redoptr = Redoptr->clone();
+	}
 
 	if (Redoptr != NULL){
 		pOut->PrintMessage("Redo the Last Action");
@@ -23,7 +29,10 @@ void Redo::ReadActionParameters()
 
 void Redo::Execute()
 {
-	ReadActionParameters(); // set the redo action parameters
+	if (Redoptr == NULL)
+	{
+		ReadActionParameters(); // set the redo action parameters
+	}
 
 	if (Redoptr != NULL)
 	{

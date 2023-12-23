@@ -13,10 +13,10 @@ void Undo::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 
-	UndoPtr = pManager->GetLastUndo();//Get the last undoable action 
+	UndoPtr = (pManager->GetLastUndo());//Get the last undoable action 
 	
 	if (UndoPtr != NULL)
-		UndoPtr = (pManager->GetLastUndo());
+		UndoPtr = (pManager->GetLastUndo())->clone();
 
 
 	if (UndoPtr != NULL){
@@ -42,9 +42,10 @@ void Undo::Execute()
 	{
 		UndoPtr->undo();  // Calling the undo function of the action to be undone
 	}
-
-	pManager->SetInRedoList(UndoPtr);  // set the undoable action in redo list to be redone later if wanted
-
+	if ( !(pManager->GetPlayrecStatus()) )
+	{
+		pManager->SetInRedoList(UndoPtr);  // set the undoable action in redo list to be redone later if wanted
+	}
 }
 
 void Undo::undo() // No implementation needed
@@ -54,4 +55,10 @@ void Undo::undo() // No implementation needed
 Action* Undo::clone() const
 {
 	return new Undo(*this);
+}
+
+Undo::~Undo()
+{
+	delete UndoPtr;
+	UndoPtr = NULL;
 }

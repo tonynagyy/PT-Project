@@ -41,7 +41,6 @@ ApplicationManager::ApplicationManager() :
 		Redoarray[i] = NULL;
 	}
 }
-
 //==================================================================================//
 //								Actions Related Functions							//
 //==================================================================================//
@@ -304,9 +303,9 @@ void ApplicationManager::SetInRedoList(Action* pAct)
 	{
 		if (pAct != NULL)
 		{
-			Redoarray[RedoCount++] = pAct;//->clone();
+			Redoarray[RedoCount++] = pAct->clone();
 			UndoCount--;
-			//delete Undoarray[UndoCount];
+			delete Undoarray[UndoCount];
 			Undoarray[UndoCount] = NULL;
 			
 		}
@@ -359,8 +358,7 @@ void ApplicationManager::Deleteundoarray()
 	}
 
 }
-void ApplicationManager::Clearall()
-{
+void ApplicationManager::Clearall() {
 	DeleteFigList();
 	Deleteundoarray();
 	DeleteAllRedos();
@@ -375,23 +373,19 @@ void ApplicationManager::SetInrecording(bool b)
 	InRecording = b;
 }
 
-bool ApplicationManager::GetRecordStatus()
-{
+bool ApplicationManager::GetRecordStatus() {
 	return InRecording;
 }
 
-Action* ApplicationManager::GetStartrecaction()
-{
+Action* ApplicationManager::GetStartrecaction() {
 	return Startrecaction;
 }
 
-void ApplicationManager::SetPlayrec(bool b)
-{
+void ApplicationManager::SetPlayrec(bool b) {
 	PlayRecStatus = b;
 }
 
-bool ApplicationManager::GetPlayrecStatus()
-{
+bool ApplicationManager::GetPlayrecStatus() {
 	return PlayRecStatus;
 }
 
