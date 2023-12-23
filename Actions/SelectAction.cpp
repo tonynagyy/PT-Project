@@ -1,7 +1,9 @@
 #include "SelectAction.h"
 
 SelectAction::SelectAction(ApplicationManager* pApp) :Action(pApp)
-{}
+{
+	Fig = NULL;
+}
 
 void SelectAction::ReadActionParameters()
 {
@@ -9,20 +11,33 @@ void SelectAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-	pOut->PrintMessage("Select Action: Select a figure");
+	if (pManager->GetPlayrecStatus())
+	{
+		if (pManager->GetSelectedFigure()) 
+		{
+			Fig = pManager->GetSelectedFigure();
+			pOut->ClearStatusBar();
+		}
+		else
+			Fig = NULL;
+	}
+	else
+	{
+		pOut->PrintMessage("Select Action: Select a figure");
 
-	//Read 1st point and store in point P1
-	pIn->GetPointClicked(P.x, P.y);
+		//Read 1st point and store in point P1
+		pIn->GetPointClicked(P.x, P.y);
 
-	Fig = pManager->GetFigure(P.x, P.y);
+		Fig = pManager->GetFigure(P.x, P.y);
 
-	pOut->ClearStatusBar();
+		pOut->ClearStatusBar();
+	}
 }
 
 void SelectAction::Execute()
 {
 	Output* pOut = pManager->GetOutput();
-	if (Fig == NULL)
+	if (Fig == NULL || pManager->GetPlayrecStatus())
 	{
 		ReadActionParameters();
 	}
