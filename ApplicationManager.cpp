@@ -29,6 +29,7 @@ ApplicationManager::ApplicationManager()
 	Actualfigcounter = 0;
 	UndoCount = 0;
 	RedoCount = 0;
+	actionsCount = 0;
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
 		FigList[i] = NULL;
@@ -189,6 +190,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case CLEAR:
+		actionsCount = 0;
 		ptrToAct = new clearAll(this);
 		ptrToAct->Execute();
 		break;
@@ -197,6 +199,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		this->UnSelect();
 		ptrToAct = new LoadAction(this);
 		ptrToAct->Execute();
+		break;
+	case START_REC:
 		break;
 
 	case EXIT:
@@ -207,6 +211,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	}
+	/*actiosCount needed for the start Rec*/
+	actionsCount++;
 	
 	//Execute the created action
 	if (ptrToAct != NULL)
@@ -493,6 +499,9 @@ int ApplicationManager::getActFigCount()
 	}
 
 	return Actualfigcounter;
+}
+int ApplicationManager::getActionsCounter() const {
+	return actionsCount;
 }
 /**
  * saveAll: save all figures in the the file

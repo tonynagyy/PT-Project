@@ -25,6 +25,7 @@ private:
 	Action* Redoarray[5];/*array to save actions for redo*/
 	int UndoCount;
 	int RedoCount;
+	int actionsCount;
 
 public:	
 
@@ -63,6 +64,7 @@ public:
 
 	void saveAll(ofstream &outfile) ;
 	int getActFigCount() ;
+	int getActionsCounter() const ;
 
 	// -- Functions related to play mode 
 	CFigure *RandomFigure(); // choose a random figure

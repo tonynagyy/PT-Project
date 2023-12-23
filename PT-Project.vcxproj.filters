@@ -207,6 +207,9 @@
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\PickClrFig.cpp" />
+    <ClCompile Include="Actions\StartRecAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -352,6 +355,9 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\PickClrFig.h" />
+    <ClInclude Include="Actions\StartRecAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
