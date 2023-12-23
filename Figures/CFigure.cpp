@@ -4,6 +4,7 @@ color CFigure::DrwClr = NULL;
 color CFigure::FlClr = NULL;
 
 int CFigure::Count = 0;
+//bool CFigure::WrngDrw = false;
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 {
@@ -18,6 +19,7 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 	}
 	Selected = false;
 	hidden = false;
+
 
 }
 
@@ -45,12 +47,6 @@ void CFigure::Sethidden(bool hd)
 bool CFigure::IfHidden()
 {
 	return hidden;
-}
-
-
-void CFigure::FakeDraw(Output* pOut)
-{
-	Draw(pOut);
 }
 
 void CFigure::ChngDrawClr(color Dclr)
@@ -99,6 +95,7 @@ float CFigure::Tri_Area(int X1, int Y1, int X2, int Y2, int X3, int Y3) {
 	// Calculate the area of the triangle using its corner points
 	return abs((X1 * (Y2 - Y3) + X2 * (Y3 - Y1) + X3 * (Y1 - Y2)) / 2.0);
 }
+
 
 void CFigure::Save(ofstream& outFile) {
 }

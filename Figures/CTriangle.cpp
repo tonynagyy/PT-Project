@@ -2,15 +2,20 @@
 
 //int CTriangle::Count = 0;
 
-CTriangle::CTriangle(const Point& p1, const Point& p2, const Point& p3, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), P1(p1), P2(p2), P3(p3) 
+CTriangle::CTriangle(const Point& p1, const Point& p2, const Point& p3, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), P1(p1), P2(p2), P3(p3)
 {
 	Identifier = 1;
-	Count++;
-	ID = Count;
+	if (CalcArea() && IsDrawn())
+	{
+		Count++;
+		ID = Count;
+	}
+
 }
 
 void CTriangle::Draw(Output* pOut) const
 {
+	if (isDrawn)
 	//Call Output::DrawTriangle to draw a triangle on the screen	
 	pOut->DrawTriangle(P1 , P2 , P3 , FigGfxInfo, Selected);
 }
@@ -60,16 +65,15 @@ int CTriangle::Counter()
 	return Count;
 }
 */
-void CTriangle::FakeDraw(Output* pOut)
-{
-	FigGfxInfo.DrawClr = LIGHTGOLDENRODYELLOW;
-	Draw(pOut);
-	FigGfxInfo.DrawClr = BLUE;
-}
 
 int CTriangle::GetID()
 {
 	return ID;
+}
+bool CTriangle::IsDrawn()
+{
+	isDrawn = !(P1.y < UI.ToolBarHeight || P1.y > UI.height - UI.StatusBarHeight || P2.y < UI.ToolBarHeight || P2.y > UI.height - UI.StatusBarHeight || P3.y < UI.ToolBarHeight || P3.y > UI.height - UI.StatusBarHeight);
+	return isDrawn;
 }
 Point CTriangle::Getcenter()
 {

@@ -22,7 +22,6 @@ public:
 
 //	virtual int Counter();
 
-	virtual void FakeDraw(Output* pOut);
 
 	//Calculate the area
 	virtual double CalcArea();
@@ -32,6 +31,8 @@ public:
 	virtual Point Getcenter();
 	virtual color GetDrawClr();
 	virtual color GetFillClr();
+
+	virtual bool IsDrawn();
 
 	//Print the data of the figure on the status bar
 	virtual void PrintInfo(Output* pOut);

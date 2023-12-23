@@ -9,8 +9,8 @@
 
 
 
-LoadAction::LoadAction(ApplicationManager* pApp) 
-	:Action(pApp) {
+LoadAction::LoadAction(ApplicationManager* pApp) : Action(pApp) 
+{
 }
 
 void LoadAction::ReadActionParameters() {

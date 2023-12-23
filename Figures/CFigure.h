@@ -14,13 +14,15 @@ class CFigure
 {
 protected:
 	int ID;		//Each figure has an ID
+	static int Count; // Counter for figures
 	int Identifier; // It is an integer to distinguishes eash shape from the other
-	static int Count;	//counting the figures 
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	static color DrwClr;
 	static color FlClr;
 	bool hidden;
+	bool isDrawn;
+
 	/// Add more parameters if needed.
 private:
 	//static int ID;
@@ -28,15 +30,15 @@ public:
 	CFigure(GfxInfo FigureGfxInfo);
 	CFigure();
 
-	void SetSelected(bool s);	//select/unselect the figure
-	bool IsSelected() const;	//check whether fig is selected
+	void SetSelected(bool s);	// select/unselect the figure
+	bool IsSelected() const;	// check whether fig is selected
 	virtual bool InFigure(int x, int y) = 0; // check if the point clicked is in the figure or not
 	void Sethidden(bool hd);
 	bool IfHidden();
 
 
+	virtual bool IsDrawn() = 0;
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
-	virtual void FakeDraw(Output* pOut) = 0;
 	virtual int GetID() = 0;
 	virtual color GetDrawClr();
 	virtual color GetFillClr();
