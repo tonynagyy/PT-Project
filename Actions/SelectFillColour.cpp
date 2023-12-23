@@ -33,6 +33,8 @@ void SelectFillColour::ReadActionParameters()
 
 void SelectFillColour::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+
 	if (Fig == NULL)
 	{
 		ReadActionParameters();
@@ -45,6 +47,8 @@ void SelectFillColour::Execute()
 			//Fig->ChngFillClr(Clr);
 		
 	}
+
+	pOut->setCrntFillColor(Clr);
 }
 
 void SelectFillColour::undo()

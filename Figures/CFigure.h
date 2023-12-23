@@ -18,8 +18,8 @@ protected:
 	int Identifier; // It is an integer to distinguishes eash shape from the other
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-	static color DrwClr;
-	static color FlClr;
+	//static color DrwClr;
+	//static color FlClr;
 	bool hidden;
 	bool isDrawn;
 

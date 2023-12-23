@@ -1,22 +1,22 @@
 #include "CFigure.h"
 
-color CFigure::DrwClr = NULL;
-color CFigure::FlClr = NULL;
+//color CFigure::DrwClr = NULL;
+//color CFigure::FlClr = NULL;
 
 int CFigure::Count = 0;
 //bool CFigure::WrngDrw = false;
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 {
-
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
-	if (DrwClr != NULL)
-		FigGfxInfo.DrawClr = DrwClr;
-	if (FlClr != NULL)
-	{
-		FigGfxInfo.FillClr = FlClr;
-		FigGfxInfo.isFilled = true;
-	}
+
+	FigGfxInfo.DrawClr = UI.DrawColor;
+	FigGfxInfo.FillClr = UI.FillColor;
+	if (FigGfxInfo.FillClr == SNOW)
+			FigGfxInfo.isFilled = false;
+	else
+			FigGfxInfo.isFilled = true;
+
 	Selected = false;
 	hidden = false;
 
@@ -51,7 +51,6 @@ bool CFigure::IfHidden()
 
 void CFigure::ChngDrawClr(color Dclr)
 {
-	DrwClr = Dclr;
 	FigGfxInfo.DrawClr = Dclr;
 }
 
@@ -87,7 +86,6 @@ void CFigure::ChngFillClr(color Fclr)
 		FigGfxInfo.isFilled = false;
 	else
 		FigGfxInfo.isFilled = true;
-	FlClr = Fclr;
 	FigGfxInfo.FillClr = Fclr;
 }
 

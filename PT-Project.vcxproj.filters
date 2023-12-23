@@ -197,16 +197,24 @@
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="helper.cpp" />
-    <ClCompile Include="Actions\clearall.cpp" />
-    <ClCompile Include="Actions\MoveAction.cpp" />
     <ClCompile Include="Actions\LoadActioncpp.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\PickClrAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\PickClrFig.cpp" />
+    <ClCompile Include="Actions\clearall.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\LoadAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\PickClrFig.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\MoveAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -343,15 +351,21 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="helper.h" />
-    <ClInclude Include="Actions\clearall.h" />
-    <ClInclude Include="Actions\MoveAction.h" />
     <ClInclude Include="Actions\LoadAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\PickClrAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\PickClrFig.h" />
+    <ClInclude Include="Actions\clearall.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\PickClrFig.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\MoveAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
