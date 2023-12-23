@@ -20,9 +20,11 @@ void MoveAction::ReadActionParameters()
 		pOut->PrintMessage("click new point to move the figure to it");
 		 
 		pIn->GetPointClicked(NewcenterPoint.x, NewcenterPoint.y);
+		pOut->ClearStatusBar();
 	}
 	else
 		pOut->PrintMessage("Select a figure first to be moved");
+	    
 }
 
 void MoveAction::Execute()
