@@ -16,6 +16,7 @@ void SelectDrawColour::ReadActionParameters()
 	if (Fig != NULL) {
 		Fig = pManager->GetSelectedFigure()->clone();
 		IniDrawClr = Fig->GetDrawClr();
+		pManager->Setundoable(true);
 	}
 
 	if (Fig)

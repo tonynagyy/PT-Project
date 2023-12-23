@@ -13,8 +13,10 @@ void Undo::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 
-	UndoPtr = pManager->GetLastUndo(); //Get the last undoable action 
+	UndoPtr = pManager->GetLastUndo();//Get the last undoable action 
 	
+	if (UndoPtr != NULL)
+		UndoPtr = (pManager->GetLastUndo());
 
 
 	if (UndoPtr != NULL){
@@ -31,7 +33,10 @@ void Undo::ReadActionParameters()
 
 void Undo::Execute()
 {
-	ReadActionParameters(); // set the undo action parameters
+	if (UndoPtr == NULL)
+	{
+		ReadActionParameters(); // set the undo action parameters
+	}
 
 	if (UndoPtr != NULL)
 	{

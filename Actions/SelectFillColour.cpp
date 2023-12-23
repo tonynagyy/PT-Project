@@ -18,6 +18,7 @@ void SelectFillColour::ReadActionParameters()
 	{
 		Fig = pManager->GetSelectedFigure()->clone();
 		IniFillColour = Fig->GetFillClr();
+		pManager->Setundoable(true);
 	}
 
 	if (Fig)

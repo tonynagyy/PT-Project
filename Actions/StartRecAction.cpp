@@ -38,21 +38,27 @@ void StartRecAction::Execute() {
 	ReadActionParameters();
 
 	if (canStartRec) {
+		pManager->SetInrecording(true);
 		outPut->PrintMessage("Recording Started click the ope reme u cannot use");
-		cout << "Recording Started click the ope reme u cannot use" << endl;
+		Sleep(1000);
+		outPut->ClearStatusBar();
 		outPut->PrintMessage("remeber that u have max of 20 rec excluding start stop play save load switch exit");
-		cout << "remeber that u have max of 20 rec excluding start stop play save load switch exit" << endl;
+		Sleep(1000);
+		outPut->ClearStatusBar();
+
 		ActType = pManager->GetUserAction();
 
 
-		outPut->ClearStatusBar();
-		outPut->ClearStatusBar();
+		//outPut->ClearStatusBar();
+		//outPut->ClearStatusBar();
+		
 		// if valid action enqueue it if not donot enqueue it till stop rec or get 20 valid rec
 
 		if (ActType == STOP_REC) {
 			outPut->PrintMessage("Recording Stopped");
-			cout << "Recording Stopped" << endl;
+			Sleep(1000);
 			outPut->ClearStatusBar();
+			pManager->SetInrecording(false);
 			return;
 		}
 
@@ -67,22 +73,28 @@ void StartRecAction::Execute() {
 				}
 				else {
 					enqueue(action);
+					/*
 					outPut->PrintMessage("Action Recorded");
-					cout << "Action Recorded" << endl;
+					Sleep(1000);
 					outPut->ClearStatusBar();
-					pManager->UpdateInterface();//update the interface after each action delete this if u want
+					*/
+					pManager->UpdateInterface(); //update the interface after each action delete this if u want
 				}
 			}
 			ActType = pManager->GetUserAction();
 		}
+		pManager->SetInrecording(false);
+
 		if (ActType == STOP_REC) {
-			cout << "Recording Stopped" << endl;	
+			outPut->PrintMessage("Recording Stopped");
+			Sleep(1000);
+			outPut->ClearStatusBar();
 			return;
 		}
 		
 	} else {
 		outPut->PrintMessage("Failed u cannot Rec now just after clear all or At the start of this shit");
-		cout << "you cannot record mother fukcker\n";
+		Sleep(1000);
 		outPut->ClearStatusBar();
 		return;
 	}
@@ -122,28 +134,22 @@ bool StartRecAction::canStartRecd()
 bool StartRecAction::ckeckActionValidity(const ActionType& type) const{
 		switch (type) {
 			case EXIT:
-				cout <<  "You cannot exit in the middle of recording" << endl;
 				break;
 			case SAVE:
-				cout << "You cannot save in the middle of recording" << endl;
 				break;
 			case LOAD:
-				cout << "You cannot load in the middle of recording" << endl;
+				break;
+			case TO_PLAY:
 				break;
 			case PLAYING_AREA:
-				cout << "You cannot play in the middle of recording" << endl;
 				break;
 			case STATUS:
-				cout << "You cannot click on the status bar in the middle of recording" << endl;
 				break;
 			case DRAWING_AREA:
-				cout << "You cannot click on the drawing area in the middle of recording" << endl;
 				break;
 			case EMPTY:
-				cout << "You cannot click on the empty area in the middle of recording" << endl;
 				break;
 			case START_REC:
-				cout << "You cannot start recording in the middle of recording" << endl;
 				break;
 			default:
 				return true;
@@ -189,7 +195,7 @@ void StartRecAction::enqueue(Action* action) {
 		} else {
 			rear++;
 		}
-		queue[rear] = action->clone();
+		queue[rear] = action;
 	}
 }
 

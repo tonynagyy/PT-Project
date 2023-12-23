@@ -22,9 +22,12 @@ void SelectAction::ReadActionParameters()
 void SelectAction::Execute()
 {
 	Output* pOut = pManager->GetOutput();
-	ReadActionParameters();
+	if (Fig == NULL)
+	{
+		ReadActionParameters();
+	}
 	if (Fig != nullptr)
-		if (Fig->IsSelected())
+		if (Fig->IsSelected() && !(pManager->GetPlayrecStatus()))
 		{
 			Fig->SetSelected(false);
 		}

@@ -141,6 +141,7 @@
     <ClCompile Include="Actions\PickClrAction.cpp" />
     <ClCompile Include="Actions\PickClrFig.cpp" />
     <ClCompile Include="Actions\PickFigAction.cpp" />
+    <ClCompile Include="Actions\PlayRecAction.cpp" />
     <ClCompile Include="Actions\Redo.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="Actions\PickClrAction.h" />
     <ClInclude Include="Actions\PickClrFig.h" />
     <ClInclude Include="Actions\PickFigAction.h" />
+    <ClInclude Include="Actions\PlayRecAction.h" />
     <ClInclude Include="Actions\Redo.h" />
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />

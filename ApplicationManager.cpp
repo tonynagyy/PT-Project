@@ -17,30 +17,29 @@
 #include "Actions\MoveAction.h"
 #include "Actions\LoadAction.h"
 #include "Actions\StartRecAction.h"
+#include "Actions\PlayRecAction.h"
 
 
 //Constructor
-ApplicationManager::ApplicationManager()
+ApplicationManager::ApplicationManager() :
+	FigCount(0), UndoCount(0), RedoCount(0),undoable(false), Actualfigcounter(0), actionsCount(0), InRecording(false), action(NULL),
+	Startrecaction(NULL), PlayRecStatus(false)
 {
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
+	
 
-	FigCount = 0;
-	Actualfigcounter = 0;
-	UndoCount = 0;
-	RedoCount = 0;
-	actionsCount = 0;
-	action = NULL;
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
 		FigList[i] = NULL;
 
+	//Create an array of undoable and redoable action pointers and set them to NULL
 	for (int i = 0; i < 5; i++)
+	{
 		Undoarray[i] = NULL;
-
-	for (int i = 0; i < 5; i++)
 		Redoarray[i] = NULL;
+	}
 }
 
 //==================================================================================//
@@ -53,97 +52,13 @@ ActionType ApplicationManager::GetUserAction() const
 }
 Action* ApplicationManager::getActionPtr() const {
 	return action;
-	//Action *ptrToAct = NULL;
-
-	////According to Action Type, create the corresponding action object
-	//switch (Type)
-	//{
-	//case DRAW_RECT:
-	//	ptrToAct = new AddRectAction(this);
-	//	return(ptrToAct);
-	//	break;
-	//
-	//case DRAW_CIRC:
-	//	ptrToAct = new AddCircleAction(this);
-	//	return(ptrToAct);
-	//	break;
-	//
-	//case DRAW_HEX:
-	//	ptrToAct = new AddHexaAction(this);
-	//	return(ptrToAct);
-	//	break;
-	//
-	//case DRAW_TRI:
-	//	ptrToAct = new AddTriangleAction(this);
-	//	return (ptrToAct);
-	//	break;
-	//
-	//case DRAW_SQ:
-	//	ptrToAct = new AddSquareAction(this);
-	//	return (ptrToAct);
-	//	break;
-
-	//case SELECT:
-	//	ptrToAct = new SelectAction(this);
-	//	break;
-	//
-	//case DEL:
-	//	ptrToAct = new DeletefigAction(this); 
-	//	return (ptrToAct);
-	//	break;
-
-	//case MOVE:
-	//	ptrToAct = new MoveAction(this);
-	//	return (ptrToAct);
-	//	break;
-
-	//case UNDO:
-	//	ptrToAct = new Undo(this);
-	//	return (ptrToAct);
-	//	break;
-
-	//case REDO:
-	//	ptrToAct = new Redo(this);
-	//	return (ptrToAct);
-	//	break;
-
-	//case FILL_COLOUR:
-	//	ptrToAct = new SelectFillColour(this);
-	//	return (ptrToAct);
-	//	break;
-
-	//case DRAW_COLOUR:
-	//	ptrToAct = new SelectDrawColour(this);
-	//	return (ptrToAct);
-	//	break;
-
-	//case SAVE:
-	//	ptrToAct = new SaveAction(this);
-	//	return (ptrToAct);
-	//	break;
-
-	//case CLEAR:
-	//	ptrToAct = new clearAll(this);
-	//	return (ptrToAct);
-	//	break;
-
-	//case LOAD:
-	//	ptrToAct = new LoadAction(this);
-	//	return (ptrToAct);
-	//	break;
-	//default:
-	//	return NULL;
-	//	break;
-
-	//}
-
 }
 void ApplicationManager::setActionPtr(Action* action) {
 	this->action = action;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
-Action * ApplicationManager::ExecuteAction(ActionType ActType)
+void ApplicationManager::ExecuteAction(ActionType ActType)
 {
 	Action *ptrToAct = NULL;
 
@@ -154,41 +69,40 @@ Action * ApplicationManager::ExecuteAction(ActionType ActType)
 		this->UnSelect();
 		ptrToAct = new AddRectAction(this);
 		ptrToAct->Execute();
-		SetInUndoList(ptrToAct);
-		ptrToAct = NULL;
-		DeleteAllRedos();
+		SetInUndoList(ptrToAct);  // save the action in the undo list
+		DeleteAllRedos();         // delete all redos from the list
 		break;
 	
 	case DRAW_CIRC:
 		this->UnSelect();
 		ptrToAct = new AddCircleAction(this);
 		ptrToAct->Execute();
-		SetInUndoList(ptrToAct);
-		DeleteAllRedos();
+		SetInUndoList(ptrToAct);   // save the action in the undo list
+		DeleteAllRedos();         // delete all redos from the list
 		break;
 	
 	case DRAW_HEX:
 		this->UnSelect();
 		ptrToAct = new AddHexaAction(this);
 		ptrToAct->Execute();
-		SetInUndoList(ptrToAct);
-		DeleteAllRedos();
+		SetInUndoList(ptrToAct);    // save the action in the undo list
+		DeleteAllRedos();          // delete all redos from the list
 		break;
 	
 	case DRAW_TRI:
 		this->UnSelect();
 		ptrToAct = new AddTriangleAction(this);
 		ptrToAct->Execute();
-		SetInUndoList(ptrToAct);
-		DeleteAllRedos();
+		SetInUndoList(ptrToAct);   // save the action in the undo list
+		DeleteAllRedos();         // delete all redos from the list
 		break;
 	
 	case DRAW_SQ:
 		this->UnSelect();
 		ptrToAct = new AddSquareAction(this);
 		ptrToAct->Execute();
-		SetInUndoList(ptrToAct);
-		DeleteAllRedos();
+		SetInUndoList(ptrToAct);    // save the action in the undo list
+		DeleteAllRedos();          // delete all redos from the list
 		break;
 
 	case SELECT:
@@ -205,15 +119,15 @@ Action * ApplicationManager::ExecuteAction(ActionType ActType)
 	case DEL:
 		ptrToAct = new DeletefigAction(this); 
 		ptrToAct->Execute();
-		SetInUndoList(ptrToAct);
-		DeleteAllRedos();
+		if (undoable) { SetInUndoList(ptrToAct); }     // save the action in the undo list
+		DeleteAllRedos();                             // delete all redos from the list
 		break;
 
 	case MOVE:
 		ptrToAct = new MoveAction(this);
 		ptrToAct->Execute();
-		SetInUndoList(ptrToAct);
-		DeleteAllRedos();
+		SetInUndoList(ptrToAct);     // save the action in the undo list
+		DeleteAllRedos();           // delete all redos from the list
 		this->UnSelect();
 		break;
 
@@ -260,19 +174,19 @@ Action * ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct->Execute();
 		break;
 
-	case FILL_COLOUR:
+	case FILL_COLOUR: 
 		ptrToAct = new SelectFillColour(this);
 		ptrToAct->Execute();
-		SetInUndoList(ptrToAct);
-		DeleteAllRedos();
+		if (undoable) { SetInUndoList(ptrToAct); }     // save the action in the undo list
+		DeleteAllRedos();                             // delete all the redos from the list
 		this->UnSelect();
 		break;
 
 	case DRAW_COLOUR:
 		ptrToAct = new SelectDrawColour(this);
 		ptrToAct->Execute();
-		SetInUndoList(ptrToAct);
-		DeleteAllRedos();
+		if (undoable){ SetInUndoList(ptrToAct); }     // save the action in the undo list
+		DeleteAllRedos();                            // delete all the redos from the list
 		this->UnSelect();
 		break;
 
@@ -283,7 +197,6 @@ Action * ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case CLEAR:
-		actionsCount = -1;//to start rec again/ bcs it will be inceratmented beneath
 		ptrToAct = new clearAll(this);
 		ptrToAct->Execute();
 		break;
@@ -293,30 +206,45 @@ Action * ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct = new LoadAction(this);
 		ptrToAct->Execute();
 		break;
+
 	case START_REC:
 		ptrToAct = new StartRecAction(this);
 		ptrToAct->Execute();
 		break;
+
 	case STOP_REC:
 		pOut->PrintMessage("You cannot stop recording now");
-		cout << "You cannot stop recording now" << endl;
+		Sleep(1000);
 		pOut->ClearStatusBar();
 		break;
+
+	case PLAY_REC:
+		ptrToAct = new PlayRecAction(this);
+		ptrToAct->Execute();
+		this->UnSelect();
+		break;
+
 	case EXIT:
 		///create ExitAction here
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
-		return(NULL);// WATCHOUTTTTTTTTTTTTTTTTTT
+		return;// WATCHOUTTTTTTTTTTTTTTTTTT
 	}
 	/*actiosCount needed for the start Rec*/
 	actionsCount++;
 
-	if (ptrToAct != NULL)
+	if (dynamic_cast<StartRecAction*> (ptrToAct))
+	{
+		Startrecaction = ptrToAct->clone() ;
+	}
+
+	if (ptrToAct != NULL && GetRecordStatus())
 		setActionPtr(ptrToAct->clone());
 	//Execute the created action
 	if (ptrToAct != NULL)
 	{
+		Setundoable(false);
 		//ptrToAct->Execute();//Execute
 		delete ptrToAct;	//You may need to change this line depending to your implementation
 		ptrToAct = NULL;
@@ -376,9 +304,9 @@ void ApplicationManager::SetInRedoList(Action* pAct)
 	{
 		if (pAct != NULL)
 		{
-			Redoarray[RedoCount++] = pAct->clone();
+			Redoarray[RedoCount++] = pAct;//->clone();
 			UndoCount--;
-			delete Undoarray[UndoCount];
+			//delete Undoarray[UndoCount];
 			Undoarray[UndoCount] = NULL;
 			
 		}
@@ -411,6 +339,10 @@ void ApplicationManager::DeleteAllRedos()
 	}
 	RedoCount = 0;
 }
+void ApplicationManager::Setundoable(bool b)
+{
+	undoable = b;
+}
 void ApplicationManager::DeleteFigList()
 {
 	for (int i = 0; i < FigCount; i++) {
@@ -435,7 +367,32 @@ void ApplicationManager::Clearall()
 	FigCount = 0;
 	UndoCount = 0;
 	RedoCount = 0;
-	
+	actionsCount = -1;    //to start rec again/ bcs it will be inceratmented beneath
+}
+
+void ApplicationManager::SetInrecording(bool b)
+{
+	InRecording = b;
+}
+
+bool ApplicationManager::GetRecordStatus()
+{
+	return InRecording;
+}
+
+Action* ApplicationManager::GetStartrecaction()
+{
+	return Startrecaction;
+}
+
+void ApplicationManager::SetPlayrec(bool b)
+{
+	PlayRecStatus = b;
+}
+
+bool ApplicationManager::GetPlayrecStatus()
+{
+	return PlayRecStatus;
 }
 
 //==================================================================================//
@@ -572,7 +529,7 @@ void ApplicationManager::UnSelect()
 //==================================================================================//
 
 //Draw all figures on the user interface
-void ApplicationManager::UpdateInterface() 
+void ApplicationManager::UpdateInterface()  const
 {
 	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
@@ -582,11 +539,12 @@ void ApplicationManager::UpdateInterface()
 				FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 		}
 	}
+	/*
 	if (action != NULL)
 	{
 		delete action;
 		action = NULL;
-	}
+	}*/
 	/*delte action pointer*/
 }
 int ApplicationManager::getActFigCount() 

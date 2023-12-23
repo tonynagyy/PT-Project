@@ -22,6 +22,7 @@ void DeletefigAction::ReadActionParameters()
 	{
 		selectedfig = pManager->GetSelectedFigure()->clone();
 		pOut->PrintMessage("delete the selected figure");
+		pManager->Setundoable(true);
 	}
 }
 
@@ -41,8 +42,10 @@ void DeletefigAction::Execute()
 
 void DeletefigAction::undo()  // undoing the delete operation by adding the figure deleted
 {
-	selectedfig->SetSelected(false);
-	pManager->AddFigure(selectedfig);
+	if (selectedfig){
+		selectedfig->SetSelected(false);
+		pManager->AddFigure(selectedfig);
+	}
 }
 
 Action* DeletefigAction::clone() const

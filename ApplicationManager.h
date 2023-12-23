@@ -6,6 +6,7 @@
 #include "GUI\input.h"
 #include "GUI\output.h"
 #include"Actions/Undo.h"
+#include "Actions\StartRecAction.h"
 
 //Main class that manages everything in the application.
 class ApplicationManager
@@ -21,12 +22,20 @@ private:
 	CFigure *SelectedFig; //Pointer to the selected figure
 	Input *pIn;/*pointer to the input */
 	Output *pOut;/*pointer to the output */
+
 	Action* Undoarray[5];/*array to save actions for undo*/
 	Action* Redoarray[5];/*array to save actions for redo*/
 	int UndoCount;
 	int RedoCount;
+	bool undoable;
+
+
 	int actionsCount;
 	Action* action;
+
+	bool InRecording;
+	bool PlayRecStatus;
+	Action* Startrecaction;
 
 public:	
 
@@ -38,16 +47,23 @@ public:
 	ActionType GetUserAction() const;
 	Action* getActionPtr() const;
 	void setActionPtr(Action* action);
-	Action * ExecuteAction(ActionType) ; //Creates an action and executes it
+	void ExecuteAction(ActionType) ; //Creates an action and executes it
+
 	void SetInUndoList(Action* pAct);
 	Action* GetLastUndo();
 	void SetInRedoList(Action* pAct);
 	Action* GetLastRedo();
 	void DeleteAllRedos();
+	void Setundoable(bool b);
+
 	void DeleteFigList();
 	void Deleteundoarray();
 	void Clearall();
-	
+	void SetInrecording(bool b);
+	bool GetRecordStatus();
+	Action* GetStartrecaction();
+	void SetPlayrec(bool b);
+	bool GetPlayrecStatus();
 
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
@@ -63,7 +79,7 @@ public:
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
-	void UpdateInterface();	//Redraws all the drawing window	
+	void UpdateInterface() const;	//Redraws all the drawing window	
 
 	void saveAll(ofstream &outfile) ;
 	int getActFigCount() ;
