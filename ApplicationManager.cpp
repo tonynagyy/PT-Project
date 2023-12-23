@@ -16,6 +16,7 @@
 #include "Actions\clearall.h"
 #include "Actions\MoveAction.h"
 #include "Actions\LoadAction.h"
+#include "Actions\StartRecAction.h"
 
 
 //Constructor
@@ -30,6 +31,7 @@ ApplicationManager::ApplicationManager()
 	UndoCount = 0;
 	RedoCount = 0;
 	actionsCount = 0;
+	action = NULL;
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
 		FigList[i] = NULL;
@@ -49,9 +51,99 @@ ActionType ApplicationManager::GetUserAction() const
 	//Ask the input to get the action from the user.
 	return pIn->GetUserAction();
 }
+Action* ApplicationManager::getActionPtr() const {
+	return action;
+	//Action *ptrToAct = NULL;
+
+	////According to Action Type, create the corresponding action object
+	//switch (Type)
+	//{
+	//case DRAW_RECT:
+	//	ptrToAct = new AddRectAction(this);
+	//	return(ptrToAct);
+	//	break;
+	//
+	//case DRAW_CIRC:
+	//	ptrToAct = new AddCircleAction(this);
+	//	return(ptrToAct);
+	//	break;
+	//
+	//case DRAW_HEX:
+	//	ptrToAct = new AddHexaAction(this);
+	//	return(ptrToAct);
+	//	break;
+	//
+	//case DRAW_TRI:
+	//	ptrToAct = new AddTriangleAction(this);
+	//	return (ptrToAct);
+	//	break;
+	//
+	//case DRAW_SQ:
+	//	ptrToAct = new AddSquareAction(this);
+	//	return (ptrToAct);
+	//	break;
+
+	//case SELECT:
+	//	ptrToAct = new SelectAction(this);
+	//	break;
+	//
+	//case DEL:
+	//	ptrToAct = new DeletefigAction(this); 
+	//	return (ptrToAct);
+	//	break;
+
+	//case MOVE:
+	//	ptrToAct = new MoveAction(this);
+	//	return (ptrToAct);
+	//	break;
+
+	//case UNDO:
+	//	ptrToAct = new Undo(this);
+	//	return (ptrToAct);
+	//	break;
+
+	//case REDO:
+	//	ptrToAct = new Redo(this);
+	//	return (ptrToAct);
+	//	break;
+
+	//case FILL_COLOUR:
+	//	ptrToAct = new SelectFillColour(this);
+	//	return (ptrToAct);
+	//	break;
+
+	//case DRAW_COLOUR:
+	//	ptrToAct = new SelectDrawColour(this);
+	//	return (ptrToAct);
+	//	break;
+
+	//case SAVE:
+	//	ptrToAct = new SaveAction(this);
+	//	return (ptrToAct);
+	//	break;
+
+	//case CLEAR:
+	//	ptrToAct = new clearAll(this);
+	//	return (ptrToAct);
+	//	break;
+
+	//case LOAD:
+	//	ptrToAct = new LoadAction(this);
+	//	return (ptrToAct);
+	//	break;
+	//default:
+	//	return NULL;
+	//	break;
+
+	//}
+
+}
+void ApplicationManager::setActionPtr(Action* action) {
+	this->action = action;
+}
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
-void ApplicationManager::ExecuteAction(ActionType ActType)
+Action * ApplicationManager::ExecuteAction(ActionType ActType)
 {
 	Action *ptrToAct = NULL;
 
@@ -191,7 +283,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case CLEAR:
-		actionsCount = 0;
+		actionsCount = -1;//to start rec again/ bcs it will be inceratmented beneath
 		ptrToAct = new clearAll(this);
 		ptrToAct->Execute();
 		break;
@@ -202,19 +294,26 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct->Execute();
 		break;
 	case START_REC:
+		ptrToAct = new StartRecAction(this);
+		ptrToAct->Execute();
 		break;
-
+	case STOP_REC:
+		pOut->PrintMessage("You cannot stop recording now");
+		cout << "You cannot stop recording now" << endl;
+		pOut->ClearStatusBar();
+		break;
 	case EXIT:
 		///create ExitAction here
-
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
-		return;
+		return(NULL);// WATCHOUTTTTTTTTTTTTTTTTTT
 	}
 	/*actiosCount needed for the start Rec*/
 	actionsCount++;
-	
+
+	if (ptrToAct != NULL)
+		setActionPtr(ptrToAct->clone());
 	//Execute the created action
 	if (ptrToAct != NULL)
 	{
@@ -473,7 +572,7 @@ void ApplicationManager::UnSelect()
 //==================================================================================//
 
 //Draw all figures on the user interface
-void ApplicationManager::UpdateInterface() const
+void ApplicationManager::UpdateInterface() 
 {
 	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
@@ -483,6 +582,12 @@ void ApplicationManager::UpdateInterface() const
 				FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 		}
 	}
+	if (action != NULL)
+	{
+		delete action;
+		action = NULL;
+	}
+	/*delte action pointer*/
 }
 int ApplicationManager::getActFigCount() 
 {

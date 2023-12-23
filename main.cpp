@@ -21,8 +21,6 @@ int main()
 
 	} while(ActType != EXIT && ActType != GET_EXIT_PLAY);
 	
-
-	
 	return 0;
 }
 

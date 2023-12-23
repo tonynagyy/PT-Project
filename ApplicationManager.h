@@ -26,6 +26,7 @@ private:
 	int UndoCount;
 	int RedoCount;
 	int actionsCount;
+	Action* action;
 
 public:	
 
@@ -35,7 +36,9 @@ public:
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
-	void ExecuteAction(ActionType) ; //Creates an action and executes it
+	Action* getActionPtr() const;
+	void setActionPtr(Action* action);
+	Action * ExecuteAction(ActionType) ; //Creates an action and executes it
 	void SetInUndoList(Action* pAct);
 	Action* GetLastUndo();
 	void SetInRedoList(Action* pAct);
@@ -60,7 +63,7 @@ public:
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
-	void UpdateInterface() const;	//Redraws all the drawing window	
+	void UpdateInterface();	//Redraws all the drawing window	
 
 	void saveAll(ofstream &outfile) ;
 	int getActFigCount() ;
