@@ -13,16 +13,12 @@ class SelectDrawColour : public Action
 public:
 
 	SelectDrawColour(ApplicationManager* pApp);
-
-	virtual void ReadActionParameters();
-
-	virtual void Execute();
-
-	virtual void undo();
-
-	virtual Action* clone()  const override;
-
 	~SelectDrawColour();
+
+	 void ReadActionParameters() override;	
+	 void Execute() override;
+	 void undo() override;
+	 Action* clone()  const override;
 };
 
 #endif

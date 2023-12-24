@@ -18,12 +18,9 @@ protected:
 	int Identifier; // It is an integer to distinguishes eash shape from the other
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-	//static color DrwClr;
-	//static color FlClr;
 	bool hidden;
 	bool isDrawn;
 
-	/// Add more parameters if needed.
 private:
 	//static int ID;
 public:
@@ -66,11 +63,7 @@ public:
 	//virtual int Counter() = 0;
 	virtual double CalcArea() = 0;
 	virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
-
 	virtual CFigure* clone() const = 0;
-
 	virtual void move(double x, double y) = 0;
-
 };
-//int CFigure::ID = 0;
 #endif

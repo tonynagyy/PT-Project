@@ -15,14 +15,13 @@ private:
 public:
 	CHexagon() = default;
 	CHexagon(const Point&, GfxInfo FigureGfxInfo);
+
 	virtual void Draw(Output* pOut) const;
 	virtual bool InFigure(int x, int y);
 	virtual double CalcArea();
 	virtual void PrintInfo(Output *pOut);
 
-
 	virtual int GetID();
-
 	virtual bool IsDrawn();
 	
 	virtual Point Getcenter();
@@ -30,11 +29,12 @@ public:
 	virtual color GetFillClr();
 
 
+	virtual void move(double x, double y) override;
+
 	void Save(ofstream &outFile) override;
 	void Load(ifstream &inFile) override;
 
 
-	virtual CFigure* clone() const override;
-	virtual void move(double x, double y) override;
+	CFigure* clone() const override;
 };
 #endif

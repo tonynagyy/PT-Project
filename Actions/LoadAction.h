@@ -18,9 +18,9 @@ class LoadAction : public Action {
 	private:
 		string fileName;
 		ifstream inFile;
-	public:
 		color drawColor;
 		color fillColor;
+	public:
 
 		LoadAction(ApplicationManager* pApp);
 		void ReadActionParameters() override;

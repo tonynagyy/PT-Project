@@ -2,7 +2,8 @@
 
 //int CTriangle::Count = 0;
 
-CTriangle::CTriangle(const Point& p1, const Point& p2, const Point& p3, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), P1(p1), P2(p2), P3(p3)
+CTriangle::CTriangle(const Point& p1, const Point& p2, const Point& p3, GfxInfo FigureGfxInfo) : 
+	CFigure(FigureGfxInfo), P1(p1), P2(p2), P3(p3)
 {
 	Identifier = 1;
 	if (CalcArea() && IsDrawn())
@@ -110,13 +111,14 @@ color CTriangle::GetFillClr()
 
 void CTriangle::Save(ofstream& outFile) {
 //	TRIANG 3 10 20 70 30 220 190 BLACK RED
-	outFile << "TRIANG\t" << ID << "\t" << P1.x << "\t" << P1.y << "\t" << P2.x << "\t" << P2.y << "\t" << P3.x << "\t" << P3.y << "\t";
+	outFile << "TRIANG\t" << ID << "\t" << Identifier << "\t" << P1.x << "\t" << P1.y << "\t";
+	outFile << P2.x << "\t" << P2.y << "\t" << P3.x << "\t" << P3.y << "\t";
 	outFile << FigGfxInfo.DrawClr << "\t";
 	outFile << FigGfxInfo.FillClr << endl;
 }
 
 void CTriangle::Load(ifstream& Infile) {
-	Infile >> ID >> P1.x >> P1.y >> P2.x >> P2.y >> P3.x >> P3.y;
+	Infile >> ID >> Identifier >> P1.x >> P1.y >> P2.x >> P2.y >> P3.x >> P3.y;
 	Infile >> FigGfxInfo.DrawClr;
 	Infile >> FigGfxInfo.FillClr;
 }
@@ -133,6 +135,7 @@ void CTriangle::move(double x, double y)
 	double centery = (P1.y + P2.y + P3.y) / 3.0;
 	double shiftx = x - centerx;
 	double shifty = y - centery;
+
 	P1.x = P1.x + shiftx;
 	P2.x = P2.x + shiftx;
 	P3.x = P3.x + shiftx;

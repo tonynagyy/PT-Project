@@ -90,7 +90,8 @@ color CRectangle::GetFillClr()
 
 void CRectangle::Save(ofstream& outFile) {
 	//RECT 1 100 200 17 30 BLUE RED
-	outFile << "RECT\t" << ID << "\t";
+
+	outFile << "RECT\t" << ID << "\t" << Identifier << "\t";
 	outFile << Corner1.x << "\t" << Corner1.y << "\t";
 	outFile << Corner2.x << "\t" << Corner2.y << "\t";
 	//GfxInfo FigGfxInfo;	//Figure graphis info
@@ -102,7 +103,7 @@ void CRectangle::Save(ofstream& outFile) {
 void CRectangle::Load(ifstream& Infile)
 {
 		//RECT 1 100 200 17 30 BLUE RED
-	Infile >> ID;
+	Infile >> ID >> Identifier;
 	Infile >> Corner1.x >> Corner1.y;
 	Infile >> Corner2.x >> Corner2.y;
 	Infile >> FigGfxInfo.DrawClr;

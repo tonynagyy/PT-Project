@@ -1,7 +1,8 @@
 #include "PickClrAction.h"
 
 PickClrAction::PickClrAction(ApplicationManager* pApp) : Action(pApp)
-{}
+{
+}
 
 void PickClrAction::ReadActionParameters()
 {
@@ -181,7 +182,7 @@ void PickClrAction::undo()
 {
 }
 
-Action* PickClrAction::clone() const
+PickClrAction* PickClrAction::clone() const
 {
 	return new PickClrAction(*this);
 }

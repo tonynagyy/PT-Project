@@ -41,7 +41,8 @@ void SelectAction::Execute()
 	{
 		ReadActionParameters();
 	}
-	if (Fig != nullptr)
+	if (Fig != nullptr) 
+	{
 		if (Fig->IsSelected() && !(pManager->GetPlayrecStatus()))
 		{
 			Fig->SetSelected(false);
@@ -52,6 +53,7 @@ void SelectAction::Execute()
 			Fig->SetSelected(true);
 			Fig->PrintInfo(pOut);
 		}
+	}
 }
 
 void SelectAction::undo()

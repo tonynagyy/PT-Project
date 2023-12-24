@@ -21,9 +21,7 @@ public:
 	virtual void PrintInfo(Output *pOut);
 
 	virtual int GetID();
-
 	virtual bool IsDrawn();
-
 	virtual Point Getcenter();
 	virtual color GetDrawClr();
 	virtual color GetFillClr();

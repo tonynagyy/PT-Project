@@ -24,14 +24,12 @@ class PickClrAction : public Action
 
 public:
 	PickClrAction(ApplicationManager* pApp);
-	virtual void ReadActionParameters();
-	virtual void Execute();
+	void ReadActionParameters() override;
+	void Execute() override;
+	void undo() override;
 	bool CheckAns();
 
-	virtual void undo();
-
-
-	virtual Action* clone() const override;
+	PickClrAction* clone() const override;
 };
 
 

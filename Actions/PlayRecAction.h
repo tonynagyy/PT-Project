@@ -1,28 +1,24 @@
-#pragma once
+#ifndef PLAYRECACTION_H
+#define PLAYRECACTION_H
+
 #include "Action.h"
-#include "..\ApplicationManager.h"
 #include "StartRecAction.h"
-#include <iostream>
+//#include "..\ApplicationManager.h"
 
 class PlayRecAction : public Action
 {
-	StartRecAction* RecordedActions;
 	int NumOfRecActions;
 	Action* pAction;
+	StartRecAction* RecordedActions;
+
 public:
 	PlayRecAction(ApplicationManager* pApp);
-
-
-	virtual void ReadActionParameters();
-	virtual void Execute();
-
-	virtual void undo();
-
-	virtual PlayRecAction* clone() const override;
-
-
 	~PlayRecAction();
 
-
+	void ReadActionParameters() override;
+	void Execute() override;
+	void undo() override;
+	PlayRecAction* clone() const override;
 };
 
+#endif

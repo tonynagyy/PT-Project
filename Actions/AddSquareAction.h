@@ -13,17 +13,13 @@ private:
 	CFigure* square;
 public:
 	AddSquareAction(ApplicationManager* pApp);
+	~AddSquareAction();
 
-	//Reads square parameters
 	virtual void ReadActionParameters();
-
-	//Add square to the ApplicationManager
 	virtual void Execute();
 	virtual void undo();
-
 	virtual Action* clone() const override;
 
-	~AddSquareAction();
 };
 
 #endif

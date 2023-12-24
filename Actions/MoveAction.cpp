@@ -1,8 +1,8 @@
 #include "MoveAction.h"
 
-MoveAction::MoveAction(ApplicationManager* pMan) :Action(pMan) 
+MoveAction::MoveAction(ApplicationManager* pMan) :
+	Action(pMan) , Selectedfig(NULL)
 {
-	Selectedfig = NULL;
 }
 
 void MoveAction::ReadActionParameters()
@@ -18,7 +18,6 @@ void MoveAction::ReadActionParameters()
 		InicenterPoint = Selectedfig->Getcenter();
 
 		pOut->PrintMessage("click new point to move the figure to it");
-		 
 		pIn->GetPointClicked(NewcenterPoint.x, NewcenterPoint.y);
 		pOut->ClearStatusBar();
 	}

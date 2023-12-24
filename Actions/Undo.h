@@ -14,25 +14,13 @@
 class Undo : public Action
 {
 	Action* UndoPtr; // pointer to last Undoable action
-	//CFigure* FigurePtr;
-	//Action* undoStack[MAX];
-	//int undoIndex;
-	//Action* redoStack [5];
-	//int redoIndex;
-	//Redo* redo;
- public:
-	 Undo(ApplicationManager* pApp);
+public:
+	Undo(ApplicationManager* pApp);
+	~Undo();
 
-
-	 virtual void ReadActionParameters();
-
-
-	 virtual void Execute();
-
-	 virtual void undo();
-
-	 virtual Action* clone() const override;
-
-	 ~Undo();
+	void ReadActionParameters() override;
+	void Execute() override;
+	void undo() override;
+	Action* clone() const override;
 };
 #endif

@@ -1,7 +1,9 @@
 #include "PlayRecAction.h"
+#include "StartRecAction.h"
 //#include<windows.h>
 
-PlayRecAction::PlayRecAction(ApplicationManager* pApp) : Action(pApp), NumOfRecActions(0), pAction(NULL)
+PlayRecAction::PlayRecAction(ApplicationManager* pApp) : 
+	Action(pApp), NumOfRecActions(0), pAction(NULL)
 {
 	RecordedActions =dynamic_cast<StartRecAction*> (pManager->GetStartrecaction());
 	//RecordedActions = new StartRecAction(pApp);
@@ -9,7 +11,6 @@ PlayRecAction::PlayRecAction(ApplicationManager* pApp) : Action(pApp), NumOfRecA
 
 void PlayRecAction::ReadActionParameters()
 {
-	//Read action parameters here
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
@@ -41,8 +42,8 @@ void PlayRecAction::ReadActionParameters()
 void PlayRecAction::Execute()
 {
 	Output* pOut = pManager->GetOutput();
-	ReadActionParameters();
 
+	ReadActionParameters();
 	if (RecordedActions != NULL && NumOfRecActions != 1)
 	{
 		for (int i = 0; i < NumOfRecActions; i++)
@@ -51,6 +52,7 @@ void PlayRecAction::Execute()
 			pAction->Execute();
 			pManager->UpdateInterface();
 			Sleep(2000);
+
 			delete pAction;
 			pAction = NULL;
 		}

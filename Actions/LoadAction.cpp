@@ -13,6 +13,10 @@ LoadAction::LoadAction(ApplicationManager* pApp) : Action(pApp)
 {
 }
 
+/*
+* LoadAction::ReadActionParameters = Reads parameters required for action to
+* Read File Name from the user
+* */
 void LoadAction::ReadActionParameters() {
 	Output* outPtr = pManager->GetOutput();
 	Input* inPtr = pManager->GetInput();
@@ -23,6 +27,11 @@ void LoadAction::ReadActionParameters() {
 
 }
 
+/*
+* LoadAction::Execute = Executes the action
+* Description - read the file name clear all set colors get count call load for each figure
+* 
+*/
 void LoadAction::Execute()
 {
 	Output * outPtr = pManager->GetOutput();
@@ -36,41 +45,46 @@ void LoadAction::Execute()
 
 	if (inFile.is_open()) {
 		pManager->Clearall();
+
 		inFile >> drawColor;
 		inFile >> fillColor;
 		outPtr->setCrntDrawColor(drawColor);
 		outPtr->setCrntFillColor(fillColor);
-		inFile >> counter;
-		cout << counter << endl;
 
-		for (int i = 0; i < counter; i++) {
+		inFile >> counter;
+
+		for (int i = 0; i < counter; i++)
+		{
 			inFile >> figType;
-			if (figType == "RECT") { // RECT SQ HEX TRIANG CIRC
+			if (figType == "RECT")
+			{ // RECT SQ HEX TRIANG CIRC
 				fig = new CRectangle;
 			}
-			else if (figType == "SQ") {
+			else if (figType == "SQ")
+			{
 				fig = new CSquare;
 			}
-			else if (figType == "HEX") {
+			else if (figType == "HEX") 
+			{
 				fig = new CHexagon;
 			}
-			else if (figType == "TRIANG") {
+			else if (figType == "TRIANG") 
+			{
 				fig = new CTriangle;
 			}
-			else if (figType == "CIRC") {
+			else if (figType == "CIRC") 
+			{
 				fig = new CCircle;
 			}
 			fig->Load(inFile);
 			pManager->AddFigure(fig);
 		}
 		inFile.close();
-
-	}	else {
-		//Output* outPtr = pManager->GetOutput();
-		outPtr->PrintMessage("file is not open or not found");
-		//outPtr->ClearStatusBar();
 	}
-
+	else 
+	{
+		outPtr->PrintMessage("file is not open or not found");
+	}
 }
 
 LoadAction* LoadAction::clone() const
