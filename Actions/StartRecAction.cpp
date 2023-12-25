@@ -15,6 +15,22 @@ StartRecAction::StartRecAction(ApplicationManager* pApp)
 }
 
 /*
+* StartRecAction::StartRecAction Destructor
+* Description: Destructor to delete the queue if not empty
+*/
+StartRecAction::~StartRecAction()
+{
+	for (int i = 0; i < MAX_SIZE; i++)
+	{
+		if (queue[i] != nullptr)
+		{
+			delete queue[i];
+			queue[i] = nullptr;
+		}
+	}
+}
+
+/*
 * StartRecAction::ReadActionParameters
 * Description: Read the parameters required for the action to execute AKA can u start rec or not
 */
@@ -88,17 +104,14 @@ void StartRecAction::Execute()
 		if (ActType == STOP_REC) 
 		{
 			outPut->PrintMessage("Recording Stopped");
-			Sleep(1000);
-			outPut->ClearStatusBar();
-			return;
 		}
 		if (isFull())
 		{
 			outPut->PrintMessage("Max number of rec reached u cannot rec anymore");
+		}
 			Sleep(1000);
 			outPut->ClearStatusBar();
 			return;
-		}
 
 	}
 	else 
@@ -110,13 +123,15 @@ void StartRecAction::Execute()
 	}
 }
 
-void StartRecAction::undo() {
+void StartRecAction::undo()
+{
 }
 
 /*
 * StartRecAction::Clone clone this action
 */
-StartRecAction* StartRecAction::clone() const {
+StartRecAction* StartRecAction::clone() const 
+{
 	return (new StartRecAction(*this));
 }
 /*
@@ -143,8 +158,10 @@ bool StartRecAction::canStartRecd()
 * @type Action type para
 * Descriprion ckeck if there is some action that can be rec or not and print err msg
 */
-bool StartRecAction::ckeckActionValidity(const ActionType& type) const {
-	switch (type) {
+bool StartRecAction::ckeckActionValidity(const ActionType& type) const 
+{
+	switch (type)
+	{
 	case EXIT:
 		break;
 	case SAVE:
@@ -174,7 +191,8 @@ bool StartRecAction::ckeckActionValidity(const ActionType& type) const {
 * @return bool
 * Description: checks if the queue is empty or not
 * */
-bool StartRecAction::isEmpty() const {
+bool StartRecAction::isEmpty() const 
+{
 	return (rear == -1 && front == -1);
 }
 
@@ -183,7 +201,8 @@ bool StartRecAction::isEmpty() const {
 * @return bool
 * Description: checks if the queue is full or not
 */
-bool StartRecAction::isFull() const {
+bool StartRecAction::isFull() const 
+{
 	return (rear == MAX_SIZE - 1);
 }
 
@@ -191,9 +210,9 @@ bool StartRecAction::isFull() const {
 * StartRecAction::enqueue
 * @param Action pointer
 * Description: enqueue the action in the queue if not full
-*
-* */
-void StartRecAction::enqueue(Action* action) {
+*/
+void StartRecAction::enqueue(Action* action)
+{
 	if (action == nullptr) 
 	{
 		cout << "Action is nullptr" << endl;
@@ -253,7 +272,8 @@ Action* StartRecAction::dequeue()
 * Description: displpays the queue from front to rear
 */
 
-void StartRecAction::displayQueue() const {
+void StartRecAction::displayQueue() const 
+{
 	if (isEmpty()) 
 	{
 		cout << "Queue is empty no display" << endl;
