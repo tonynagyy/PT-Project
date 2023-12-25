@@ -26,6 +26,8 @@ enum ActionType //The actions supported (you can add more if needed)
 	EXIT,
 	FILL_COLOUR, // fill the figure
 	DRAW_COLOUR, // highlighted the frame of the figure 
+	PLAY_VOICE,
+
 	TO_DRAW,		//Switch interface to Draw mode
 	PICK_CLR_FIG,
 	PICK_FIG,
@@ -34,8 +36,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	DRAWING_AREA,	//A click on the drawing area
 	PLAYING_AREA,
 	STATUS,			//A click on the status bar
-	GET_EXIT_PLAY,
-
+	GET_EXIT_PLAY,  
 	///TODO: Add the other action types of the two modes
 };
 enum ActionColour

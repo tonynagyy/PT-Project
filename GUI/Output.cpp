@@ -126,6 +126,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_TRIANGLE] = "images\\MenuItems\\Menu_Triangle.jpg";
 	MenuItemImages[ITM_UNDO] = "images\\MenuItems\\Menu_undo.jpg";
 	MenuItemImages[ITM_PLAYMODE] = "images\\MenuItems\\Menu_playmode.jpg";
+	MenuItemImages[ITM_PLAY_VOICE] = "images\\MenuItems\\Menu_playvoice.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 	//MenuItemImages[ITM_COLOUR] = "images\\MenuItems\\Menu_colors.jpg";
 

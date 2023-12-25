@@ -63,7 +63,7 @@ ActionType Input::GetUserAction() const
 			case ITM_REDO: return REDO;
 			case ITM_START_REC: return START_REC;
 			case ITM_STOP_REC: return STOP_REC;
-			case ITM_PLAY_REC: return PLAY_REC;
+			case ITM_PLAY_REC: return PLAY_REC;	
 			case ITM_SELECT: return SELECT;
 			case ITM_MOVE: return MOVE;
 			case ITM_CLEAR: return CLEAR;
@@ -76,8 +76,8 @@ ActionType Input::GetUserAction() const
 			case ITM_DRAWINGCLR: return DRAW_COLOUR;
 			case ITM_FILLINGCLR: return FILL_COLOUR;
 			case ITM_PLAYMODE: return TO_PLAY;
+			case ITM_PLAY_VOICE: return PLAY_VOICE;
 			//case ITM_COLOUR: return COLOURS;
-
 
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}

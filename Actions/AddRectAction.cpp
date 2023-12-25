@@ -1,13 +1,12 @@
 #include "AddRectAction.h"
 #include "..\Figures\CRectangle.h"
 
-
 #include "..\ApplicationManager.h"
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddRectAction::AddRectAction(ApplicationManager *pApp) :Action(pApp) 
+AddRectAction::AddRectAction(ApplicationManager *pApp, bool voice) :Action(pApp), PlayRectVoice(voice)
 {
 	P1.x = 0;
 	P1.y = 0;
@@ -23,6 +22,13 @@ void AddRectAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
+	if (PlayRectVoice)          // if Voice is enabled then play the voice of rectangle
+	{
+		PlaySound(("Voices\Rectvoice.wav"), NULL, SND_SYNC);
+		//PlaySound(0, 0, 0);
+
+	}
+	 
 	pOut->PrintMessage("New Rectangle: Click at first corner");
 	
 	//Read 1st corner and store in point P1

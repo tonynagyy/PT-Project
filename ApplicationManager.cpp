@@ -18,12 +18,13 @@
 #include "Actions\LoadAction.h"
 #include "Actions\StartRecAction.h"
 #include "Actions\PlayRecAction.h"
+#include "Actions\PlayvoiceAction.h"
 
 
 //Constructor
 ApplicationManager::ApplicationManager() :
 	FigCount(0), UndoCount(0), RedoCount(0),undoable(false), Actualfigcounter(0), actionsCount(0), InRecording(false), action(NULL),
-	Startrecaction(NULL), PlayRecStatus(false)
+	Startrecaction(NULL), PlayRecStatus(false), Playvoice(false)
 {
 	//Create Input and output
 	pOut = new Output;
@@ -66,7 +67,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 	case DRAW_RECT:
 		this->UnSelect();
-		ptrToAct = new AddRectAction(this);
+		ptrToAct = new AddRectAction(this, Playvoice);
 		ptrToAct->Execute();
 		SetInUndoList(ptrToAct);  // save the action in the undo list
 		DeleteAllRedos();         // delete all redos from the list
@@ -219,6 +220,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case PLAY_REC:
 		ptrToAct = new PlayRecAction(this);
+		ptrToAct->Execute();
+		this->UnSelect();
+		break;
+
+	case PLAY_VOICE:
+		ptrToAct = new PlayVoiceAction(this);
 		ptrToAct->Execute();
 		this->UnSelect();
 		break;
@@ -387,6 +394,15 @@ void ApplicationManager::SetPlayrec(bool b) {
 
 bool ApplicationManager::GetPlayrecStatus() {
 	return PlayRecStatus;
+}
+
+void ApplicationManager::SetPlayvoicestatus(bool b)
+{
+	Playvoice = b;	
+}
+
+bool ApplicationManager::Getplayvoicestatus() {
+	return Playvoice;
 }
 
 //==================================================================================//

@@ -70,6 +70,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Actions\Action.cpp" />
     <ClCompile Include="Actions\PlayRecAction.cpp" />
+    <ClCompile Include="Actions\PlayVoiceAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircleAction.h" />
@@ -125,6 +126,7 @@
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="helper.h" />
     <ClInclude Include="Actions\PlayRecAction.h" />
+    <ClInclude Include="Actions\PlayVoiceAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

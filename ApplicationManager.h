@@ -16,6 +16,7 @@ class ApplicationManager
 	};	//Max no of figures
 
 private:
+	bool Playvoice;     //boolean to play voice
 	int FigCount;		//Actual number of figures
 	int Actualfigcounter;	//Actual number of figures
 	CFigure *FigList[MaxFigCount];	//List of all figures (Array of pointers)
@@ -65,6 +66,9 @@ public:
 	void SetPlayrec(bool b);
 	bool GetPlayrecStatus();
 
+	void SetPlayvoicestatus(bool b);     // setting the status to enable or disable
+	bool Getplayvoicestatus();
+
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	void DeleteFig(CFigure* pFig);
@@ -80,7 +84,7 @@ public:
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
-
+	
 	void saveAll(ofstream &outfile) ;
 	int getActFigCount() ;
 	int getActionsCounter() const ;
