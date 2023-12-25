@@ -27,8 +27,7 @@ void AddHexaAction::ReadActionParameters()
 
 	if (PlayHexaVoice)          // if Voice is enabled then play the voice of rectangle
 	{
-		PlaySound(TEXT("Voices\\Rectvoice.wav.wav"), NULL, SND_ASYNC);
-		//PlaySound(0, 0, 0);
+		PlaySound(TEXT("Voices\\hexa.wav"), NULL, SND_ASYNC);
 	}
 
 	pOut->PrintMessage("New Hexagon: Click at the center of Hexagon");

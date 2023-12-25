@@ -14,11 +14,11 @@ private:
 public:
 	AddCircleAction(ApplicationManager* pApp, bool voice);
 	AddCircleAction(const AddCircleAction& other);
-	 ~AddCircleAction();
+	~AddCircleAction();
 
 	void ReadActionParameters() override;
-	 void Execute() override;
-	 void undo() override;
+	void Execute() override;
+	void undo() override;
 	AddCircleAction* clone() const override;
 };
 #endif

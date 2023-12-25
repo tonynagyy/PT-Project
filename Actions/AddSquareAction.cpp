@@ -26,9 +26,10 @@ void AddSquareAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+
 	if (PlaySquareVoice)
 	{
-		PlaySound(TEXT("Voices\\Rectvoice.wav.wav"), NULL, SND_ASYNC);
+		PlaySound(TEXT("Voices\\sq.wav"), NULL, SND_ASYNC);
 	}
 
 	pOut->PrintMessage("New Square: Click at the center of Square");

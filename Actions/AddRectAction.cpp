@@ -29,7 +29,6 @@ void AddRectAction::ReadActionParameters()
 	if (PlayRectVoice)          // if Voice is enabled then play the voice of rectangle
 	{
 		PlaySound(TEXT("Voices\\Rectvoice.wav.wav"), NULL, SND_ASYNC);
-		//PlaySound(0, 0, 0);
 	}
 	 
 	pOut->PrintMessage("New Rectangle: Click at first corner");

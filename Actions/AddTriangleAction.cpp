@@ -29,7 +29,7 @@ void AddTriangleAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 	if (PlayTrigSound)
 	{
-		PlaySound(TEXT("Voices\\Rectvoice.wav.wav"), NULL, SND_ASYNC);
+		PlaySound(TEXT("Voices\\tri.wav"), NULL, SND_ASYNC);
 	}
 
 	pOut->PrintMessage("New Triangle: Click at first point");

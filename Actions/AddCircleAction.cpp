@@ -27,7 +27,7 @@ void AddCircleAction::ReadActionParameters()
 
 	if (PlayCircleVoice)          // if Voice is enabled then play the voice of rectangle
 	{
-		PlaySound(TEXT("Voices\\Rectvoice.wav.wav"), NULL, SND_ASYNC);
+		PlaySound(TEXT("Voices\\circ.wav"), NULL, SND_ASYNC);
 		//PlaySound(0, 0, 0);
 	}
 
