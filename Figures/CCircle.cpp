@@ -48,23 +48,6 @@ CCircle::CCircle(const Point& p1, const Point& p2, GfxInfo FigureGfxInfo) : CFig
 	 return ID;
  }
 
- /*
- int CCircle::GetNum()
- {
-	 return Num;
- }
-
- void CCircle::DecNum()
- {
-	 Num--;
- }
-
- void CCircle::IncNum()
- {
-	 Num++;
- }
- */
-
  Point CCircle::Getcenter()
  {
 	 return P1;
@@ -143,6 +126,8 @@ CCircle::CCircle(const Point& p1, const Point& p2, GfxInfo FigureGfxInfo) : CFig
 
  void CCircle::move(double x, double y)
  {
+	 Point temp = P1;
+
 	 double shiftx = x - P1.x;
 	 double shifty = y - P1.y;
 
@@ -150,6 +135,12 @@ CCircle::CCircle(const Point& p1, const Point& p2, GfxInfo FigureGfxInfo) : CFig
 	 P2.x = P2.x +shiftx;
 	 P1.y = y;
 	 P2.y = P2.y +shifty;
+
+	 if (!IsDrawn())
+	 {
+		 Movable = false;
+		 move(temp.x, temp.y);
+	 }
  }
 
  

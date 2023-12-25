@@ -140,6 +140,14 @@ CFigure* CHexagon::clone() const
 
 void CHexagon::move(double x, double y)
 {
+	Point temp = center;
+
 	center.x = x;
 	center.y = y;
+
+	if (!IsDrawn())
+	{
+		Movable = false;
+		move(temp.x, temp.y);
+	}
 }

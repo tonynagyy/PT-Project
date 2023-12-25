@@ -19,6 +19,7 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 
 	Selected = false;
 	hidden = false;
+	Movable = true;
 
 
 }
@@ -73,6 +74,16 @@ color CFigure::GetDrawClr()
 color CFigure::GetFillClr()
 {
 	return FigGfxInfo.FillClr;
+}
+
+bool CFigure::IsMovable()
+{
+	return Movable;
+}
+
+void CFigure::SetMovable(bool b)
+{
+	Movable = b;
 }
 
 bool CFigure::IsFilled()

@@ -126,5 +126,11 @@ void CRectangle::move(double x, double y)
 	Corner1.y = Corner1.y + shifty;
 	Corner2.y = Corner2.y + shifty;
 
+	if (!IsDrawn())
+	{
+		Movable = false;
+		move(centerx, centery);
+	}
+
 
 }

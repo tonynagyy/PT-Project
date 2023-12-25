@@ -21,6 +21,7 @@ public:
 	ActionColour GetColourAction(DrawMenuItem ITM) const; // read colours
 	void StopStoringClicks() const;
 	void StopStoringKeys() const;
+	bool ClickingStatus(int& x, int& y); // Checking if the user still clicking in the left button or not 
 
 	~Input();
 };

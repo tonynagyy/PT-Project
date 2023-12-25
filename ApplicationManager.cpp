@@ -107,6 +107,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		DeleteAllRedos();
 		this->UnSelect();
 		break;
+	case DRAGGING_MOVE:
+		ptrToAct = new DraggingMove(this);
+		ptrToAct->Execute();
+		break;
 	case TO_PLAY:
 		this->UnSelect();
 		pOut->CreatePlayToolBar();

@@ -12,6 +12,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	PLAY_REC,
 	SELECT,
 	MOVE,
+	DRAGGING_MOVE,
 	CLEAR,
 	DEL,  // delete item ----> Note: there is a func called delete so we wrote it as "DEL"
 	DRAW_RECT, //Draw Rectangle

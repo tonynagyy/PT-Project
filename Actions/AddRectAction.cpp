@@ -5,9 +5,10 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddRectAction::AddRectAction(ApplicationManager *pApp, bool voice) :Action(pApp), PlayRectVoice(voice)
-AddRectAction::AddRectAction(ApplicationManager *pApp) :
-	Action(pApp) , rect(NULL), P1(0,0), P2(0,0)
+AddRectAction::AddRectAction(ApplicationManager* pApp, bool voice) :Action(pApp), rect(NULL), P1(0, 0), P2(0, 0), PlayRectVoice(voice)
+{
+}
+AddRectAction::AddRectAction(ApplicationManager *pApp) : Action(pApp) , rect(NULL), P1(0,0), P2(0,0)
 {
 }
 

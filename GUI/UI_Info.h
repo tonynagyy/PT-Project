@@ -23,6 +23,8 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_PLAY_REC,
 	ITM_SELECT,
 	ITM_MOVE,
+	ITM_DRAGGING_MOVE,
+	//ITM_RESIZE,
 	ITM_CLEAR,
 	ITM_DELETE,
 	ITM_RECT,
@@ -34,12 +36,13 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_REDO,
 	ITM_SAVE,
 	ITM_LOAD,
-	ITM_EXIT,//Exit item
 	ITM_DRAWINGCLR,
 	ITM_FILLINGCLR,
 	ITM_PLAY_VOICE,
-	//ITM_COLOUR,
+	ITM_EXIT,//Exit item
 	DRAW_ITM_COUNT,
+	
+
 	//no. of menu items ==> This should be the last line in this enum
 
 };

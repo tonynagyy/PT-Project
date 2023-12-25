@@ -14,7 +14,7 @@ Output::Output()
 	//Initialize user interface parameters
 	UI.InterfaceMode = MODE_DRAW;
 
-	UI.width = 1250;
+	UI.width = 1350;
 	UI.height = 650;
 	UI.wx = 5;
 	UI.wy = 5;
@@ -85,14 +85,7 @@ void Output::ClearToolBar() const
 	pWind->SetBrush(UI.BkGrndColor);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 }
-/*
-void Output::ClearColourMenu() const
-{
-	pWind->SetPen(UI.BkGrndColor, 1);
-	pWind->SetBrush(UI.BkGrndColor);
-	pWind->DrawRectangle(ITM_COLOUR * UI.MenuItemWidth, UI.ToolBarHeight, UI.width, (COLOUR_ITM_COUNT + 1) * UI.ToolBarHeight);
-}
-*/
+
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBar() const
 {
@@ -116,6 +109,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_HEXAGON] = "images\\MenuItems\\Menu_Hexagon.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_load.jpg";
 	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\Menu_move.jpg";
+	MenuItemImages[ITM_DRAGGING_MOVE] = "images\\MenuItems\\Menu_Dragging.jpg";
 	MenuItemImages[ITM_PLAY_REC] = "images\\MenuItems\\Menu_playrec.jpg";
 	MenuItemImages[ITM_REDO] = "images\\MenuItems\\Menu_redo.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_save.jpg";
@@ -128,6 +122,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_PLAYMODE] = "images\\MenuItems\\Menu_playmode.jpg";
 	MenuItemImages[ITM_PLAY_VOICE] = "images\\MenuItems\\Menu_playvoice.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
+	
 	//MenuItemImages[ITM_COLOUR] = "images\\MenuItems\\Menu_colors.jpg";
 
 	//Draw menu item one image at a time

@@ -20,6 +20,7 @@ protected:
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	bool hidden;
 	bool isDrawn;
+	bool Movable;
 
 private:
 	//static int ID;
@@ -32,6 +33,8 @@ public:
 	virtual bool InFigure(int x, int y) = 0; // check if the point clicked is in the figure or not
 	void Sethidden(bool hd);
 	bool IfHidden();
+	void SetMovable(bool b);
+	bool IsMovable();
 
 
 	virtual bool IsDrawn() = 0;

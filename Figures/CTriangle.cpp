@@ -76,29 +76,16 @@ bool CTriangle::IsDrawn()
 	isDrawn = !(P1.y < UI.ToolBarHeight || P1.y > UI.height - UI.StatusBarHeight || P2.y < UI.ToolBarHeight || P2.y > UI.height - UI.StatusBarHeight || P3.y < UI.ToolBarHeight || P3.y > UI.height - UI.StatusBarHeight);
 	return isDrawn;
 }
+
 Point CTriangle::Getcenter()
 {
-	Point center;
-	center.x = (P1.x + P2.x + P3.x) / 3;
-	center.y = (P1.y + P2.y + P3.y) / 3;
-	return center;
-}
-/*
-int CTriangle::GetNum()
-{
-	return Num;
+	Point P;
+	P.x = (P1.x + P2.x + P3.x) / 3.0;
+	P.y = (P1.y + P2.y + P3.y) / 3.0;;
+
+	return P;
 }
 
-void CTriangle::IncNum()
-{
-	Num++;
-}
-
-void CTriangle::DecNum()
-{
-	Num--;
-}
-*/
 color CTriangle::GetDrawClr()
 {
 	return FigGfxInfo.DrawClr;
@@ -142,4 +129,11 @@ void CTriangle::move(double x, double y)
 	P1.y = P1.y + shifty;
 	P2.y = P2.y + shifty;
 	P3.y = P3.y + shifty;
+	//Movable = true;
+
+	if (!IsDrawn())
+	{
+		Movable = false;
+		move(centerx, centery);
+	}
 }

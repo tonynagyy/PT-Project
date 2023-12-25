@@ -28,6 +28,8 @@ void MoveAction::ReadActionParameters()
 
 void MoveAction::Execute()
 { 
+	Output* pOut = pManager->GetOutput();
+
 	if (Selectedfig == NULL)
 	{
 		ReadActionParameters();
@@ -35,7 +37,10 @@ void MoveAction::Execute()
 
 	if (Selectedfig != nullptr)
 	{
+		Selectedfig->SetMovable(true);
 		pManager->Movefigure(Selectedfig, NewcenterPoint.x, NewcenterPoint.y);
+		if (!Selectedfig->IsMovable())
+			pOut->PrintMessage("Invalid Action");
 	}
 }
 

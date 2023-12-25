@@ -22,6 +22,7 @@
 #include "Actions\clearall.h"
 #include "Actions\MoveAction.h"
 #include "Actions\LoadAction.h"
+#include "Actions\DraggingMove.h"
 
 //Main class that manages everything in the application.
 class ApplicationManager
