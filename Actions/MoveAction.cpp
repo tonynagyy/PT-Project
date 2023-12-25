@@ -1,8 +1,15 @@
 #include "MoveAction.h"
 
 MoveAction::MoveAction(ApplicationManager* pMan) :
-	Action(pMan) , Selectedfig(NULL)
+	Action(pMan) , InicenterPoint(0,0), NewcenterPoint(0,0), Selectedfig(NULL)
 {
+}
+
+MoveAction::MoveAction(const MoveAction& other)
+	:Action(other), Selectedfig(NULL), InicenterPoint(other.InicenterPoint), NewcenterPoint(other.NewcenterPoint)
+{
+	if (other.Selectedfig != NULL)
+		Selectedfig = other.Selectedfig->clone();
 }
 
 void MoveAction::ReadActionParameters()
@@ -54,6 +61,9 @@ Action* MoveAction::clone() const
 
 MoveAction::~MoveAction()
 {
-	delete Selectedfig;
-	Selectedfig = NULL;
+	if (Selectedfig != NULL)
+	{
+		delete Selectedfig;
+		Selectedfig = NULL;
+	}
 }

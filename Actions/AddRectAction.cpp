@@ -5,10 +5,20 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddRectAction::AddRectAction(ApplicationManager *pApp, bool voice) :Action(pApp), PlayRectVoice(voice)
-AddRectAction::AddRectAction(ApplicationManager *pApp) :
-	Action(pApp) , rect(NULL), P1(0,0), P2(0,0)
+AddRectAction::AddRectAction(ApplicationManager *pApp, bool voice) :
+	Action(pApp), PlayRectVoice(voice), rect(NULL), P1(0, 0), P2(0, 0)
 {
+}
+
+AddRectAction::AddRectAction(const AddRectAction& other)
+	:Action(other), PlayRectVoice(other.PlayRectVoice), rect(NULL),
+	P1(other.P1), P2(other.P2), RectGfxInfo(other.RectGfxInfo)
+{
+	if (other.rect != NULL)
+	{
+		//rect = new CRectangle(*othjer.rect);
+		rect = static_cast<CRectangle*>(other.rect->clone());
+	}
 }
 
 void AddRectAction::ReadActionParameters() 
@@ -18,9 +28,8 @@ void AddRectAction::ReadActionParameters()
 
 	if (PlayRectVoice)          // if Voice is enabled then play the voice of rectangle
 	{
-		PlaySound(("Voices\Rectvoice.wav"), NULL, SND_SYNC);
+		PlaySound(TEXT("Voices\\Rectvoice.wav.wav"), NULL, SND_ASYNC);
 		//PlaySound(0, 0, 0);
-
 	}
 	 
 	pOut->PrintMessage("New Rectangle: Click at first corner");
@@ -44,8 +53,9 @@ void AddRectAction::Execute()
 	}
 	
 	if (rect == NULL)
-	{
+	{// if rect == null then we need to make a new one bcs initally it is null
 		 rect = new CRectangle(P1, P2, RectGfxInfo);
+		 //sice rect is something new so we need to make a copy constructor
 	}
 
 	pManager->AddFigure(rect);

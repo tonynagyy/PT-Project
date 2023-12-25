@@ -16,6 +16,7 @@ class Undo : public Action
 	Action* UndoPtr; // pointer to last Undoable action
 public:
 	Undo(ApplicationManager* pApp);
+	Undo(const Undo& other);
 	~Undo();
 
 	void ReadActionParameters() override;

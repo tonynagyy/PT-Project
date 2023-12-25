@@ -13,6 +13,7 @@ class PlayRecAction : public Action
 
 public:
 	PlayRecAction(ApplicationManager* pApp);
+
 	~PlayRecAction();
 
 	void ReadActionParameters() override;

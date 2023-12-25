@@ -1,8 +1,18 @@
 #include "SelectFillColour.h"
 
-SelectFillColour::SelectFillColour(ApplicationManager* pApp) : Action(pApp)
+SelectFillColour::SelectFillColour(ApplicationManager* pApp) : 
+	Action(pApp) ,Fig(NULL)
 {
 	Fig = NULL;
+}
+
+SelectFillColour::SelectFillColour(const SelectFillColour& SelFillClr)
+	:Action(SelFillClr), Fig(NULL), Clr(SelFillClr.Clr), IniFillColour(SelFillClr.IniFillColour)
+{
+	if (SelFillClr.Fig != NULL) 
+	{
+		Fig = SelFillClr.Fig->clone();
+	}
 }
 
 void SelectFillColour::ReadActionParameters()

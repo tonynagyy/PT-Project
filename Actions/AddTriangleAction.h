@@ -10,8 +10,10 @@ private:
 	Point P1, P2, P3; //Triangle Corners
 	GfxInfo triangleGfxInfo;
 	CFigure* triangle;
+	bool PlayTrigSound;
 public:
-	AddTriangleAction(ApplicationManager* pApp);
+	AddTriangleAction(ApplicationManager* pApp, bool voice);
+	AddTriangleAction(const AddTriangleAction& other);
 	 ~AddTriangleAction();
 
 	virtual void ReadActionParameters();

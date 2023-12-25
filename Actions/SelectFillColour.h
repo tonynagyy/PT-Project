@@ -13,6 +13,7 @@ class SelectFillColour : public Action
 public:
 
 	SelectFillColour(ApplicationManager* pApp);
+	SelectFillColour(const SelectFillColour& SelFillClr);
 	~SelectFillColour();
 
 	void ReadActionParameters() override;

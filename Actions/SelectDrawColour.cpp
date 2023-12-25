@@ -1,8 +1,16 @@
 #include "SelectDrawColour.h"
 
-SelectDrawColour::SelectDrawColour(ApplicationManager* pApp) : Action(pApp)
+SelectDrawColour::SelectDrawColour(ApplicationManager* pApp) : Action(pApp), Fig(NULL)
 {
-	Fig = NULL;
+}
+
+SelectDrawColour::SelectDrawColour(const SelectDrawColour& other) :
+	Action(other), Fig(NULL), IniDrawClr(other.IniDrawClr), Clr(other.Clr)
+{
+	if (other.Fig)
+	{
+		Fig = other.Fig->clone();
+	}
 }
 
 void SelectDrawColour::ReadActionParameters()
@@ -62,6 +70,9 @@ Action* SelectDrawColour::clone()  const
 
 SelectDrawColour::~SelectDrawColour()
 {
-	delete Fig;
-	Fig = NULL;
+	if (Fig != NULL)
+	{
+		delete Fig;
+		Fig = NULL;
+	}
 }

@@ -9,19 +9,17 @@
 #include "..\ApplicationManager.h"
 
 class MoveAction : public Action{
-private:
-	CFigure* Selectedfig = nullptr;
-	Point NewcenterPoint;
-	Point InicenterPoint;
-
-public:
-	MoveAction(ApplicationManager* pApp);
-	void ReadActionParameters() override;
-	void Execute() override;
-	void undo() override;
-	Action* clone() const override;
-
-
-	~MoveAction();
+	private:
+		Point NewcenterPoint;
+		Point InicenterPoint;
+		CFigure* Selectedfig;
+	public:
+		MoveAction(ApplicationManager* pApp);
+		MoveAction(const MoveAction&);
+		void ReadActionParameters() override;
+		void Execute() override;
+		void undo() override;
+		Action* clone() const override;
+		~MoveAction();
 };
 #endif

@@ -4,7 +4,8 @@
 #include "Actions\PlayvoiceAction.h"
 
 ApplicationManager::ApplicationManager() :
-	FigCount(0), UndoCount(0), RedoCount(0),undoable(false), Actualfigcounter(0), actionsCount(0), InRecording(false), action(NULL),
+	FigCount(0), UndoCount(0), RedoCount(0),undoable(false), Actualfigcounter(0)
+	, actionsCount(0), InRecording(false), action(NULL),
 	Startrecaction(NULL), PlayRecStatus(false), Playvoice(false)
 {
 	pOut = new Output;
@@ -56,28 +57,28 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case DRAW_CIRC:
 		this->UnSelect();
-		ptrToAct = new AddCircleAction(this);
+		ptrToAct = new AddCircleAction(this, Playvoice);
 		ptrToAct->Execute();
 		SetInUndoList(ptrToAct);   
 		DeleteAllRedos();         
 		break;
 	case DRAW_HEX:
 		this->UnSelect();
-		ptrToAct = new AddHexaAction(this);
+		ptrToAct = new AddHexaAction(this, Playvoice);
 		ptrToAct->Execute();
 		SetInUndoList(ptrToAct);
 		DeleteAllRedos();
 		break;
 	case DRAW_TRI:
 		this->UnSelect();
-		ptrToAct = new AddTriangleAction(this);
+		ptrToAct = new AddTriangleAction(this, Playvoice);
 		ptrToAct->Execute();
 		SetInUndoList(ptrToAct);
 		DeleteAllRedos();
 		break;
 	case DRAW_SQ:
 		this->UnSelect();
-		ptrToAct = new AddSquareAction(this);
+		ptrToAct = new AddSquareAction(this, Playvoice);
 		ptrToAct->Execute();
 		SetInUndoList(ptrToAct);
 		DeleteAllRedos();
@@ -130,6 +131,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pOut->ClearStatusBar();
 		break;
 	case GET_EXIT_PLAY:
+		Clearall();
 		break;
 	case UNDO:
 		this->UnSelect();
@@ -198,7 +200,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case EXIT:
-		//TODO Exit EXction
+		Clearall();
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
@@ -211,7 +213,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	/*Get StartRecAction to get this action needed to reach to the quqeue inside it*/
 	if (dynamic_cast<StartRecAction*> (ptrToAct))
 	{
-		Startrecaction = ptrToAct->clone() ;
+		if (Startrecaction != NULL)
+		{
+			delete Startrecaction;
+			Startrecaction = NULL;
+		}
+		Startrecaction = ptrToAct->clone();
 	}
 
 	if (ptrToAct != NULL && GetRecordStatus())// get Acopy of the Action If we Record Bcs it will be Deleted beneath
@@ -239,8 +246,10 @@ void ApplicationManager::SetInUndoList(Action* pAct)
 		else
 		{
 			// If the undo stack is full, remove the oldest action
-			delete Undoarray[0];
-			Undoarray[0] = NULL;
+			if (Undoarray[0] != NULL) {
+				delete Undoarray[0];
+				Undoarray[0] = NULL;
+			}
 
 			for (int i = 0; i < 4; ++i)
 			{
@@ -251,13 +260,19 @@ void ApplicationManager::SetInUndoList(Action* pAct)
 
 		if (RedoCount < 5)
 		{
-			delete Redoarray[RedoCount];
-			Redoarray[RedoCount] = NULL;
+			if (Redoarray[RedoCount] != NULL)
+			{
+				delete Redoarray[RedoCount];
+				Redoarray[RedoCount] = NULL;
+			}
 		}
 		else
 		{
-			delete Redoarray[RedoCount - 1];
-			Redoarray[RedoCount - 1] = NULL;
+			if (Redoarray[RedoCount - 1] != NULL)
+			{
+				delete Redoarray[RedoCount - 1];
+				Redoarray[RedoCount - 1] = NULL;
+			}
 		}
 	}
 }
@@ -282,10 +297,11 @@ void ApplicationManager::SetInRedoList(Action* pAct)
 		{
 			Redoarray[RedoCount++] = pAct->clone();
 			UndoCount--;
-
-			delete Undoarray[UndoCount];
-			Undoarray[UndoCount] = NULL;
-			
+			if (Undoarray[UndoCount] != NULL)
+			{
+				delete Undoarray[UndoCount];
+				Undoarray[UndoCount] = NULL;
+			}
 		}
 		else
 			Redoarray[RedoCount] = NULL;
@@ -324,8 +340,11 @@ void ApplicationManager::DeleteFigList()
 {
 	for (int i = 0; i < FigCount; i++)
 	{
-		delete FigList[i];
-		FigList[i] = NULL;
+		if (FigList[i] != NULL)
+		{
+			delete FigList[i];
+			FigList[i] = NULL;
+		}
 	}
 	FigCount = 0;
 }
@@ -334,11 +353,13 @@ void ApplicationManager::Deleteundoarray()
 
 	for (int i = 0; i < UndoCount && Undoarray[i]; i++) 
 	{
-		delete Undoarray[i];
-		Undoarray[i] = NULL;
+		if (Undoarray[i] != NULL) 
+		{
+			delete Undoarray[i];
+			Undoarray[i] = NULL;
+		}
 	}
 	UndoCount = 0;
-
 }
 void ApplicationManager::Clearall() 
 {
@@ -646,6 +667,11 @@ ApplicationManager::~ApplicationManager()
 	Clearall();
 	delete pIn;  
 	delete pOut;
+	if (Startrecaction != NULL)
+	{
+		delete Startrecaction;
+		Startrecaction = NULL;
+	}
 	pIn = NULL;
 	pOut = NULL;
 }

@@ -10,8 +10,21 @@ using std::endl;
 * intitally u cannot rec
 */
 StartRecAction::StartRecAction(ApplicationManager* pApp)
-	: Action(pApp), canStartRec(false), front(-1), rear(-1)
+	:Action(pApp), canStartRec(false), front(-1), rear(-1), queue{ nullptr }
 {
+}
+
+StartRecAction::StartRecAction(const StartRecAction& other)
+	:Action(other.pManager), canStartRec(other.canStartRec), 
+	front(other.front), rear(other.rear), queue{ nullptr }
+{
+	for (int i = 0; i < MAX_SIZE; i++)
+	{
+		if (other.queue[i] != nullptr)
+		{
+			queue[i] = other.queue[i]->clone();
+		}
+	}
 }
 
 /*
@@ -180,9 +193,13 @@ bool StartRecAction::ckeckActionValidity(const ActionType& type) const
 		break;
 	case START_REC:
 		break;
+	case PLAY_VOICE:
+		break;
 	default:
 		return true;
 	}
+	pManager->GetOutput()->PrintMessage("Action cannot be recorded");
+	Sleep(1000);
 	return false;
 }
 
@@ -215,14 +232,12 @@ void StartRecAction::enqueue(Action* action)
 {
 	if (action == nullptr) 
 	{
-		cout << "Action is nullptr" << endl;
 		return;
 	}
 	else 
 	{
 		if (isFull()) 
 		{
-			cout << "Queue is full" << endl;
 			return;
 		}
 		else if (isEmpty()) 
@@ -249,7 +264,6 @@ Action* StartRecAction::dequeue()
 
 	if (isEmpty()) 
 	{
-		cout << "Queue is empty" << endl;
 		return (action);//nullptr if empty
 	}
 	else if (front == rear) 
@@ -264,6 +278,11 @@ Action* StartRecAction::dequeue()
 		front++;
 	}
 	return (action);
+	// if i want to play this rec 3 times i will dequeue it 3 times and execute it 3 times
+	// there is a problem here i dequue so i dequeue i lose the action bcs the front is incremented
+	// how to solve this problem ?
+	// ans  i donot want to dequeue i want to get the front and execute it and then dequeue it
+
 }
 
 
@@ -276,7 +295,6 @@ void StartRecAction::displayQueue() const
 {
 	if (isEmpty()) 
 	{
-		cout << "Queue is empty no display" << endl;
 		return;
 	}
 }
@@ -290,7 +308,6 @@ Action* StartRecAction::getFront() const
 {
 	if (isEmpty()) 
 	{
-		cout << "Queue is empty no front" << endl;
 		return nullptr;
 	}
 	return (queue[front]);
@@ -305,7 +322,6 @@ Action* StartRecAction::getRear() const
 {
 	if (isEmpty()) 
 	{
-		cout << "Queue is empty no rear" << endl;
 		return nullptr;
 	}
 	return (queue[rear]);
@@ -319,6 +335,15 @@ Action* StartRecAction::getRear() const
 int StartRecAction::getQueueSize() const 
 {
 	return (rear - front + 1);
+}
+
+void StartRecAction::setFrontIndex(int idx)
+{
+	front = idx;
+}
+void StartRecAction::setRearIndex(int idx)
+{
+	rear = idx;
 }
 
 

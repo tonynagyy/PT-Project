@@ -14,17 +14,10 @@ class PlayVoiceAction : public Action
 public:
 	PlayVoiceAction(ApplicationManager* pApp);
 
-	virtual void ReadActionParameters() ;
-
-
-	virtual void Execute();
-
-	virtual void undo() ;
-
-	virtual Action* clone() const ;
-
-
-
+	void ReadActionParameters() override;
+	void Execute() override;
+	void undo()  override;
+	Action* clone() const override;
 };
 
 #endif
