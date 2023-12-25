@@ -6,22 +6,11 @@
 ApplicationManager::ApplicationManager() :
 	FigCount(0), UndoCount(0), RedoCount(0),undoable(false), Actualfigcounter(0)
 	, actionsCount(0), InRecording(false), action(NULL),
-	Startrecaction(NULL), PlayRecStatus(false), Playvoice(false)
+	Startrecaction(NULL), PlayRecStatus(false), Playvoice(false),
+	Undoarray{ NULL }, Redoarray{ NULL }, FigList{ NULL }, SelectedFig(NULL)
 {
 	pOut = new Output;
 	pIn = pOut->CreateInput();
-	
-
-	//Create an array of figure pointers and set them to NULL		
-	for (int i = 0; i < MaxFigCount; i++)
-		FigList[i] = NULL;
-
-	//Create an array of undoable and redoable action pointers and set them to NULL
-	for (int i = 0; i < 5; i++)
-	{
-		Undoarray[i] = NULL;
-		Redoarray[i] = NULL;
-	}
 }
 
 //==================================================================================//
