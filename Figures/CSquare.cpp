@@ -77,23 +77,6 @@ Point CSquare::Getcenter()
 {
 	return center;
 }
-
-/*
-int CSquare::GetNum()
-{
-	return Num;
-}
-
-void CSquare::IncNum()
-{
-	Num++;
-}
-
-void CSquare::DecNum()
-{
-	Num--;
-}
-*/
 color CSquare::GetDrawClr()
 {
 	return FigGfxInfo.DrawClr;
@@ -105,7 +88,7 @@ color CSquare::GetFillClr()
 }
 
 void CSquare::Save(ofstream& outFile) {
-	outFile << "SQ\t" << ID << "\t" << center.x << "\t" << center.y << "\t";
+	outFile << "SQ\t" << ID << "\t" << Identifier << "\t" << center.x << "\t" << center.y << "\t";
 	outFile << FigGfxInfo.DrawClr << "\t";
 	outFile << FigGfxInfo.FillClr << endl;
 }
@@ -117,7 +100,7 @@ void CSquare::move(double x, double y)
 }
 
 void CSquare::Load(ifstream& Infile) {
-	Infile >> ID >> center.x >> center.y;
+	Infile >> ID >> Identifier >> center.x >> center.y;
 	Infile >> FigGfxInfo.DrawClr;
 	Infile >> FigGfxInfo.FillClr;
 }

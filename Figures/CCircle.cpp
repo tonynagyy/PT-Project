@@ -115,31 +115,41 @@ CCircle::CCircle(const Point& p1, const Point& p2, GfxInfo FigureGfxInfo) : CFig
  {
 	 return new CCircle(*this);
  }
+ /*
+ * Save Cicle Data to the file
+ * @param Output File
+ * ID Identifier P1.x P1.y P2.x P2.y DrawClr FillClr
+ */
 
  void CCircle::Save(ofstream& OutFile)
  {
-	 OutFile << "CIRC\t" << ID << "\t";
+	 OutFile << "CIRC\t" << ID << "\t" <<  Identifier << "\t";
 	 OutFile << P1.x << "\t" << P1.y << "\t" << P2.x << "\t" << P2.y << "\t";
 	 OutFile << FigGfxInfo.DrawClr << "\t";
 	 OutFile << FigGfxInfo.FillClr << endl;
  }
 
- void CCircle::Load(ifstream& inFile) {
-	 inFile >> ID >> P1.x >> P1.y >> P2.x >> P2.y;
+ /*
+ * Load Cicle Data from the file
+ * @param Input File
+ * read ID Identifier P1.x P1.y P2.x P2.y DrawClr FillClr
+ */
+ void CCircle::Load(ifstream& inFile)
+ {
+	 inFile >> ID >> Identifier >> P1.x >> P1.y >> P2.x >> P2.y;
 	 inFile >> FigGfxInfo.DrawClr;
 	 inFile >> FigGfxInfo.FillClr;
  }
 
  void CCircle::move(double x, double y)
  {
-	 
-      double shiftx = x - P1.x;
+	 double shiftx = x - P1.x;
 	 double shifty = y - P1.y;
+
 	 P1.x = x;
 	 P2.x = P2.x +shiftx;
 	 P1.y = y;
 	 P2.y = P2.y +shifty;
-
  }
 
  

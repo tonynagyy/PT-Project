@@ -8,12 +8,12 @@ DeletefigAction::DeletefigAction(ApplicationManager* pApp): Action(pApp)
 void DeletefigAction::ReadActionParameters()
 {
 
-    //Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
 	//selectedfig->clone();
 	selectedfig = pManager->GetSelectedFigure();
+
 	if (selectedfig == NULL)
 	{
 		pOut->PrintMessage("Select the figure you want to delete first");
@@ -36,13 +36,13 @@ void DeletefigAction::Execute()
 	if (selectedfig != nullptr)
 	{
 		pManager->DeleteFig(selectedfig);
-		
 	}
 }
 
 void DeletefigAction::undo()  // undoing the delete operation by adding the figure deleted
 {
-	if (selectedfig){
+	if (selectedfig)
+	{
 		selectedfig->SetSelected(false);
 		pManager->AddFigure(selectedfig);
 	}

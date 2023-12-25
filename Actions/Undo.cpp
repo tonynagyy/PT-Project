@@ -1,10 +1,8 @@
 #include "Undo.h"
 
-Undo::Undo(ApplicationManager* pApp):Action(pApp)
+Undo::Undo(ApplicationManager* pApp):
+	Action(pApp), UndoPtr(NULL)
 {
-	UndoPtr = NULL;
-	//FigurePtr = NULL;
-	//UndoPtr = new Action(pApp);
 }
 
 void Undo::ReadActionParameters()
@@ -16,18 +14,14 @@ void Undo::ReadActionParameters()
 	UndoPtr = (pManager->GetLastUndo());//Get the last undoable action 
 	
 	if (UndoPtr != NULL)
-		UndoPtr = (pManager->GetLastUndo())->clone();
-
-
-	if (UndoPtr != NULL){
+	{
+		UndoPtr = UndoPtr->clone(); // clone the last undoable action to be undone later
 		pOut->PrintMessage("Undo the Last Action");
 	}
-	else{
+	else
+	{
 		pOut->PrintMessage("No Action to Undo");
 	}
-
-
-
 }
 	
 

@@ -122,13 +122,13 @@ color CHexagon::GetFillClr()
 }
 
 void CHexagon::Save(ofstream& outFile) {
-	outFile << "HEX\t" << ID << "\t" << center.x << "\t" << center.y << "\t";
+	outFile << "HEX\t" << ID << "\t" << Identifier << "\t" << center.x << "\t" << center.y << "\t";
 	outFile << FigGfxInfo.DrawClr << "\t";
 	outFile << FigGfxInfo.FillClr << endl;
 }
 
 void CHexagon::Load(ifstream& inFile) {
-	inFile >> ID >> center.x >> center.y;
+	inFile >> ID >> Identifier >> center.x >> center.y;
 	inFile >> FigGfxInfo.DrawClr;
 	inFile >> FigGfxInfo.FillClr;
 }

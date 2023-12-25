@@ -18,11 +18,11 @@ void Redo::ReadActionParameters()
 	{
 		Redoptr = Redoptr->clone();
 	}
-
 	if (Redoptr != NULL){
 		pOut->PrintMessage("Redo the Last Action");
 	}
-	else{
+	else
+	{
 		pOut->PrintMessage("No Action to Redo");
 	}
 }
@@ -56,6 +56,5 @@ Action* Redo::clone() const
 
 Redo::~Redo()
 {
-	//delete Redoptr;
 	Redoptr = NULL;
 }

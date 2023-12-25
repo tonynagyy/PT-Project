@@ -18,14 +18,11 @@ class DeletefigAction : public Action
 
 public:
 	DeletefigAction(ApplicationManager* pApp);
+	~DeletefigAction();
 
 	virtual void ReadActionParameters();
-
 	virtual void Execute();
-
-	virtual void undo(); // undoing the delete operation by adding the figure deleted	
+	virtual void undo();
 	virtual Action* clone() const override;
-
-	~DeletefigAction();
 };
 #endif;

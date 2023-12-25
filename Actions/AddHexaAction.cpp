@@ -6,27 +6,21 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddHexaAction::AddHexaAction(ApplicationManager* pApp) :Action(pApp) 
+AddHexaAction::AddHexaAction(ApplicationManager* pApp) :
+	Action(pApp) , hexa(NULL), center(0,0)
 {
-	hexa = NULL;
-	center.x = 0;
-	center.y = 0;
 }
 
 void AddHexaAction::ReadActionParameters()
 {
-	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
 	pOut->PrintMessage("New Hexagon: Click at the center of Hexagon");
-
-	//Read the center and store in point center
 	pIn->GetPointClicked(center.x, center.y);
-
 	
+	/*set colors data*/
 	HexaGfxInfo.isFilled = false;	//default is not filled
-	//get drawing, filling colors and pen width from the interface
 	HexaGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	HexaGfxInfo.FillClr = pOut->getCrntFillColor();
 
@@ -35,7 +29,6 @@ void AddHexaAction::ReadActionParameters()
 
 void AddHexaAction::Execute()
 {
-	//This action needs to read some parameters first
 	if (center.x == 0 && center.y == 0)
 	{
 		ReadActionParameters();
@@ -43,14 +36,10 @@ void AddHexaAction::Execute()
 
 	if (hexa == NULL)
 	{
-		//Create a Hexagon with the parameters read from the user
 		hexa = new CHexagon(center, HexaGfxInfo);
 	}
 
-	//Add the Hexagon to the list of figures
 	pManager->AddFigure(hexa);
-	
-
 }
 
 void AddHexaAction::undo()

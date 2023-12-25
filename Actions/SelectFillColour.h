@@ -13,16 +13,12 @@ class SelectFillColour : public Action
 public:
 
 	SelectFillColour(ApplicationManager* pApp);
-
-	virtual void ReadActionParameters();
-
-	virtual void Execute();
-
-	virtual void undo();
-
-	virtual Action* clone()  const override;
-
 	~SelectFillColour();
+
+	void ReadActionParameters() override;
+	void Execute() override;
+	void undo() override;
+	Action* clone()  const override;
 };
 
 #endif

@@ -12,17 +12,12 @@ private:
 	CFigure* hexa;
 public:
 	AddHexaAction(ApplicationManager* pApp);
+	~AddHexaAction();
 
-	//Reads hexagon parameters
 	virtual void ReadActionParameters();
-
-	//Add hexagon to the ApplicationManager
 	virtual void Execute();
 	virtual void undo();
-
 	virtual Action* clone() const override;
-
-	~AddHexaAction();
 };
 
 #endif

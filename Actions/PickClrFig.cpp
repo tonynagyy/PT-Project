@@ -1,7 +1,8 @@
 #include "PickClrFig.h"
 
 PickClrFigAction::PickClrFigAction(ApplicationManager* pApp) : Action(pApp)
-{}
+{
+}
 
 void PickClrFigAction::ReadActionParameters()
 {

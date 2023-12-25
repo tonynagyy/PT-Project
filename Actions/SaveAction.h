@@ -17,14 +17,12 @@ class SaveAction : public Action
 {
 	string fileName;
 	ofstream outFile;
-public:
 	color drawColor;
 	color fillColor;
+public:
 	SaveAction(ApplicationManager* pApp);
 	void ReadActionParameters() override;
 	void Execute() override;
-	const string& getFileName() const;
-	void setFileNmae(const string& fileName);
 	SaveAction * clone() const override;
 	void undo() override;
 

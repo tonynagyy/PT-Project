@@ -15,6 +15,7 @@ private:
 public:
 	CRectangle(const Point &,const Point &, GfxInfo FigureGfxInfo );
 	CRectangle() = default;
+
 	virtual void Draw(Output* pOut) const;
 	virtual bool InFigure(int x, int y);
 

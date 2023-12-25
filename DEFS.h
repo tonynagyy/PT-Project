@@ -52,6 +52,10 @@ enum ActionColour
 struct Point	//To be used for figures points
 {
 	int x, y;
+	Point() = default;
+	Point(int x, int y) : 
+		x(x), y(y) {
+	}
 };
 
 struct GfxInfo	//Graphical info of each figure (you may add more members)

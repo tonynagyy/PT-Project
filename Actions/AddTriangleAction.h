@@ -3,7 +3,7 @@
 
 #include "Action.h"
 #include"../Figures/CFigure.h"
-//Add Triangle Action class
+
 class AddTriangleAction : public Action
 {
 private:
@@ -12,18 +12,12 @@ private:
 	CFigure* triangle;
 public:
 	AddTriangleAction(ApplicationManager* pApp);
-
-	//Reads rectangle parameters
-	virtual void ReadActionParameters();
-
-	//Add rectangle to the ApplicationManager
-	virtual void Execute();
-
-	virtual void undo();
-
-	virtual Action* clone() const override;
-
 	 ~AddTriangleAction();
+
+	virtual void ReadActionParameters();
+	virtual void Execute();
+	virtual void undo();
+	virtual Action* clone() const override;
 };
 
 #endif

@@ -3,7 +3,8 @@
 
 #include "Action.h"
 #include "..\ApplicationManager.h"
-class clearAll : public Action {
+class clearAll : public Action
+{
 private:
 	string warningMsg;
 public:
@@ -12,7 +13,6 @@ public:
 	void Execute() override;
 	void undo() override;
 	Action* clone() const override;
-	
 };
 #endif
 

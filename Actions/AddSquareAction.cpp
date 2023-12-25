@@ -6,28 +6,21 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddSquareAction::AddSquareAction(ApplicationManager* pApp) :Action(pApp) 
+AddSquareAction::AddSquareAction(ApplicationManager* pApp) :
+	Action(pApp) , square(NULL), center(0,0)
 {
-	center.x = 0;
-	center.y = 0;
-
-	square = NULL;
 }
 
 void AddSquareAction::ReadActionParameters()
 {
-	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
 	pOut->PrintMessage("New Square: Click at the center of Square");
-
-	//Read the center and store in point center
 	pIn->GetPointClicked(center.x, center.y);
 
-
-	SquareGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
+	SquareGfxInfo.isFilled = false;	//default is not filled
 	SquareGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	SquareGfxInfo.FillClr = pOut->getCrntFillColor();
 
@@ -36,7 +29,6 @@ void AddSquareAction::ReadActionParameters()
 
 void AddSquareAction::Execute()
 {
-	//This action needs to read some parameters first
 	if (center.x == 0 && center.y == 0)
 	{
 		ReadActionParameters();
@@ -44,14 +36,10 @@ void AddSquareAction::Execute()
 	
 	if (square == NULL)
 	{
-		//Create a Square with the parameters read from the user
 		square = new CSquare(center, SquareGfxInfo);
 	}
 
-	//Add the Square to the list of figures
 	pManager->AddFigure(square);
-
-	
 }
 
 void AddSquareAction::undo()

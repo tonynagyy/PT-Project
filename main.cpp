@@ -1,26 +1,17 @@
 #include "ApplicationManager.h"
 
-
-int main()
-{
-
+int main() {
   	ActionType ActType;
-	//Create an object of ApplicationManager
  	ApplicationManager AppManager;
 
-	do
-	{		
-		//Read user action
+	do {		
 		ActType = AppManager.GetUserAction();
 
-		//Exexute the action
 		AppManager.ExecuteAction(ActType);
 
-		//Update the interface
 		AppManager.UpdateInterface();	
 
 	} while(ActType != EXIT && ActType != GET_EXIT_PLAY);
 	
-	return 0;
+	return (0);
 }
-

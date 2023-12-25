@@ -14,16 +14,14 @@ private:
 
 	Point P;
 	CFigure* Fig = nullptr;
-
 public:
 	SelectAction(ApplicationManager* pApp);
 
 	// get point and the figure from the user
-	virtual void ReadActionParameters();
-	virtual void Execute();
-	virtual void undo();
-
-	virtual Action* clone() const override;
+	 void ReadActionParameters() override;
+	 void Execute() override;
+	 void undo() override;
+	 Action* clone() const override;
 };
 
 

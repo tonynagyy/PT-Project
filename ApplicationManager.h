@@ -5,8 +5,23 @@
 #include "Figures\CFigure.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
-#include"Actions/Undo.h"
-#include "Actions\StartRecAction.h"
+#include "Actions\AddRectAction.h"
+#include "Actions\AddCircleAction.h"
+#include "Actions\AddHexaAction.h"
+#include "Actions\AddTriangleAction.h"
+#include "Actions\AddSquareAction.h"
+#include "Actions\SelectAction.h"
+#include "Actions\DeletefigAction.h"
+#include "Actions\PickFigAction.h"
+#include "Actions\PickClrAction.h"
+#include "Actions\PickClrFig.h"
+#include "Actions\Undo.h"
+#include "Actions\SelectFillColour.h"
+#include "Actions\SelectDrawColour.h"
+#include "Actions\SaveAction.h"
+#include "Actions\clearall.h"
+#include "Actions\MoveAction.h"
+#include "Actions\LoadAction.h"
 
 //Main class that manages everything in the application.
 class ApplicationManager
@@ -19,44 +34,36 @@ private:
 	bool Playvoice;     //boolean to play voice
 	int FigCount;		//Actual number of figures
 	int Actualfigcounter;	//Actual number of figures
+	int actionsCount;
+	int UndoCount;
+	int RedoCount;
+	bool undoable;
 	CFigure *FigList[MaxFigCount];	//List of all figures (Array of pointers)
 	CFigure *SelectedFig; //Pointer to the selected figure
 	Input *pIn;/*pointer to the input */
 	Output *pOut;/*pointer to the output */
-
 	Action* Undoarray[5];/*array to save actions for undo*/
 	Action* Redoarray[5];/*array to save actions for redo*/
-	int UndoCount;
-	int RedoCount;
-	bool undoable;
-
-
-	int actionsCount;
+	Action* Startrecaction;
 	Action* action;
-
 	bool InRecording;
 	bool PlayRecStatus;
-	Action* Startrecaction;
-
 public:	
 
 	ApplicationManager(); 
 	~ApplicationManager();
 	
 	// -- Action-Related Functions
-	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
 	Action* getActionPtr() const;
 	void setActionPtr(Action* action);
 	void ExecuteAction(ActionType) ; //Creates an action and executes it
-
 	void SetInUndoList(Action* pAct);
 	Action* GetLastUndo();
 	void SetInRedoList(Action* pAct);
 	Action* GetLastRedo();
 	void DeleteAllRedos();
 	void Setundoable(bool b);
-
 	void DeleteFigList();
 	void Deleteundoarray();
 	void Clearall();
@@ -75,7 +82,6 @@ public:
 	void Changefillcolor(CFigure* pFig ,color clr);
 	void Changedrawcolor(CFigure* pFig, color clr);
 	void Movefigure(CFigure* pFig, int x, int y);
-
 	CFigure* GetSelectedFigure();
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	void UnSelect();
@@ -84,7 +90,8 @@ public:
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
-	
+
+	/*Save*/
 	void saveAll(ofstream &outfile) ;
 	int getActFigCount() ;
 	int getActionsCounter() const ;
@@ -97,5 +104,4 @@ public:
 	bool CheckPlay(int I, color clr); // check if there is a figure with the same identifier and colour or not
 	void DrawingBack(); // return the figures after playing
 };
-
 #endif

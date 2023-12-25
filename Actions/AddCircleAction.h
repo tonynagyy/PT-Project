@@ -3,7 +3,7 @@
 
 #include "Action.h"
 #include"../Figures/CFigure.h"
-//Add circle Action class
+
 class AddCircleAction : public Action
 {
 private:
@@ -12,17 +12,11 @@ private:
 	CFigure* circle;
 public:
 	AddCircleAction(ApplicationManager* pApp);
-
-	//Reads circle parameters
-	virtual void ReadActionParameters();
-	
-	//Add circle to the ApplicationManager
-	virtual void Execute();
-	virtual void undo();
-
-	virtual Action* clone() const override;
-
 	 ~AddCircleAction();
-};
 
+	void ReadActionParameters() override;
+	 void Execute() override;
+	 void undo() override;
+	AddCircleAction* clone() const override;
+};
 #endif

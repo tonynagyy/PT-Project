@@ -14,17 +14,13 @@ private:
 	bool PlayRectVoice;
 public:
 	AddRectAction(ApplicationManager *pApp, bool voice);
+	AddRectAction(ApplicationManager *pApp);
+	~AddRectAction();
 
-	//Reads rectangle parameters
 	virtual void ReadActionParameters();
-	
-	//Add rectangle to the ApplicationManager
 	virtual void Execute() ;
 	virtual void undo();
-
 	Action* clone() const override;
-
-	~AddRectAction();
 };
 
 #endif

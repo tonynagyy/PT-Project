@@ -11,6 +11,7 @@ class StartRecAction : public Action {
 		int rear;
 	public:
 		StartRecAction(ApplicationManager *pApp);
+		~StartRecAction();
 		void ReadActionParameters() override;
 		void Execute() override;
 		void undo() override;
@@ -26,5 +27,4 @@ class StartRecAction : public Action {
 		Action *getFront() const;	
 		Action *getRear() const;
 		int getQueueSize() const;
-	
 };
