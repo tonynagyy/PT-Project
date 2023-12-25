@@ -1,8 +1,16 @@
 #include "Redo.h"
 
-Redo::Redo(ApplicationManager* pApp) :Action(pApp)
+Redo::Redo(ApplicationManager* pApp) :Action(pApp), Redoptr(NULL)
 {
-	Redoptr = NULL;
+}
+
+Redo::Redo(const Redo& other)
+	: Action(other)
+{
+	if (other.Redoptr != NULL)
+	{
+		Redoptr = other.Redoptr->clone();
+	}
 }
 
 void Redo::ReadActionParameters()

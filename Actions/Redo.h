@@ -23,6 +23,7 @@ public:
 	Action* Redoptr;	// pointer to last Redoable action
 public:
 	Redo(ApplicationManager* pApp);
+	Redo(const Redo& other);
 	~Redo();
 
 	virtual void ReadActionParameters() override;

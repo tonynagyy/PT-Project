@@ -22,7 +22,7 @@ void PlayRecAction::ReadActionParameters()
 	else
 	{
 		NumOfRecActions = RecordedActions->getQueueSize();
-		if (NumOfRecActions == 1)
+		if (NumOfRecActions == 0)
 		{
 			pOut->PrintMessage("No recorded actions to be played");
 		}
@@ -44,7 +44,7 @@ void PlayRecAction::Execute()
 	Output* pOut = pManager->GetOutput();
 
 	ReadActionParameters();
-	if (RecordedActions != NULL && NumOfRecActions != 1)
+	if (RecordedActions != NULL && NumOfRecActions != 0)
 	{
 		for (int i = 0; i < NumOfRecActions; i++)
 		{
@@ -53,9 +53,11 @@ void PlayRecAction::Execute()
 			pManager->UpdateInterface();
 			Sleep(2000);
 
-			delete pAction;
-			pAction = NULL;
+			//delete pAction;
+			//pAction = NULL;
 		}
+		RecordedActions->setFrontIndex(0);
+		RecordedActions->setRearIndex(NumOfRecActions - 1);
 		pOut->PrintMessage("The Play Recording Finished");
 	}
 	pManager->SetPlayrec(false);
@@ -73,6 +75,6 @@ PlayRecAction* PlayRecAction::clone() const
 
 PlayRecAction::~PlayRecAction()
 {
-	delete RecordedActions;
-	RecordedActions = NULL;
+	//delete RecordedActions;
+	//RecordedActions = NULL;
 }

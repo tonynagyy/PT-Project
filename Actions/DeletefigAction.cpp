@@ -1,8 +1,16 @@
 #include "DeletefigAction.h"
 
-DeletefigAction::DeletefigAction(ApplicationManager* pApp): Action(pApp)
+DeletefigAction::DeletefigAction(ApplicationManager* pApp): 
+	Action(pApp), selectedfig(NULL)
 {
-	selectedfig = NULL;
+}
+DeletefigAction::DeletefigAction(const DeletefigAction& other) :
+	Action(other), selectedfig(NULL)
+{
+	if (other.selectedfig != NULL)
+	{
+		selectedfig = other.selectedfig->clone();
+	}
 }
 
 void DeletefigAction::ReadActionParameters()
@@ -48,13 +56,16 @@ void DeletefigAction::undo()  // undoing the delete operation by adding the figu
 	}
 }
 
-Action* DeletefigAction::clone() const
+DeletefigAction* DeletefigAction::clone() const
 {
 	return new DeletefigAction(*this);
 }
 
 DeletefigAction::~DeletefigAction()
 {
-	delete selectedfig;
-	selectedfig = NULL;	
+	if (selectedfig != NULL)
+	{
+		delete selectedfig;
+		selectedfig = NULL; 
+	}
 }

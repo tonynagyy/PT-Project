@@ -10,8 +10,10 @@ private:
 	Point center; //Hexagon center
 	GfxInfo HexaGfxInfo;
 	CFigure* hexa;
+	bool PlayHexaVoice;
 public:
-	AddHexaAction(ApplicationManager* pApp);
+	AddHexaAction(ApplicationManager* pApp, bool voiceh);
+	AddHexaAction(const AddHexaAction & other);
 	~AddHexaAction();
 
 	virtual void ReadActionParameters();

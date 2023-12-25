@@ -5,6 +5,19 @@ Undo::Undo(ApplicationManager* pApp):
 {
 }
 
+Undo::Undo(const Undo& other)
+	:Action(other)
+{
+	if (other.UndoPtr != NULL)
+	{
+		UndoPtr = other.UndoPtr->clone();
+	}
+	else
+	{
+		UndoPtr = NULL;
+	}
+}
+
 void Undo::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
@@ -53,6 +66,9 @@ Action* Undo::clone() const
 
 Undo::~Undo()
 {
-	delete UndoPtr;
-	UndoPtr = NULL;
+	if (UndoPtr != NULL) 
+	{
+		delete UndoPtr;
+		UndoPtr = NULL;
+	}
 }

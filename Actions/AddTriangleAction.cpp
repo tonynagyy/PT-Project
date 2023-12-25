@@ -6,15 +6,31 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddTriangleAction::AddTriangleAction(ApplicationManager* pApp) : 
-	Action(pApp), P1(0, 0), P2(0,0), P3(0, 0), triangle(NULL)
+AddTriangleAction::AddTriangleAction(ApplicationManager* pApp, bool voice) : 
+	Action(pApp), P1(0, 0), P2(0,0), P3(0, 0), triangle(NULL), PlayTrigSound(voice)
 {
 }
+
+AddTriangleAction::AddTriangleAction(const AddTriangleAction& other) :
+	Action(other), P1(other.P1), P2(other.P2), P3(other.P3), triangle(NULL),
+	PlayTrigSound(other.PlayTrigSound), triangleGfxInfo(other.triangleGfxInfo)
+{
+	if (other.triangle != NULL)
+	{
+		triangle = static_cast<CTriangle*>(other.triangle->clone());
+	}
+
+}
+
 
 void AddTriangleAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+	if (PlayTrigSound)
+	{
+		PlaySound(TEXT("Voices\\tri.wav"), NULL, SND_ASYNC);
+	}
 
 	pOut->PrintMessage("New Triangle: Click at first point");
 	pIn->GetPointClicked(P1.x, P1.y);

@@ -1,8 +1,15 @@
 #include "SelectAction.h"
 
-SelectAction::SelectAction(ApplicationManager* pApp) :Action(pApp)
+SelectAction::SelectAction(ApplicationManager* pApp) :Action(pApp), Fig(NULL), P(0,0)
 {
-	Fig = NULL;
+}
+SelectAction::SelectAction(const SelectAction& other) :
+	Action(other) , P(0,0), Fig(NULL)
+{
+	if (other.Fig != NULL)
+	{
+		Fig = other.Fig->clone();
+	}
 }
 
 void SelectAction::ReadActionParameters()

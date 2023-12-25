@@ -10,13 +10,15 @@ private:
 	Point P1, P2; //circle points
 	GfxInfo circleGfxInfo;
 	CFigure* circle;
+	bool PlayCircleVoice;
 public:
-	AddCircleAction(ApplicationManager* pApp);
-	 ~AddCircleAction();
+	AddCircleAction(ApplicationManager* pApp, bool voice);
+	AddCircleAction(const AddCircleAction& other);
+	~AddCircleAction();
 
 	void ReadActionParameters() override;
-	 void Execute() override;
-	 void undo() override;
+	void Execute() override;
+	void undo() override;
 	AddCircleAction* clone() const override;
 };
 #endif

@@ -13,16 +13,13 @@
 class DeletefigAction : public Action
 {
 	CFigure* selectedfig = nullptr; // pointer to figure to be deleted 
-
-
-
 public:
 	DeletefigAction(ApplicationManager* pApp);
+	DeletefigAction(const DeletefigAction& other);
 	~DeletefigAction();
-
+	DeletefigAction* clone() const override;
 	virtual void ReadActionParameters();
 	virtual void Execute();
 	virtual void undo();
-	virtual Action* clone() const override;
 };
 #endif;

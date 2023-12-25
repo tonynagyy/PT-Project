@@ -11,8 +11,10 @@ private:
 	Point center; //Square center
 	GfxInfo SquareGfxInfo;
 	CFigure* square;
+	bool PlaySquareVoice;
 public:
-	AddSquareAction(ApplicationManager* pApp);
+	AddSquareAction(ApplicationManager* pApp, bool voice);
+	AddSquareAction(const AddSquareAction& other);
 	~AddSquareAction();
 
 	virtual void ReadActionParameters();

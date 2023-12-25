@@ -13,6 +13,7 @@ class SelectDrawColour : public Action
 public:
 
 	SelectDrawColour(ApplicationManager* pApp);
+	SelectDrawColour(const SelectDrawColour& other);
 	~SelectDrawColour();
 
 	 void ReadActionParameters() override;	

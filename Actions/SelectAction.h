@@ -11,11 +11,11 @@
 class SelectAction : public Action
 {
 private:
-
 	Point P;
 	CFigure* Fig = nullptr;
 public:
 	SelectAction(ApplicationManager* pApp);
+	SelectAction(const SelectAction& other);
 
 	// get point and the figure from the user
 	 void ReadActionParameters() override;

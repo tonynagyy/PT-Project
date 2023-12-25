@@ -5,15 +5,31 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddCircleAction::AddCircleAction(ApplicationManager* pApp) :
-	Action(pApp), circle(NULL), P1(0,0), P2(0,0)
+AddCircleAction::AddCircleAction(ApplicationManager* pApp, bool voice) :
+	Action(pApp), P1(0, 0)
+	,P2(0, 0), circle(NULL), PlayCircleVoice(voice)
 {
+}
+AddCircleAction::AddCircleAction(const AddCircleAction& other) :
+	Action(other), P1(other.P1), P2(other.P2), circle(NULL),
+	PlayCircleVoice(other.PlayCircleVoice), circleGfxInfo(other.circleGfxInfo)
+{
+	if (other.circle != NULL)
+	{
+		circle = static_cast<CCircle*>(other.circle->clone());
+	}
 }
 
 void AddCircleAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+
+	if (PlayCircleVoice)          // if Voice is enabled then play the voice of rectangle
+	{
+		PlaySound(TEXT("Voices\\circ.wav"), NULL, SND_ASYNC);
+		//PlaySound(0, 0, 0);
+	}
 
 	pOut->PrintMessage("New circle: Click at first point");
 	pIn->GetPointClicked(P1.x, P1.y);
