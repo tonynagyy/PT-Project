@@ -56,7 +56,7 @@ void MoveAction::undo()
 {
 	if (Selectedfig != NULL)
 	{
-		double x = NewcenterPoint.x, y = NewcenterPoint.y;
+		double x = InicenterPoint.x, y = InicenterPoint.y;
 		pManager->Movefigure(Selectedfig, x, y);
 	}
 }
