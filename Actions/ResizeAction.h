@@ -1,5 +1,5 @@
-#ifndef DRAGGINGMOVE_H
-#define DRAGGINGMOVE_H
+#ifndef RESIZEACTION_H
+#define RESIZEACTION_H
 
 #include "Action.h"
 #include "..\Figures\CFigure.h"
@@ -8,20 +8,21 @@
 #include "..\GUI\Output.h"
 #include "..\defs.h"
 
-class DraggingMove : public Action
+class ResizeAction : public Action
 {
 	CFigure* Fig; // the selected figure
 	Point P;
+	bool Valid = true; // flag if the coordinates are not allowed
+	int FigCorner; // the closest corner from the point
 
 public:
 
-	DraggingMove(ApplicationManager* pApp);
+	ResizeAction(ApplicationManager* pApp);
 	virtual void ReadActionParameters();
 	virtual void Execute();
 
 	virtual void undo();
 	virtual Action* clone() const;
 };
-
 
 #endif

@@ -37,7 +37,8 @@ public:
 
 	//Print the data of the figure on the status bar
 	virtual void PrintInfo(Output* pOut);
-	virtual void move(double x, double y) override ;
+	virtual void move(double& x, double& y, bool b = true) override;
+	virtual void Resize(int x, int y, bool& Valid, int c);
 };
 
 #endif

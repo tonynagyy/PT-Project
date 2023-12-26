@@ -78,6 +78,7 @@ ActionType Input::GetUserAction() const
 			case ITM_PLAYMODE: return TO_PLAY;
 			case ITM_PLAY_VOICE: return PLAY_VOICE;
 			case ITM_DRAGGING_MOVE: return DRAGGING_MOVE;
+			case ITM_RESIZE: return RESIZE;
 			//case ITM_COLOUR: return COLOURS;
 
 			default: return EMPTY;	//A click on empty place in desgin toolbar

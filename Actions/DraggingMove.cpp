@@ -23,23 +23,26 @@ void DraggingMove::Execute()
 
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-
-	while (!pIn->ClickingStatus(P.x, P.y))
-	{
-		Fig->SetMovable(true);
-		Fig->move(P.x, P.y);
-		if (!Fig->IsMovable())
-			pOut->PrintMessage("Invalid Action");
-		pManager->UpdateInterface();
-		Sleep(1);
-		pOut->ClearStatusBar();
-	}
+	if (Fig)
+		while (!pIn->ClickingStatus(P.x, P.y))
+		{
+			double x = P.x, y = P.y;
+			Fig->move(x, y);
+			if (!Fig->IsMovable())
+				pOut->PrintMessage("Invalid Action");
+			pManager->UpdateInterface();
+			Sleep(1);
+			pOut->ClearStatusBar();
+		}
+	else
+		pOut->PrintMessage("There is no figure selected");
 }
 
 
 
 void DraggingMove::undo()
 {
+
 }
 
 Action* DraggingMove::clone() const

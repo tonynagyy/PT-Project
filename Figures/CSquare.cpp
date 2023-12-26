@@ -18,13 +18,16 @@ void CSquare::Draw(Output* pOut) const
 {
 	if (isDrawn)
 		//Call Output::DrawSquare to draw a square on the screen	
-		pOut->DrawSquare(center, FigGfxInfo, Selected);
+		pOut->DrawSquare(center, FigGfxInfo, Selected, Modified_Length);
 }
 
 bool CSquare::InFigure(int x, int y)
 {
     //Check if the point in the region of the square or not
-    return (DEST(center.x, center.y, x, y) < HALF_SQUARE_LENGTH);
+	if(!Modified_Length)
+		return (DELTA(center.x, x) < HALF_SQUARE_LENGTH && DELTA(center.y , y) < HALF_SQUARE_LENGTH);
+	else
+		return (DELTA(center.x, x) < Modified_Length && DELTA(center.y, y) < Modified_Length);
 }
 
 double CSquare::CalcArea()
@@ -58,15 +61,9 @@ void CSquare::PrintInfo(Output* pOut)
 bool CSquare::IsDrawn()
 {
 	isDrawn = !(center.y - HALF_SQUARE_LENGTH < UI.ToolBarHeight || center.y + HALF_SQUARE_LENGTH > UI.height - UI.StatusBarHeight);
-	return isDrawn;
+	bool b = !(center.y - Modified_Length < UI.ToolBarHeight || center.y + Modified_Length > UI.height - UI.StatusBarHeight);
+	return (isDrawn && b);
 }
-/*
-int CSquare::Counter()
-{
-	return Count;
-}
-*/
-
 
 int CSquare::GetID()
 {
@@ -93,8 +90,10 @@ void CSquare::Save(ofstream& outFile) {
 	outFile << FigGfxInfo.FillClr << endl;
 }
 
-void CSquare::move(double x, double y)
+void CSquare::move(double& x, double& y, bool b)
 {
+	if(b)
+		Movable = true;
 	Point temp = center;
 
 	center.x = x;
@@ -103,8 +102,19 @@ void CSquare::move(double x, double y)
 	if (!IsDrawn())
 	{
 		Movable = false;
-		move(temp.x, temp.y);
+		center = temp;
+		x = center.x, y = center.y;
+		move(x, y, false);
 	}
+}
+
+void CSquare::Resize(int x, int y, bool& Valid, int c)
+{
+	int temp = Modified_Length;
+
+	Modified_Length = DEST(x, y, center.x, center.y);
+	if (!(Valid = IsDrawn()))
+		Modified_Length = temp;
 }
 
 void CSquare::Load(ifstream& Infile) {

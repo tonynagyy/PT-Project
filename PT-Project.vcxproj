@@ -145,6 +145,7 @@
     <ClCompile Include="Actions\PlayRecAction.cpp" />
     <ClCompile Include="Actions\PlayVoiceAction.cpp" />
     <ClCompile Include="Actions\Redo.cpp" />
+    <ClCompile Include="Actions\ResizeAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\SelectDrawColour.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="Actions\PlayRecAction.h" />
     <ClInclude Include="Actions\PlayVoiceAction.h" />
     <ClInclude Include="Actions\Redo.h" />
+    <ClInclude Include="Actions\ResizeAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\SelectDrawColour.h" />

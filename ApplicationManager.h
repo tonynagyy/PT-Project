@@ -23,6 +23,7 @@
 #include "Actions\MoveAction.h"
 #include "Actions\LoadAction.h"
 #include "Actions\DraggingMove.h"
+#include "Actions\ResizeAction.h"
 
 //Main class that manages everything in the application.
 class ApplicationManager
@@ -82,7 +83,7 @@ public:
 	void DeleteFig(CFigure* pFig);
 	void Changefillcolor(CFigure* pFig ,color clr);
 	void Changedrawcolor(CFigure* pFig, color clr);
-	void Movefigure(CFigure* pFig, int x, int y);
+	void Movefigure(CFigure* pFig, double& x, double& y);
 	CFigure* GetSelectedFigure();
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	void UnSelect();

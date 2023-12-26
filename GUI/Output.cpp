@@ -14,7 +14,7 @@ Output::Output()
 	//Initialize user interface parameters
 	UI.InterfaceMode = MODE_DRAW;
 
-	UI.width = 1350;
+	UI.width = 1380;
 	UI.height = 650;
 	UI.wx = 5;
 	UI.wy = 5;
@@ -110,6 +110,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_load.jpg";
 	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\Menu_move.jpg";
 	MenuItemImages[ITM_DRAGGING_MOVE] = "images\\MenuItems\\Menu_Dragging.jpg";
+	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Menu_Resize.jpg";
 	MenuItemImages[ITM_PLAY_REC] = "images\\MenuItems\\Menu_playrec.jpg";
 	MenuItemImages[ITM_REDO] = "images\\MenuItems\\Menu_redo.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_save.jpg";
@@ -189,22 +190,13 @@ void Output::CreateColourMenu(DrawMenuItem ITM) const
 
 void Output::PrintMessage(string msg) const	//Prints a message on status bar
 {
+	Sleep(1);
 	ClearStatusBar();	//First clear the status bar
 
 	pWind->SetPen(UI.MsgColor, 50);
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
 	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.5), msg);
 }
-
-void Output::PrintNumber(int msg) const	//Prints a message on status bar
-{
-	//ClearStatusBar();	//First clear the status bar
-
-	pWind->SetPen(UI.MsgColor, 50);
-	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
-	pWind->DrawDouble(10, UI.height - (int)(UI.StatusBarHeight / 1.5), msg);
-}
-
 //////////////////////////////////////////////////////////////////////////////////////////
 
 color Output::getCrntDrawColor() const	//get current drawing color
@@ -297,7 +289,7 @@ void Output::DrawRect(const Point &P1, const Point &P2, GfxInfo RectGfxInfo, boo
 }
 
 //DRAWING SQUARE FUNCTION
-void Output::DrawSquare(Point P1, GfxInfo RectGfxInfo, bool selected) const
+void Output::DrawSquare(Point P1, GfxInfo RectGfxInfo, bool selected, int L) const
 {
 	int centerX = 0, centerY = 0, x1 = 0, y1 = 0, x2 = 0, y2 = 0;
 	color DrawingClr;
@@ -305,11 +297,20 @@ void Output::DrawSquare(Point P1, GfxInfo RectGfxInfo, bool selected) const
 
 	centerX = P1.x;
 	centerY = P1.y;
-	x1 = centerX - HALF_SQUARE_LENGTH;
-	y1 = centerY - HALF_SQUARE_LENGTH;
-	x2 = centerX + HALF_SQUARE_LENGTH;
-	y2 = centerY + HALF_SQUARE_LENGTH;
-
+	if (!L)
+	{
+		x1 = centerX - HALF_SQUARE_LENGTH;
+		y1 = centerY - HALF_SQUARE_LENGTH;
+		x2 = centerX + HALF_SQUARE_LENGTH;
+		y2 = centerY + HALF_SQUARE_LENGTH;
+	}
+	else
+	{
+		x1 = centerX - L;
+		y1 = centerY - L;
+		x2 = centerX + L;
+		y2 = centerY + L;
+	}
 	if (selected)
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
 	else
@@ -358,13 +359,17 @@ void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo RectGfxInfo, boo
 }
 
 //DRAW HEXAGON FUNCTION
-void Output::DrawHexagon(Point P1, GfxInfo RectGfxInfo, bool selected) const
+void Output::DrawHexagon(Point P1, GfxInfo RectGfxInfo, bool selected, int L) const
 {
 	color DrawingClr;
 	drawstyle style;
 	int xVertices[6] = {P1.x - HEXA_RADIUS, P1.x - HEXA_RADIUS / 2, P1.x + HEXA_RADIUS / 2, P1.x + HEXA_RADIUS, P1.x + HEXA_RADIUS /2, P1.x - HEXA_RADIUS / 2};
 	int yVertices[6] = {P1.y, ceil(P1.y + HEX_CALC), ceil(P1.y + HEX_CALC), P1.y, ceil(P1.y - HEX_CALC), ceil(P1.y - HEX_CALC)};
 
+	int L_CALC = ((sqrt(3) / 2) * L);
+	int xLVertices[6] = { P1.x - L, P1.x - L / 2, P1.x + L / 2, P1.x + L, P1.x + L / 2, P1.x - L / 2 };
+	int yLVertices[6] = { P1.y, ceil(P1.y + L_CALC), ceil(P1.y + L_CALC), P1.y, ceil(P1.y - L_CALC), ceil(P1.y - L_CALC) };
+	
 	if (selected)
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
 	else
@@ -378,8 +383,10 @@ void Output::DrawHexagon(Point P1, GfxInfo RectGfxInfo, bool selected) const
 	}
 	else
 		style = FRAME;
-
-	pWind->DrawPolygon(xVertices, yVertices, 6, style);
+	if(!L)
+		pWind->DrawPolygon(xVertices, yVertices, 6, style);
+	else
+		pWind->DrawPolygon(xLVertices, yLVertices, 6, style);
 }
 
 /*

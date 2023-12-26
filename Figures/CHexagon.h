@@ -9,8 +9,7 @@ class CHexagon : public CFigure
 {
 private:
 	Point center;
-	//static int Count;
-	//int Num;
+	int Modified_Length = 0;
 	
 public:
 	CHexagon() = default;
@@ -29,7 +28,8 @@ public:
 	virtual color GetFillClr();
 
 
-	virtual void move(double x, double y) override;
+	virtual void move(double& x, double& y, bool b = true) override;
+	virtual void Resize(int x, int y, bool& Valid, int c);
 
 	void Save(ofstream &outFile) override;
 	void Load(ifstream &inFile) override;

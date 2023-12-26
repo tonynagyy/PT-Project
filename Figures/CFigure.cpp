@@ -110,3 +110,8 @@ void CFigure::Save(ofstream& outFile) {
 }
 void CFigure::Load(ifstream& Infile) {
 }
+
+int CFigure::SelectCorner(int x, int y)
+{
+	return 0;
+}

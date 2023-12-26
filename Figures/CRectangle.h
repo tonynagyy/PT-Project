@@ -34,8 +34,9 @@ public:
 	void Load(ifstream &Infile) override;
 	
 	virtual CFigure* clone() const override;
-	virtual void move(double x, double y) override;
+	virtual void move(double& x, double& y, bool b = true) override;
+	virtual void Resize(int x, int y, bool& Valid, int c);
+	virtual int SelectCorner(int x, int y);
 	
 };
-//int CRectangle::Num = 0;
 #endif

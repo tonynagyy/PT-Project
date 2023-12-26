@@ -101,6 +101,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct = new DraggingMove(this);
 		ptrToAct->Execute();
 		break;
+	case RESIZE:
+		ptrToAct = new ResizeAction(this);
+		ptrToAct->Execute();
+		break;
 	case TO_PLAY:
 		this->UnSelect();
 		pOut->CreatePlayToolBar();
@@ -163,8 +167,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct->Execute();
 		break;
 		this->UnSelect();
-		ptrToAct = new LoadAction(this);
-		ptrToAct->Execute();
 		break;
 	case LOAD:
 		this->UnSelect();
@@ -460,7 +462,7 @@ void ApplicationManager::Changedrawcolor(CFigure* pFig, color clr)
 		}
 	}
 }
-void ApplicationManager::Movefigure(CFigure* pFig, int x, int y)
+void ApplicationManager::Movefigure(CFigure* pFig, double& x, double& y)
 {
 	for (int i = 0; i < FigCount; i++)
 	{

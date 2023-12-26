@@ -115,8 +115,13 @@ CFigure *CRectangle::clone() const
 	return new CRectangle(*this);
 }
 
-void CRectangle::move(double x, double y)
+void CRectangle::move(double& x, double& y, bool b)
 {
+	if(b)
+		Movable = true;
+
+	Point temp1 = Corner1, temp2 = Corner2;
+
 	double centerx = (Corner1.x + Corner2.x) / 2.0;
 	double centery = (Corner1.y + Corner2.y) / 2.0;
 	double shiftx = x - centerx;
@@ -129,8 +134,33 @@ void CRectangle::move(double x, double y)
 	if (!IsDrawn())
 	{
 		Movable = false;
-		move(centerx, centery);
+		Corner1 = temp1, Corner2 = temp2;
+		x = (Corner1.x + Corner2.x) / 2.0, y = (Corner1.y + Corner2.y) / 2.0;
+		move(x, y, false);
 	}
 
 
+}
+
+void CRectangle::Resize(int x, int y, bool& Valid, int c)
+{
+	if (c == 1)
+	{
+		Corner1.x = x;
+		Corner1.y = y;
+	}
+	else
+	{
+		Corner2.x = x;
+		Corner2.y = y;
+	}
+	Valid = IsDrawn();
+}
+
+int CRectangle::SelectCorner(int x, int y)
+{
+	if (y < (Corner1.y + Corner2.y) / 2)
+		return 1;
+	else
+		return 2;
 }

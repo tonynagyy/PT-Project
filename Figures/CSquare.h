@@ -9,10 +9,10 @@ class CSquare : public CFigure
 {
 	private:
 		Point center;
+		int Modified_Length = 0;
 	public:
 		CSquare(const Point&, GfxInfo FigureGfxInfo);
 		CSquare() = default;
-		//CSquare();
 		void Draw(Output* pOut) const;
 		virtual bool InFigure(int x, int y);
 		virtual double CalcArea();
@@ -27,7 +27,8 @@ class CSquare : public CFigure
 		virtual color GetFillClr();
 
 		void Save(ofstream& outFile) override;
-		virtual void move(double x, double y);
+		virtual void move(double& x, double& y, bool b = true);
+		virtual void Resize(int x, int y, bool& Valid, int c = 0);
 		void Load(ifstream& Infile) override;
 
 		virtual CFigure* clone() const override;

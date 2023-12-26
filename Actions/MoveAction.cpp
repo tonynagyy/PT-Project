@@ -44,9 +44,10 @@ void MoveAction::Execute()
 
 	if (Selectedfig != nullptr)
 	{
-		Selectedfig->SetMovable(true);
-		pManager->Movefigure(Selectedfig, NewcenterPoint.x, NewcenterPoint.y);
-		if (!Selectedfig->IsMovable())
+		double x = NewcenterPoint.x, y = NewcenterPoint.y;
+		pManager->Movefigure(Selectedfig, x, y);
+		NewcenterPoint.x = x, NewcenterPoint.y = y;
+		if (NewcenterPoint.x == InicenterPoint.x && NewcenterPoint.y == InicenterPoint.y)
 			pOut->PrintMessage("Invalid Action");
 	}
 }
@@ -55,7 +56,8 @@ void MoveAction::undo()
 {
 	if (Selectedfig != NULL)
 	{
-		pManager->Movefigure(Selectedfig, InicenterPoint.x, InicenterPoint.y);
+		double x = NewcenterPoint.x, y = NewcenterPoint.y;
+		pManager->Movefigure(Selectedfig, x, y);
 	}
 }
 

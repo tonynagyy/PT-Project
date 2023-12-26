@@ -67,7 +67,9 @@ public:
 	virtual double CalcArea() = 0;
 	virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 	virtual CFigure* clone() const = 0;
-	virtual void move(double x, double y) = 0;
+	virtual void move(double& x, double& y, bool b = true) = 0;
+	virtual void Resize(int x, int y, bool& Valid, int c = 0) = 0;
+	virtual int SelectCorner(int x, int y);
 	virtual ~CFigure() = default;
 };
 #endif

@@ -28,15 +28,13 @@ public:
 
 	// -- Figures Drawing functions
 	void DrawRect(const Point &P1,const  Point &P2, GfxInfo RectGfxInfo, bool selected = false) const;  //Draw a rectangle
-	void DrawSquare(Point P1, GfxInfo RectGfxInfo, bool selected = false) const;  //Draw a square
+	void DrawSquare(Point P1, GfxInfo RectGfxInfo, bool selected = false, int L = 0) const;  //Draw a square
 	void DrawTriangle(Point P1, Point P2, Point P3, GfxInfo RectGfxInfo, bool selected = false) const;  //Draw a tiangle
-	void DrawHexagon(Point P1, GfxInfo RectGfxInfo, bool selected) const;  //Draw a hexagon
+	void DrawHexagon(Point P1, GfxInfo RectGfxInfo, bool selected, int L = 0) const;  //Draw a hexagon
 	void DrawCircle(const  Point &P1,const  Point &P2, GfxInfo RectGfxInfo, bool selected) const;
 	///Make similar functions for drawing all other figure types.
 
 	void PrintMessage(string msg) const;	//Print a message on Status bar
-
-	void PrintNumber(int msg) const;
 
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color

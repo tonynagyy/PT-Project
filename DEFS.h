@@ -13,6 +13,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	SELECT,
 	MOVE,
 	DRAGGING_MOVE,
+	RESIZE,
 	CLEAR,
 	DEL,  // delete item ----> Note: there is a func called delete so we wrote it as "DEL"
 	DRAW_RECT, //Draw Rectangle
@@ -28,7 +29,6 @@ enum ActionType //The actions supported (you can add more if needed)
 	FILL_COLOUR, // fill the figure
 	DRAW_COLOUR, // highlighted the frame of the figure 
 	PLAY_VOICE,
-
 	TO_DRAW,		//Switch interface to Draw mode
 	PICK_CLR_FIG,
 	PICK_FIG,

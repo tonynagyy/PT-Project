@@ -124,9 +124,13 @@ CCircle::CCircle(const Point& p1, const Point& p2, GfxInfo FigureGfxInfo) : CFig
 	 inFile >> FigGfxInfo.FillClr;
  }
 
- void CCircle::move(double x, double y)
+ void CCircle::move(double& x, double& y, bool b)
  {
-	 Point temp = P1;
+	 if(b)
+		Movable = true;
+
+	 Point temp1 = P1;
+	 Point temp2 = P2;
 
 	 double shiftx = x - P1.x;
 	 double shifty = y - P1.y;
@@ -139,7 +143,22 @@ CCircle::CCircle(const Point& p1, const Point& p2, GfxInfo FigureGfxInfo) : CFig
 	 if (!IsDrawn())
 	 {
 		 Movable = false;
-		 move(temp.x, temp.y);
+		 P1 = temp1, P2 = temp2;
+		 x = P1.x, y = P1.y;
+		 move(x, y, false);
+	 }
+ }
+
+ void CCircle::Resize(int x, int y, bool& Valid, int c)
+ {
+	 Point temp = P2;
+	 double X = P2.x, Y = P2.y;
+	 P2.x = x;
+	 P2.y = y;
+	 if (!( Valid = IsDrawn()))
+	 {
+		 P2 = temp;
+		 move(X, Y);
 	 }
  }
 

@@ -37,6 +37,56 @@ double CTriangle::CalcArea()
 	return Tri_Area(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y);
 }
 
+void CTriangle::Switch()
+{
+	Point temp;
+	if (P1.x > P2.x)
+	{
+		if (P1.x > P3.x)
+			if (P2.x > P3.x)
+			{
+			}
+			else
+			{
+				temp = P2;
+				P2 = P3;
+				P3 = temp;
+			}
+		else
+		{
+			temp = P3;
+			P3 = P2;
+			P2 = P1;
+			P1 = temp;
+		}
+	}
+	else
+	{
+		if (P2.x > P3.x)
+		{
+			if (P3.x > P1.x)
+			{
+				temp = P2;
+				P2 = P3;
+				P3.x = P1.x;
+				P1 = temp;
+			}
+			else
+			{
+				temp = P2;
+				P2 = P1;
+				P1 = temp;
+			}
+		}
+		else
+		{
+			temp = P1;
+			P1 = P3;
+			P3 = temp;
+		}
+	}
+}
+
 void CTriangle::PrintInfo(Output* pOut)
 {
 	string S = "Triangle ID: ";
@@ -59,13 +109,6 @@ void CTriangle::PrintInfo(Output* pOut)
 	
 
 }
-
-/*
-int CTriangle::Counter()
-{
-	return Count;
-}
-*/
 
 int CTriangle::GetID()
 {
@@ -116,8 +159,12 @@ CFigure* CTriangle::clone() const
 	return new CTriangle(*this);
 }
  
-void CTriangle::move(double x, double y)
+void CTriangle::move(double& x, double& y, bool b)
 {
+	if(b)
+		Movable = true;
+	Point temp1 = P1, temp2 = P2, temp3 = P3;
+
 	double centerx = (P1.x + P2.x + P3.x) / 3.0;
 	double centery = (P1.y + P2.y + P3.y) / 3.0;
 	double shiftx = x - centerx;
@@ -129,11 +176,52 @@ void CTriangle::move(double x, double y)
 	P1.y = P1.y + shifty;
 	P2.y = P2.y + shifty;
 	P3.y = P3.y + shifty;
-	//Movable = true;
 
 	if (!IsDrawn())
 	{
 		Movable = false;
-		move(centerx, centery);
+		P1 = temp1, P2 = temp2, P3 = temp3;
+		x = (P1.x + P2.x + P3.x) / 3.0, y = (P1.y + P2.y + P3.y) / 3.0;
+		move(x, y, false);
 	}
+}
+
+void CTriangle::Resize(int x, int y, bool& Valid, int c)
+{
+	if (c == 1)
+	{
+		P1.x = x;
+		P1.y = y;
+	}
+	else if (c == 2)
+	{
+		P2.x = x;
+		P2.y = y;
+	}
+	else
+	{
+		P3.x = x;
+		P3.y = y;
+	}
+	Valid = IsDrawn();
+}
+
+int CTriangle::SelectCorner(int x, int y)
+{
+	Switch();
+	
+	int Center = (P1.x + P2.x + P3.x) / 3;
+	int D2 = DELTA(Center, P2.x);
+	int D = DELTA(x, Center);
+
+	if (x > Center)
+		if (D > D2)
+			return 1;
+		else
+			return 2;
+	else
+		if (D > D2)
+			return 3;
+		else
+			return 2;
 }

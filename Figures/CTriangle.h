@@ -18,6 +18,7 @@ public:
 	virtual void Draw(Output* pOut) const;
 	virtual bool InFigure(int x, int y);
 	virtual double CalcArea();
+	void Switch();
 	virtual void PrintInfo(Output *pOut);
 
 	virtual int GetID();
@@ -31,6 +32,8 @@ public:
 
 	// make clone copy constructor
 	virtual CFigure* clone() const override;
-	virtual void move(double x, double y) override;
+	virtual void move(double& x, double& y, bool b = true) override;
+	virtual void Resize(int x, int y, bool& Valid, int c);
+	virtual int SelectCorner(int x, int y);
 };
 #endif
