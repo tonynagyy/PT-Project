@@ -35,17 +35,15 @@ void SelectFillColour::ReadActionParameters()
 	{
 		pOut->PrintMessage("Select the filling colour");
 		Clr = pOut->GetColour(pIn, pOut, ITM_FILLINGCLR);
-		if ()
-		{
-
-		}
+		if (Clr == SNOW)
+			Clr = UI.FillColor;
 		pOut->ClearStatusBar();
 		pManager->UpdateInterface();
 	}
 	else
 	{
 		pOut->PrintMessage("Select a figure first to choose the filling colour");
-
+		Clr = UI.FillColor;
 	}
 }
 

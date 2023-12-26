@@ -31,11 +31,16 @@ void SelectDrawColour::ReadActionParameters()
 	{
 		pOut->PrintMessage("Select the drawing colour");
 		Clr = pOut->GetColour(pIn, pOut, ITM_DRAWINGCLR);
+		if (Clr == SNOW)
+			Clr = UI.DrawColor;
 		pOut->ClearStatusBar();
 		pManager->UpdateInterface();
 	}
 	else
+	{
 		pOut->PrintMessage("Select a figure first to choose the drawing colour");
+		Clr = UI.DrawColor;
+	}
 }
 
 void SelectDrawColour::Execute()
