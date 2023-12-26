@@ -1,5 +1,4 @@
 #include "SaveAction.h"
-#include "..\helper.h"
 
 /*
 * SaveAction - constructor function
@@ -37,7 +36,7 @@ void SaveAction::Execute()
 	Output* outPtr = pManager->GetOutput();
 	int figCount = pManager->getActFigCount();
 
-	ReadActionParameters();
+	ReadActionParameters();/*get file Name into fileName*/
 	outFile.open(fileName);
 
 	drawColor =  outPtr->getCrntDrawColor();
@@ -58,6 +57,11 @@ void SaveAction::Execute()
 	}
 }
 
+/*
+* clone - clones the save action
+* Description: Return NULL as it is not needed
+* but must be implemented sice pure virtual
+*/
 SaveAction* SaveAction::clone() const 
 {
 	return (NULL);

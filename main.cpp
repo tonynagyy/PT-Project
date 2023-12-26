@@ -1,10 +1,17 @@
 #include "ApplicationManager.h"
+/*
+* undo redo play reszie voice
+* mario playmode  select 
+* wagih drag clearall exit Addfig  move changeclolour
+*/
 
-int main() {
+int main()
+{
   	ActionType ActType;
  	ApplicationManager AppManager;
 
-	do {		
+	do
+	{		
 		ActType = AppManager.GetUserAction();
 
 		AppManager.ExecuteAction(ActType);

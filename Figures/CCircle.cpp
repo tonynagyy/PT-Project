@@ -1,7 +1,6 @@
 #include "CCircle.h"
 #include <cmath>
 
-//int CCircle::Count = 0;
 
 CCircle::CCircle(const Point& p1, const Point& p2, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), P1(p1), P2(p2)
 {
@@ -98,12 +97,12 @@ CCircle::CCircle(const Point& p1, const Point& p2, GfxInfo FigureGfxInfo) : CFig
  {
 	 return new CCircle(*this);
  }
+
  /*
  * Save Cicle Data to the file
  * @param Output File
- * ID Identifier P1.x P1.y P2.x P2.y DrawClr FillClr
+ * Description: Save Identifier P1.x P1.y P2.x P2.y DrawClr FillClr into a file
  */
-
  void CCircle::Save(ofstream& OutFile)
  {
 	 OutFile << "CIRC\t" << ID << "\t" <<  Identifier << "\t";
@@ -161,7 +160,4 @@ CCircle::CCircle(const Point& p1, const Point& p2, GfxInfo FigureGfxInfo) : CFig
 		 move(X, Y);
 	 }
  }
-
- 
-
 

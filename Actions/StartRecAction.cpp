@@ -1,7 +1,7 @@
 #include "StartRecAction.h"
 #include <iostream>
-using std::cout;
-using std::endl;
+using std::endl;//for testing into the console
+using std::cout;//for testing into the console
 
 /*
 * StartRecAction::StartRecAction Constructor
@@ -10,13 +10,19 @@ using std::endl;
 * intitally u cannot rec
 */
 StartRecAction::StartRecAction(ApplicationManager* pApp)
-	:Action(pApp), canStartRec(false), front(-1), rear(-1), queue{ nullptr }
+	:Action(pApp), canStartRec(false), front(-1), rear(-1), queue{NULL}
 {
 }
 
+/*
+* StartRecAction::StartRecAction Copy Constructor
+* @param StartRecAction reference
+* Description: Copy Constructor to copy the queue and the front and rear
+* Needed for undo and redo to take a clone of the action
+*/
 StartRecAction::StartRecAction(const StartRecAction& other)
 	:Action(other.pManager), canStartRec(other.canStartRec), 
-	front(other.front), rear(other.rear), queue{ nullptr }
+	front(other.front), rear(other.rear), queue{nullptr}
 {
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
@@ -35,10 +41,10 @@ StartRecAction::~StartRecAction()
 {
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
-		if (queue[i] != nullptr)
+		if (queue[i] != NULL)
 		{
 			delete queue[i];
-			queue[i] = nullptr;
+			queue[i] = NULL;
 		}
 	}
 }
@@ -56,6 +62,9 @@ void StartRecAction::ReadActionParameters()
 * StartRecAction::Execute
 * Description: Execute the action if valid
 * add the action to the queue if valid
+* in case of stop rec or clear all stop rec and print msg
+* prevent recording if the queue is full
+* prevent playing if the queue is empty or clearAll
 * if not valid print err msg
 */
 void StartRecAction::Execute() 
@@ -63,6 +72,7 @@ void StartRecAction::Execute()
 	Output* outPut = pManager->GetOutput();
 	Input* inPut = pManager->GetInput();
 	Action* action = nullptr;
+	StopRecAction* stopRec = nullptr;
 	ActionType ActType;
 	bool isValidAction = false;
 
@@ -72,22 +82,21 @@ void StartRecAction::Execute()
 	{
 		pManager->SetInrecording(true);/*if he can rec put the rec bcs we clone to avoid mem leak*/
 
-		outPut->PrintMessage("Recording Started click the ope reme u cannot use");
+		outPut->PrintMessage("Recording Started");
 		Sleep(1000);
 		outPut->ClearStatusBar();
-		outPut->PrintMessage("remeber that u have max of 20 rec excluding start stop play save load switch exit");
+		outPut->PrintMessage("Remeber that u have max of 20 rec excluding start stop play save load switch exit");
 		Sleep(1000);
 		outPut->ClearStatusBar();
 
 		ActType = pManager->GetUserAction();
 		
 		// if he stopped recording just after start rec
-		if (ActType == STOP_REC)
+		if (ActType == STOP_REC || ActType == CLEAR)
 		{
 			outPut->PrintMessage("Recording Stopped");
-			Sleep(1000);
+			Sleep(2000);
 			outPut->ClearStatusBar();
-
 			pManager->SetInrecording(false);
 			return;
 		}
@@ -99,6 +108,16 @@ void StartRecAction::Execute()
 			if (isValidAction)
 			{
 				pManager->ExecuteAction(ActType);
+				pManager->UpdateInterface();
+
+				if (ActType == CLEAR)
+				{
+					outPut->PrintMessage("Clear all");
+					Sleep(1000);
+					this->~StartRecAction();/*clear all the quque to prevent playing it*/
+					break;
+				}
+				/*get action to enquq it if it is not not null*/
 				action = pManager->getActionPtr();
 				if (action == NULL)
 				{
@@ -107,29 +126,33 @@ void StartRecAction::Execute()
 				else 
 				{
 					enqueue(action);
-					pManager->UpdateInterface(); //update the interface after each action bcs we execute it 
 				}
 			}
 			ActType = pManager->GetUserAction();
 		}
-		pManager->SetInrecording(false);
 
-		if (ActType == STOP_REC) 
-		{
-			outPut->PrintMessage("Recording Stopped");
-		}
 		if (isFull())
 		{
 			outPut->PrintMessage("Max number of rec reached u cannot rec anymore");
-		}
 			Sleep(1000);
 			outPut->ClearStatusBar();
-			return;
+		}
 
+		stopRec = new StopRecAction(pManager);
+		if (stopRec == NULL)
+		{
+			perror("Error in allocating memoryy for stop rec action");//print to stderror allocated in heap
+			return;
+		}
+		stopRec->Execute();
+
+		delete stopRec;
+		stopRec = NULL;
+		return;
 	}
 	else 
 	{
-		outPut->PrintMessage("Failed u cannot Rec now just after clear all or At the start of this shit");
+		outPut->PrintMessage("Failed u cannot Rec now only just after clear all or at start");
 		Sleep(1000);
 		outPut->ClearStatusBar();
 		return;
@@ -141,19 +164,21 @@ void StartRecAction::undo()
 }
 
 /*
-* StartRecAction::Clone clone this action
+*StartRecAction::clone Clone the Action via Non default Copy Constructor
+*Description: clone of start to play it mulitple times needed for play
+*Return: Return A clone of start Rec Action
 */
 StartRecAction* StartRecAction::clone() const 
 {
 	return (new StartRecAction(*this));
 }
+
 /*
 * canStartRecd to check if the action is valid or not
 * @return bool
 * Description: checks if the action count is 0 or not if 0 means at the start of the program
 * or after clear action so it's valid else
 */
-
 bool StartRecAction::canStartRecd()
 {
 	int count = 0;
@@ -168,8 +193,9 @@ bool StartRecAction::canStartRecd()
 
 /*
 * StartRecAction::CkeckActionValidity Checks if the action Can be Recorded or not
-* @type Action type para
-* Descriprion ckeck if there is some action that can be rec or not and print err msg
+* @type: Action type
+* Return: True if Valid false if Not
+* Descriprion: ckeck if there is some action that can be rec or not and print err msg
 */
 bool StartRecAction::ckeckActionValidity(const ActionType& type) const 
 {
@@ -195,12 +221,17 @@ bool StartRecAction::ckeckActionValidity(const ActionType& type) const
 		break;
 	case PLAY_VOICE:
 		break;
+	case RESIZE:
+		break;
+	case DRAGGING_MOVE:
+		break;
 	default:
-		return true;
+		return (true);
 	}
 	pManager->GetOutput()->PrintMessage("Action cannot be recorded");
 	Sleep(1000);
-	return false;
+	pManager->GetOutput()->ClearStatusBar();
+	return (false);
 }
 
 /*
@@ -210,7 +241,7 @@ bool StartRecAction::ckeckActionValidity(const ActionType& type) const
 * */
 bool StartRecAction::isEmpty() const 
 {
-	return (rear == -1 && front == -1);
+	return ((rear == -1) && (front == -1));
 }
 
 /*
@@ -220,7 +251,7 @@ bool StartRecAction::isEmpty() const
 */
 bool StartRecAction::isFull() const 
 {
-	return (rear == MAX_SIZE - 1);
+	return (rear == (MAX_SIZE - 1));
 }
 
 /*
@@ -228,7 +259,7 @@ bool StartRecAction::isFull() const
 * @param Action pointer
 * Description: enqueue the action in the queue if not full
 */
-void StartRecAction::enqueue(Action* action)
+void StartRecAction::enqueue(Action *action)
 {
 	if (action == nullptr) 
 	{
@@ -251,7 +282,6 @@ void StartRecAction::enqueue(Action* action)
 		queue[rear] = action;
 	}
 }
-
 
 /*
 * StartRecAction::dequeue
@@ -278,11 +308,6 @@ Action* StartRecAction::dequeue()
 		front++;
 	}
 	return (action);
-	// if i want to play this rec 3 times i will dequeue it 3 times and execute it 3 times
-	// there is a problem here i dequue so i dequeue i lose the action bcs the front is incremented
-	// how to solve this problem ?
-	// ans  i donot want to dequeue i want to get the front and execute it and then dequeue it
-
 }
 
 
@@ -290,7 +315,6 @@ Action* StartRecAction::dequeue()
 * StartRecAction::displayQueue for testing
 * Description: displpays the queue from front to rear
 */
-
 void StartRecAction::displayQueue() const 
 {
 	if (isEmpty()) 
@@ -337,10 +361,21 @@ int StartRecAction::getQueueSize() const
 	return (rear - front + 1);
 }
 
+/*
+* StartRecAction::setFrontIndex set the front of the queue
+* @param int
+* Description: set the front of the queue needed for PlayRecAction multiple times
+*/
 void StartRecAction::setFrontIndex(int idx)
 {
 	front = idx;
 }
+
+/*
+* StartRecAction::setRearIndex set the rear of the queue
+* @param int
+* Description: set the rear of the queue needed for PlayRecAction multiple times
+*/
 void StartRecAction::setRearIndex(int idx)
 {
 	rear = idx;

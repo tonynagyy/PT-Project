@@ -136,6 +136,7 @@
     <ClCompile Include="Actions\clearall.cpp" />
     <ClCompile Include="Actions\DeletefigAction.cpp" />
     <ClCompile Include="Actions\DraggingMove.cpp" />
+    <ClCompile Include="Actions\ExitAction.cpp" />
     <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\LoadActioncpp.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
@@ -200,6 +201,8 @@
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="helper.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="StopRecAction.cpp" />
+    <ClCompile Include="SwitchModeAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircleAction.h" />
@@ -209,6 +212,7 @@
     <ClInclude Include="Actions\clearall.h" />
     <ClInclude Include="Actions\DeletefigAction.h" />
     <ClInclude Include="Actions\DraggingMove.h" />
+    <ClInclude Include="Actions\ExitActionh.h" />
     <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
     <ClInclude Include="Actions\PickClrAction.h" />
@@ -258,6 +262,8 @@
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="helper.h" />
+    <ClInclude Include="StopRecAction.h" />
+    <ClInclude Include="SwitchModeAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

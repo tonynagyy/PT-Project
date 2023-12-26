@@ -17,7 +17,8 @@ LoadAction::LoadAction(ApplicationManager* pApp) : Action(pApp)
 * LoadAction::ReadActionParameters = Reads parameters required for action to
 * Read File Name from the user
 * */
-void LoadAction::ReadActionParameters() {
+void LoadAction::ReadActionParameters() 
+{
 	Output* outPtr = pManager->GetOutput();
 	Input* inPtr = pManager->GetInput();
 

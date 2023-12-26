@@ -1,4 +1,5 @@
 #include "helper.h"
+
 /*
 * operator<< - overloading the << operator to save the colors
 * @param outFile - ofstream object
@@ -31,12 +32,14 @@ std::ofstream& operator<<(std::ofstream& outFile, color& c) {
 	}
 	return outFile;
 }
-// i want to use the same function to load the colors
-// read the color as string from the file and return the color
-// what would the prototype of the function be?
-// ans: ifstream& operator>>(ifstream& inFile, color& c);// will this return the color?
-//ans: no it will return the ifstream object
 
+/*
+* operator>> - overloading the >> operator to load the colors
+* @param inFile - ifstream object
+* @param c - color object
+* Description: overloading the >> operator to load the colors for red, green, blue, black, orange, yellow and no fill
+* Return: color Reference
+*/
 color& operator>>(std::ifstream& inFile, color& c) {
 	string colorName;
 	inFile >> colorName;

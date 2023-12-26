@@ -1,6 +1,5 @@
 #include "clearall.h"
 #include "string"
-using std::string;
 
 clearAll::clearAll(ApplicationManager* pMan)
 	:Action(pMan) 
@@ -10,21 +9,18 @@ clearAll::clearAll(ApplicationManager* pMan)
 void clearAll::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
-	
-	pOut->PrintMessage("Are you sure you want to CLEAR ALL Y or N ");
-	warningMsg = pIn->GetSrting(pOut);
-	pOut->ClearStatusBar();
+	pOut->setCrntDrawColor(BLUE);
+	pOut->setCrntFillColor(SNOW);
+
+	pOut->PrintMessage("Clearing all Actions");
 }
 
 void clearAll::Execute()
 {
 	ReadActionParameters();
+	pManager->setActionsCount(-1);/*Need for Rec to Start at the beginne only or just after clear*/
+	pManager->Clearall();
 
-	if (warningMsg == "Y" || warningMsg == "y" || warningMsg == "YES" || warningMsg == "yes")
-	{
-		pManager->Clearall();
-	}
 }
 
 void clearAll::undo() 
@@ -33,7 +29,7 @@ void clearAll::undo()
 
 Action* clearAll::clone() const 
 {
-	return nullptr;
+	return new clearAll(*this);
 }
 
 
