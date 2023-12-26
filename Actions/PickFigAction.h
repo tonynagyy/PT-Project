@@ -26,7 +26,7 @@ public:
 	PickFigAction(ApplicationManager* pApp);
 	virtual void ReadActionParameters();
 	virtual void Execute();
-	bool CheckAns();
+	bool CheckAns();   // checking if the points clicked are correct or not
 
 	virtual void undo();
 

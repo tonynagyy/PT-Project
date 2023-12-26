@@ -5,7 +5,7 @@ PickFigAction::PickFigAction(ApplicationManager* pApp) : Action(pApp)
 
 void PickFigAction::ReadActionParameters()
 {
-	Fig = pManager->RandomFigure();	
+	Fig = pManager->RandomFigure();	// select a random figure
 }
 
 void PickFigAction::Execute()
@@ -23,7 +23,7 @@ void PickFigAction::Execute()
 			{
 				if (CheckAns())
 				{
-					Fig->Sethidden(true);
+					Fig->Sethidden(true); // to hide the correct answer
 					pManager->UpdateInterface();
 				}
 
@@ -88,10 +88,10 @@ void PickFigAction::Execute()
 	else
 		pOut->PrintMessage("There is no figures to play");
 
-	pManager->DrawingBack();
+	pManager->DrawingBack(); // to back the drawings
 	pManager->UpdateInterface();
 
-	if (Exit)
+	if (Exit) // selecting the new game 
 	{
 			int ClickedItemOrder = (P.x / UI.MenuItemWidth);
 
@@ -127,7 +127,7 @@ bool PickFigAction::CheckAns()
 
 	pIn->GetPointClicked(P.x, P.y);
 
-	if (P.y >= 0 && P.y < UI.ToolBarHeight && P.x < 5 * UI.MenuItemWidth)
+	if (P.y >= 0 && P.y < UI.ToolBarHeight && P.x < 5 * UI.MenuItemWidth) // if the user wants to change the game 
 		Exit = true;
 	else
 	{

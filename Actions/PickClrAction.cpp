@@ -6,7 +6,7 @@ PickClrAction::PickClrAction(ApplicationManager* pApp) : Action(pApp)
 
 void PickClrAction::ReadActionParameters()
 {
-	Fig = pManager->RandomFigure();	
+	Fig = pManager->RandomFigure(); // select a random figure
 }
 
 void PickClrAction::Execute()
@@ -16,7 +16,7 @@ void PickClrAction::Execute()
 
 	ReadActionParameters();
 
-	if(Fig)
+	if(Fig) 
 		if (Fig->IsFilled())
 			if (Fig->GetFillClr() == BLACK)
 			{

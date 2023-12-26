@@ -27,7 +27,7 @@ public:
 	void ReadActionParameters() override;
 	void Execute() override;
 	void undo() override;
-	bool CheckAns();
+	bool CheckAns(); // checking if the points clicked are correct or not 
 
 	PickClrAction* clone() const override;
 };
