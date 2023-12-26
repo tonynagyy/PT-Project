@@ -258,7 +258,7 @@ color Output::GetColour(Input* pIn, Output* pOut, DrawMenuItem ITM) const
 	default:
 		break;
 	}
-	return NULL;
+	return SNOW;
 }
 
 
