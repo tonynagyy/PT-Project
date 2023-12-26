@@ -97,7 +97,7 @@ void PickFigAction::Execute()
 
 			switch (ClickedItemOrder)
 			{
-			case ITM_DRAWMODE: pManager->ExecuteAction(TO_DRAW);
+			case ITM_DRAWMODE: pManager->ExecuteAction(TO_DRAW); break;
 			case ITM_FIGURE_TYPE_AND_FILL_COLOR: pManager->ExecuteAction(PICK_CLR_FIG); break;
 			case ITM_FIGURE_FILL_COLOR: pManager->ExecuteAction(PICK_CLR); break;
 			case ITM_FIGURE_TYBE: pManager->ExecuteAction(PICK_FIG); break;
