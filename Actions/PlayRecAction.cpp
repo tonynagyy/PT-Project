@@ -5,8 +5,14 @@
 PlayRecAction::PlayRecAction(ApplicationManager* pApp) : 
 	Action(pApp), NumOfRecActions(0), pAction(NULL)
 {
-	RecordedActions =dynamic_cast<StartRecAction*> (pManager->GetStartrecaction());
-	//RecordedActions = new StartRecAction(pApp);
+	RecordedActions = dynamic_cast<StartRecAction*> (pManager->GetStartrecaction());
+
+	if (RecordedActions->getFront() == NULL)
+	{
+		delete RecordedActions;
+		RecordedActions = NULL;
+		pManager->GetStartrecaction() = NULL;
+	}
 }
 
 void PlayRecAction::ReadActionParameters()

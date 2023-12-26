@@ -73,6 +73,7 @@
     <ClCompile Include="Actions\PlayVoiceAction.cpp" />
     <ClCompile Include="Actions\DraggingMove.cpp" />
     <ClCompile Include="Actions\ResizeAction.cpp" />
+    <ClCompile Include="StopRecAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircleAction.h" />
@@ -131,6 +132,7 @@
     <ClInclude Include="Actions\PlayVoiceAction.h" />
     <ClInclude Include="Actions\DraggingMove.h" />
     <ClInclude Include="Actions\ResizeAction.h" />
+    <ClInclude Include="StopRecAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

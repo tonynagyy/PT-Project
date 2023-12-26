@@ -1,10 +1,12 @@
 #include "ApplicationManager.h"
 
-int main() {
+int main()
+{
   	ActionType ActType;
  	ApplicationManager AppManager;
 
-	do {		
+	do
+	{		
 		ActType = AppManager.GetUserAction();
 
 		AppManager.ExecuteAction(ActType);

@@ -5,7 +5,7 @@ Redo::Redo(ApplicationManager* pApp) :Action(pApp), Redoptr(NULL)
 }
 
 Redo::Redo(const Redo& other)
-	: Action(other)
+	: Action(other), Redoptr(NULL)
 {
 	if (other.Redoptr != NULL)
 	{

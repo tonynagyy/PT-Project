@@ -27,7 +27,7 @@ public:
 	virtual void Execute() = 0;
 	virtual void undo() = 0;
 	virtual Action* clone() const = 0;
-	virtual ~Action() {}
+	virtual ~Action() = default;
 };
 
 #endif

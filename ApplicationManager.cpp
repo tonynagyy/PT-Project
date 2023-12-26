@@ -7,7 +7,7 @@ ApplicationManager::ApplicationManager() :
 	FigCount(0), UndoCount(0), RedoCount(0),undoable(false), Actualfigcounter(0)
 	, actionsCount(0), InRecording(false), action(NULL),
 	Startrecaction(NULL), PlayRecStatus(false), Playvoice(false),
-	Undoarray{ NULL }, Redoarray{ NULL }, FigList{ NULL }, SelectedFig(NULL)
+	Undoarray{NULL}, Redoarray{NULL}, FigList{NULL}, SelectedFig(NULL)
 {
 	pOut = new Output;
 	pIn = pOut->CreateInput();
@@ -165,8 +165,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case CLEAR:
 		ptrToAct = new clearAll(this);
 		ptrToAct->Execute();
-		break;
-		this->UnSelect();
+		actionsCount = -1;    //to start rec again/ bcs it will be incrmenated in the excute
 		break;
 	case LOAD:
 		this->UnSelect();
@@ -187,17 +186,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct->Execute();
 		this->UnSelect();
 		break;
-
 	case PLAY_VOICE:
 		ptrToAct = new PlayVoiceAction(this);
 		ptrToAct->Execute();
 		this->UnSelect();
 		break;
-
 	case EXIT:
 		Clearall();
 		break;
-
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	}
@@ -358,10 +354,16 @@ void ApplicationManager::Deleteundoarray()
 }
 void ApplicationManager::Clearall() 
 {
+
 	DeleteFigList();
 	Deleteundoarray();
 	DeleteAllRedos();
-	actionsCount = -1;    //to start rec again/ bcs it will be incrmenated in the excute
+
+	if (!GetPlayrecStatus() && Startrecaction != NULL)
+	{
+		delete Startrecaction;
+		Startrecaction = NULL;
+	}
 }
 
 void ApplicationManager::SetInrecording(bool b)
@@ -369,19 +371,23 @@ void ApplicationManager::SetInrecording(bool b)
 	InRecording = b;
 }
 
-bool ApplicationManager::GetRecordStatus() {
+bool ApplicationManager::GetRecordStatus() 
+{
 	return InRecording;
 }
 
-Action* ApplicationManager::GetStartrecaction() {
+Action*& ApplicationManager::GetStartrecaction() 
+{
 	return Startrecaction;
 }
 
-void ApplicationManager::SetPlayrec(bool b) {
+void ApplicationManager::SetPlayrec(bool b) 
+{
 	PlayRecStatus = b;
 }
 
-bool ApplicationManager::GetPlayrecStatus() {
+bool ApplicationManager::GetPlayrecStatus() 
+{
 	return PlayRecStatus;
 }
 
@@ -392,6 +398,11 @@ void ApplicationManager::SetPlayvoicestatus(bool b)
 
 bool ApplicationManager::Getplayvoicestatus() {
 	return Playvoice;
+}
+
+void ApplicationManager::setActionsCount(int count)
+{
+	actionsCount = 0;
 }
 
 //==================================================================================//

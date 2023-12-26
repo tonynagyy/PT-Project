@@ -5,14 +5,12 @@
 #include "..\ApplicationManager.h"
 class clearAll : public Action
 {
-private:
-	string warningMsg;
-public:
-	clearAll(ApplicationManager * pMan);
-	void ReadActionParameters() override;
-	void Execute() override;
-	void undo() override;
-	Action* clone() const override;
+	public:
+		clearAll(ApplicationManager * pMan);
+		void ReadActionParameters() override;
+		void Execute() override;
+		void undo() override;
+		Action* clone() const override;
 };
 #endif
 

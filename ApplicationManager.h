@@ -71,12 +71,13 @@ public:
 	void Clearall();
 	void SetInrecording(bool b);
 	bool GetRecordStatus();
-	Action* GetStartrecaction();
+	Action*& GetStartrecaction();
 	void SetPlayrec(bool b);
 	bool GetPlayrecStatus();
 
 	void SetPlayvoicestatus(bool b);     // setting the status to enable or disable
 	bool Getplayvoicestatus();
+	void setActionsCount(int count);
 
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
