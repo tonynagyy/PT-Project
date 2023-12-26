@@ -20,14 +20,7 @@ void SelectAction::ReadActionParameters()
 
 	if (pManager->GetPlayrecStatus())
 	{
-		//if (pManager->GetSelectedFigure()) 
-		{
-			//Fig = pManager->GetSelectedFigure();
-			//pOut->ClearStatusBar();
-		}
 		Fig->SetSelected(true);
-		//else
-			//Fig = NULL;
 	}
 	else
 	{
