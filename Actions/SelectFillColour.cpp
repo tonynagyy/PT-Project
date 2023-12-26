@@ -78,6 +78,9 @@ Action* SelectFillColour::clone()  const
 
 SelectFillColour::~SelectFillColour()
 {
-	delete Fig;
-	Fig = NULL;
+	if (Fig != NULL)
+	{
+		delete Fig;
+		Fig = NULL;
+	}
 }

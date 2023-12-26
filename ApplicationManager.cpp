@@ -107,10 +107,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case TO_PLAY:
 		this->UnSelect();
-		pOut->CreatePlayToolBar();
+		ptrToAct = new SwitchModeAction(this, false);
+		ptrToAct->Execute();
 		break;
 	case TO_DRAW:
-		pOut->CreateDrawToolBar();
+		ptrToAct = new SwitchModeAction(this, true);
+		ptrToAct->Execute();
 		break;
 	case PICK_FIG:
 		ptrToAct = new PickFigAction(this);
@@ -128,7 +130,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pOut->ClearStatusBar();
 		break;
 	case GET_EXIT_PLAY:
-		Clearall();
+	case EXIT:
+		ptrToAct = new ExitAction(this);
+		ptrToAct->Execute();
 		break;
 	case UNDO:
 		this->UnSelect();
@@ -188,9 +192,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct = new PlayVoiceAction(this);
 		ptrToAct->Execute();
 		this->UnSelect();
-		break;
-	case EXIT:
-		Clearall();
 		break;
 	case STATUS:	//a click on the status bar ==> no action
 		return;

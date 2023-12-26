@@ -1,4 +1,9 @@
 #include "ApplicationManager.h"
+/*
+* undo redo play reszie voice
+* mario playmode  select 
+* wagih drag clearall exit Addfig  move changeclolour
+*/
 
 int main()
 {

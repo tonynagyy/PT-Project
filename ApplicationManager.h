@@ -25,6 +25,8 @@
 #include "Actions\DraggingMove.h"
 #include "Actions\ResizeAction.h"
 #include "StopRecAction.h"	
+#include "Actions\ExitActionh.h"
+#include "SwitchModeAction.h"
 
 //Main class that manages everything in the application.
 class ApplicationManager
@@ -37,7 +39,7 @@ private:
 	bool Playvoice;     //boolean to play voice
 	int FigCount;		//Actual number of figures
 	int Actualfigcounter;	//Actual number of figures
-	int actionsCount;
+	int actionsCount;	//Actual number of actions needed for start rec and play rec
 	int UndoCount;
 	int RedoCount;
 	bool undoable;
@@ -49,8 +51,8 @@ private:
 	Action* Redoarray[5];/*array to save actions for redo*/
 	Action* Startrecaction;
 	Action* action;
-	bool InRecording;
-	bool PlayRecStatus;
+	bool InRecording;//boolean to check if the user is in recording mode or not
+	bool PlayRecStatus;//boolean to check if the user is in playing mode or not
 public:	
 
 	ApplicationManager(); 
@@ -78,7 +80,6 @@ public:
 
 	void SetPlayvoicestatus(bool b);     // setting the status to enable or disable
 	bool Getplayvoicestatus();
-	void setActionsCount(int count);
 
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
@@ -96,9 +97,11 @@ public:
 	void UpdateInterface() const;	//Redraws all the drawing window	
 
 	/*Save*/
-	void saveAll(ofstream &outfile) ;
-	int getActFigCount() ;
-	int getActionsCounter() const ;
+	void saveAll(ofstream& outfile);
+	int getActFigCount();
+	/*Rec*/
+	int getActionsCounter() const;// get the number of actions needed for start rec and play rec
+	void setActionsCount(int count);// set it to -1 in case of clearAll
 
 	// -- Functions related to play mode 
 	CFigure *RandomFigure(); // choose a random figure

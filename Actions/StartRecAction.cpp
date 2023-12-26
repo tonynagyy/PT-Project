@@ -95,7 +95,7 @@ void StartRecAction::Execute()
 		if (ActType == STOP_REC || ActType == CLEAR)
 		{
 			outPut->PrintMessage("Recording Stopped");
-			Sleep(1000);
+			Sleep(2000);
 			outPut->ClearStatusBar();
 			pManager->SetInrecording(false);
 			return;
@@ -113,6 +113,7 @@ void StartRecAction::Execute()
 				if (ActType == CLEAR)
 				{
 					outPut->PrintMessage("Clear all");
+					Sleep(1000);
 					this->~StartRecAction();/*clear all the quque to prevent playing it*/
 					break;
 				}
@@ -140,11 +141,11 @@ void StartRecAction::Execute()
 		stopRec = new StopRecAction(pManager);
 		if (stopRec == NULL)
 		{
-			perror("Error in allocating memoryy for stop rec action");
+			perror("Error in allocating memoryy for stop rec action");//print to stderror allocated in heap
 			return;
 		}
-
 		stopRec->Execute();
+
 		delete stopRec;
 		stopRec = NULL;
 		return;

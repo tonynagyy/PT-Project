@@ -43,7 +43,7 @@ void StopRecAction::Execute()
 	{
 		pManager->GetOutput()->PrintMessage("You are not in recording mode you cannot rec");
 	}
-	Sleep(1000);
+	Sleep(2000);
 	pManager->GetOutput()->ClearStatusBar();
 }
 

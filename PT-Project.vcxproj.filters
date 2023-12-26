@@ -74,6 +74,8 @@
     <ClCompile Include="Actions\DraggingMove.cpp" />
     <ClCompile Include="Actions\ResizeAction.cpp" />
     <ClCompile Include="StopRecAction.cpp" />
+    <ClCompile Include="Actions\ExitAction.cpp" />
+    <ClCompile Include="SwitchModeAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircleAction.h" />
@@ -133,6 +135,8 @@
     <ClInclude Include="Actions\DraggingMove.h" />
     <ClInclude Include="Actions\ResizeAction.h" />
     <ClInclude Include="StopRecAction.h" />
+    <ClInclude Include="Actions\ExitActionh.h" />
+    <ClInclude Include="SwitchModeAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
