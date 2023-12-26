@@ -62,6 +62,9 @@ void StartRecAction::ReadActionParameters()
 * StartRecAction::Execute
 * Description: Execute the action if valid
 * add the action to the queue if valid
+* in case of stop rec or clear all stop rec and print msg
+* prevent recording if the queue is full
+* prevent playing if the queue is empty or clearAll
 * if not valid print err msg
 */
 void StartRecAction::Execute() 
@@ -69,6 +72,7 @@ void StartRecAction::Execute()
 	Output* outPut = pManager->GetOutput();
 	Input* inPut = pManager->GetInput();
 	Action* action = nullptr;
+	StopRecAction* stopRec = nullptr;
 	ActionType ActType;
 	bool isValidAction = false;
 
@@ -98,12 +102,21 @@ void StartRecAction::Execute()
 		}
 
 		// if valid action enqueue it if not donot enqueue it till stop rec or get 20 valid rec
-		while (ActType != STOP_REC && !isFull() && ActType != CLEAR)
+		while (ActType != STOP_REC && !isFull())
 		{
 			isValidAction = ckeckActionValidity(ActType);
 			if (isValidAction)
 			{
 				pManager->ExecuteAction(ActType);
+				pManager->UpdateInterface();
+
+				if (ActType == CLEAR)
+				{
+					outPut->PrintMessage("Clear all");
+					this->~StartRecAction();/*clear all the quque to prevent playing it*/
+					break;
+				}
+				/*get action to enquq it if it is not not null*/
 				action = pManager->getActionPtr();
 				if (action == NULL)
 				{
@@ -112,37 +125,33 @@ void StartRecAction::Execute()
 				else 
 				{
 					enqueue(action);
-					pManager->UpdateInterface(); //update the interface after each action bcs we execute it 
 				}
 			}
 			ActType = pManager->GetUserAction();
 		}
-		pManager->SetInrecording(false);
 
-		if (ActType == STOP_REC)
-		{
-			outPut->PrintMessage("Recording Stopped");
-		}
-		else if (ActType == CLEAR)
-		{
-			outPut->PrintMessage("Clear all");
-			Sleep(1000);
-			outPut->ClearStatusBar();
-			pManager->ExecuteAction(ActType);
-			pManager->UpdateInterface();
-			this->~StartRecAction();
-		}
-		else if (isFull())
+		if (isFull())
 		{
 			outPut->PrintMessage("Max number of rec reached u cannot rec anymore");
-		}
 			Sleep(1000);
 			outPut->ClearStatusBar();
+		}
+
+		stopRec = new StopRecAction(pManager);
+		if (stopRec == NULL)
+		{
+			perror("Error in allocating memoryy for stop rec action");
 			return;
+		}
+
+		stopRec->Execute();
+		delete stopRec;
+		stopRec = NULL;
+		return;
 	}
 	else 
 	{
-		outPut->PrintMessage("Failed u cannot Rec now just after clear all or at start");
+		outPut->PrintMessage("Failed u cannot Rec now only just after clear all or at start");
 		Sleep(1000);
 		outPut->ClearStatusBar();
 		return;

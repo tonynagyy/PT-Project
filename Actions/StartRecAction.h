@@ -1,6 +1,7 @@
 #pragma once
 #include "Action.h"
 #include "..\ApplicationManager.h"
+#include "..\StopRecAction.h"
 #define MAX_SIZE 20
 
 /*

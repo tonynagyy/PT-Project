@@ -24,6 +24,7 @@
 #include "Actions\LoadAction.h"
 #include "Actions\DraggingMove.h"
 #include "Actions\ResizeAction.h"
+#include "StopRecAction.h"	
 
 //Main class that manages everything in the application.
 class ApplicationManager

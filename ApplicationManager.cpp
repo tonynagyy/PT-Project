@@ -165,7 +165,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case CLEAR:
 		ptrToAct = new clearAll(this);
 		ptrToAct->Execute();
-		actionsCount = -1;    //to start rec again/ bcs it will be incrmenated in the excute
 		break;
 	case LOAD:
 		this->UnSelect();
@@ -177,9 +176,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ptrToAct->Execute();
 		break;
 	case STOP_REC:
-		pOut->PrintMessage("You cannot stop recording now");
-		Sleep(1000);
-		pOut->ClearStatusBar();
+		ptrToAct = new StopRecAction(this);
+		ptrToAct->Execute();
 		break;
 	case PLAY_REC:
 		ptrToAct = new PlayRecAction(this);
@@ -402,7 +400,7 @@ bool ApplicationManager::Getplayvoicestatus() {
 
 void ApplicationManager::setActionsCount(int count)
 {
-	actionsCount = 0;
+	actionsCount = count;
 }
 
 //==================================================================================//
